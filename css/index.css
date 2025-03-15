@@ -1,0 +1,147 @@
+
+body{
+    background: linear-gradient(to bottom right,#d4dada, rgb(143, 195, 255),#d4dada );
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+
+.container{
+    overflow: auto;
+}
+
+/*es el estilo original*/
+img{
+    float: left;
+    margin-right: 5%;
+    width:250px;
+    height:100px;
+}
+i{
+    margin-right: 4%;
+    font-size: 30px;
+}
+.text{
+    padding: 17%;
+}
+.co{
+    background-color: black;
+    margin-top: 10.8%;
+    color: white;
+}
+/*Estilos vini*/
+#botsalir{
+    background-color: #ffffff;
+    border: none;
+    margin: -8% 103% 0%;
+    width: 50px;
+  
+}
+
+.inier{
+    margin-top: 5%;
+    margin-left: 35%;
+    width: 30%;
+    height: 60%;
+    border: none;
+    padding: 50px 60px 70px;
+    text-align: center;
+    border-radius: 25px;
+}
+.tbl{
+    font-size: 35px;
+    position: relative;
+    text-align: left;
+    top: -3%;
+    height: 13%;
+    
+}
+.tbl::after{
+    content: '';
+    width: 40%;
+    height: 4px;
+    border-radius: 3px;
+    background: rgb(3, 144, 251);
+    position: absolute;
+    bottom: -12px;
+    left: 3%;
+}
+.input-group{
+    top: -2%;
+}
+.ini{
+    margin: 15px 0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+}
+.inl{
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: none;
+    padding: 18px 15px;
+}
+.inl::placeholder{
+    color: black;
+}
+#btn-abm{
+    top: 7%;
+}
+@media (max-width: 768px) {
+    /*Vista vini.php*/
+    .inier{
+        margin-top: 5%;
+        margin-left: 35%;
+        width: 30%;
+        height: 60%;
+        border: none;
+        padding: 50px 60px 70px;
+        text-align: center;
+        border-radius: 25px;
+    }
+    .tbl{
+        font-size: 35px;
+        position: relative;
+        text-align: left;
+        top: -3%;
+        height: 13%;
+        
+    }
+    .tbl::after{
+        content: '';
+        width: 40%;
+        height: 4px;
+        border-radius: 3px;
+        background: rgb(3, 144, 251);
+        position: absolute;
+        bottom: -12px;
+        left: 3%;
+    }
+    .input-group{
+        top: -2%;
+    }
+    .ini{
+        margin: 15px 0;
+        border-radius: 3px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        width: 100%;
+    }
+    .inl{
+        width: 100%;
+        background: transparent;
+        border: 0;
+        outline: none;
+        padding: 18px 15px;
+    }
+    .inl::placeholder{
+        color: black;
+    }
+    #btn-abm{
+        top: 7%;
+    }
+
+}

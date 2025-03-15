@@ -1,0 +1,415 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+body{
+    background: linear-gradient(to bottom right,#d4dada, rgb(143, 195, 255),#d4dada );
+    background-repeat: no-repeat;
+    padding: 25px 25px;
+    background-size: auto;
+}
+.container{
+    overflow: auto;
+}
+
+/*Estilo de vregis*/
+.regis{
+    margin-top: 5%;
+    margin-left: 30%;
+    width: 100%;
+    max-width: 650px;
+    border: 1px solid black;
+    padding: 50px 60px 70px;
+    text-align: center;
+    border-radius: 25px;
+}
+.til{
+    font-size: 25px;
+    margin-bottom: 8px;
+    position: relative;
+}
+.til::after{
+    content: '';
+    width: 40%;
+    height: 4px;
+    border-radius: 3px;
+    background: rgb(3, 144, 251);
+    position: absolute;
+    bottom: -12px;
+    left: 30%;
+}
+.regi-fi{
+    margin: 15px 0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-left: 3%;
+}
+.in{
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: none;
+    padding: 18px 15px;
+}
+.in::placeholder{
+    color: black;
+}
+.bunt{
+    margin: 15px 0;
+    margin-top: 5%;
+    padding: 0px 10px 0px 0px;
+}
+
+
+/*Estilo de vper*/
+.perin{
+    padding-left: 20%;
+    margin-top: 2%;
+    margin-left: -4%;
+}
+.perftada{
+    display: block;
+    position: relative;
+    width: 90%;
+    height: 7rem;
+    border-radius: 0 0 20px 20px;
+    top: 11%;
+}
+.peavat{
+    display: flex;
+    width: 180px;
+    height: 180px;
+    align-items: center;
+    justify-content: center;
+    border: 7px solid #ffff;
+    background-color: #dfe5f2;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #000;
+    position: absolute;
+    bottom: -40px;
+    /*left: calc(50% -90px);*/
+}
+.oltu{
+    width: 100%;
+}
+.perbio{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 0 12px rgba(0,0,0, .2);
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    width: 85%;
+    margin-bottom: 1.25rem;
+    text-align: center;
+}
+.perfo{
+    padding: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 2rem;
+    box-shadow: 0 0 12px rgba(0,0,0, .2);
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    width: 85%;
+}
+.datos{
+    width: 100%;
+}
+.fi{
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding-left: 2%;
+}
+.on{
+    width: 80%;
+    background: transparent;
+    border: 1px solid lightskyblue;
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+}
+.un{
+    width: 100%;
+    background: transparent;
+    border: 1px solid lightskyblue;
+    padding: 10px;
+    text-align: center;
+    margin-left: 3%;
+    border-radius: 10px;
+}
+/*estilo vista vpro y vest*/
+/* .for{
+    background:#f5f5f5;
+    width: 50%;
+    height: 50%;
+    margin: auto;
+    /*margin-top: 100px;
+    border-radius: 15px;
+    font-family: 'calibri' ;
+    color: white;
+    box-shadow: 0 0 12px rgba(0,0,0, .2);
+}
+
+.rp h4 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-size: 22px;
+    text-align: center;
+    color: #000;
+    width: 100%;
+}
+
+.controls{
+    width: 80%;
+    height: 25%;
+    text-align: center;
+    margin-left: 10%;
+    background: transparent;
+    border-radius: 10px;
+    border: 1px solid rgb(0, 0, 0);
+    font-family: 'calibri';
+    font-size: 18px;
+    margin-top: 5%;
+}
+
+.for p {
+    height: 40px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.for a{
+    color: white;
+    text-decoration: none;
+}
+
+.for a:hover{
+    color: white;
+    text-decoration: underline;
+}
+.for .botons{
+    background: linear-gradient(to bottom right,#d4dada, rgb(143, 195, 255),#d4dada );
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 40%;
+    border-radius: 10px;
+    padding:10px ;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    margin-left: 30%;
+    font: size 20px
+}
+.rp{
+    background: linear-gradient(to bottom right,#d4dada, rgb(143, 195, 255),#d4dada );
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 0 12px rgba(0,0,0, .2);
+    background-color: #f5f5f5;
+    border-radius: 15px;
+    width: 40%;
+    margin-bottom: 1.25rem;
+    margin-left: 30%;
+}
+.form-group{
+    width: 50%;
+    height: 28%;
+}
+.ñl{
+    padding: 7%;
+}
+.re{
+    display: block;
+    font-size: 20px;
+    color: #333;
+    font-weight: 600;
+    width: 100%;
+    text-align: center;
+    margin-top: 5%;
+} */
+
+
+/*estilo home*/
+.homeall {
+    display: flex;
+    flex-direction: row; 
+}
+
+.homeall section {
+    flex: 1; 
+    max-width: 60px; 
+    margin-right: 20px;
+}
+.fj {
+    background-color: white;;
+    width: 95%;
+    position: relative;
+    height: auto;
+    border-radius: 15px 15px 15px 15px;
+    display: flex; 
+    flex-direction: column;
+    min-height: 97vh;
+    box-shadow: 0 10px 20px 8px rgba(0, 0, 0, 0.2);
+}
+/*estilo hheader.php*/
+.contair{
+    height: 22%;
+    overflow: auto;
+}
+.hl{
+    width: 30%;
+}
+img{
+    width:250px;
+    height:100px;
+}
+.jh{
+    height: 50%;
+    font-size: 40px;
+    color: #000;
+    text-align: center;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+.sd{
+    font-size: 27px;
+    text-align: left;
+    left: 24%;
+    font-family: 'calibri';
+    color: #000;
+    text-decoration: none;   
+}
+@media (max-width: 768px) {
+    /*estilo hheader.php*/
+    .contair{
+        position: relative;
+        height: 20%;
+        overflow: auto;
+        /*height: 25%;*/
+    
+    }
+    .hl{
+        width: 50%;
+        position: fixed;
+        left: 8%;
+    }
+    img{
+        width:180px;
+        height:80px;
+        position: fixed;
+        left: 70%;
+    }
+    .jh{
+        height: 50%;
+        font-size: 40px;
+        color: #000;
+        text-align: center;
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    .sd{
+        font-size: 20px;
+        text-align: left;
+        left: 24%;
+        font-family: 'calibri';
+        color: #000;
+        text-decoration: none;   
+    }
+    .fj {
+        min-height: 88vh;
+    }
+}
+/*Estilo vcrgrupo.php*/
+.conl{
+    padding: 2%;
+}
+/*estilo vpag.php*/
+#abrir{
+    margin: 1%;
+}
+.dg{
+    padding: 0% 1% 1% 1%;
+}
+.fa-2x {
+    margin: 5px;
+    text-decoration: none;
+    font-size: 25px;
+    color: rgb(0, 0, 0);
+}
+/*estilo menu.php*/
+/* _______________MENU HAMBURGUESA____________ */
+
+.nilba{
+    width: 60px;
+}
+.nav-links{
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: 60px;
+    justify-content: center;
+}
+.nav-links li {
+    display: grid;
+    place-items: center;
+}
+.nav-links a {
+    text-decoration: none;
+    color: #000000;
+    padding: 12px 12px;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+    border-radius: 10px;
+    display: block;
+    font-size: 25px;
+}
+.nav-links a:hover {
+    background-color: #00A8CC;
+    transform: scale(1.1);
+    border-radius: 8px;
+} 
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    position: absolute;
+    top: 50px;
+    left: 15px;
+}
+  
+.menu-toggle .bar {
+    font-size: 35px;
+    margin: 0px 0;
+    transition: all 0.3s;
+}
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        width: 10%;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 21%;
+        left: 0;
+    }
+    .nav-links.active {
+        display: flex;
+    }
+    .nav-links li {
+       position: relative;
+    }
+    .menu-toggle {
+        display: flex;
+        top: 70px;
+
+    }
+}
