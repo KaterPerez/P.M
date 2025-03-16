@@ -4,14 +4,16 @@
         <div class="col-12 col-md-6">
             <div class="d-flex align-items-center py-3">
                 <h1 class="me-3">Dominio</h1>
-                <button id="toggleForm" class="btn btn-dark">
+                <!-- Cambié ID a clase para mayor flexibilidad -->
+                <button class="btn btn-dark toggleFormButton">
                     <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
         </div>
     </div>
-    <form name="frm1" action="home.php?pg=<?= $pg; ?>" method="POST" class="toggleForm "  style="display:none;">
-        <div class="row g-3  p-3">
+    <!-- Aseguramos que el formulario tenga la clase correcta -->
+    <form name="frm1" action="home.php?pg=<?= $pg; ?>" method="POST" class="toggleForm" style="display:none;">
+        <div class="row g-3 p-3">
             <div class="form-group col-12 col-md-6">
                 <label for="nomdom">Nombre de dominio</label>
                 <input type="text" name="nomdom" id="nomdom" maxlength="70" 
@@ -31,7 +33,6 @@
             <tr>
                 <th>Codigo</th>
                 <th>Dominio</th>
-                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -50,4 +51,5 @@
         </tbody>
     </table>
 </div>
+
 <script type="text/javascript" src="js/java2.js"></script>

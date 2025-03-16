@@ -1174,16 +1174,16 @@ CREATE TABLE pagina(
 );
 INSERT INTO `pagina` (`codpag`, `nompag`, `rutpag`,`mospag`, `icopag`) VALUES
 (3145, 'Perfil', 'views/vper.php','1', 'fa-solid fa-user-tie ms-auto'),
-(1001, 'Registro de estudiente', 'views/vest.php', '1', 'gi fa-solid fa-user-graduate'),
-(1002, 'Registro de Profesor', 'views/vpro.php','1', 'gi fa-solid fa-chalkboard-user'),
-(1003, 'Crear Curso', 'views/vcrecur.php', '1','gt fa-solid fa-grip'),
-(2001, 'Crear Grupo', 'views/vgrue.php', '1', 'gr fa-solid fa-users-gear'),
-(2002, 'Crear Proyecto', 'views/vcrgrupo.php','1', 'gr fa-regular fa-folder-open'),
-(3001, 'Fases', 'views/vfas.php','1', 'gr fa-solid fa-gears'),
-(4001, 'Dominio', 'views/vdom.php','1', 'gi fa-solid fa-bars-progress'),
-(4004, 'Valor', 'views/vval.php','1', 'gi fa-solid fa-bars-progress'),
-(4003, 'Pagina', 'views/vpag.php','1', 'gi fa-solid fa-clipboard-question'),
-(4002, 'Lista de Institucion', 'views/vlisin.php','1', 'gt fa-solid fa-school-flag');
+(1001, 'Registro de estudiente', 'views/vest.php', '1', 'fa-solid fa-user-graduate'),
+(1002, 'Registro de Profesor', 'views/vpro.php','1', 'fa-solid fa-chalkboard-user'),
+(1003, 'Crear Curso', 'views/vcrecur.php', '1','fa-solid fa-grip'),
+(2001, 'Crear Grupo', 'views/vgrue.php', '1', 'fa-solid fa-users-gear'),
+(2002, 'Crear Proyecto', 'views/vcrgrupo.php','1', 'fa-regular fa-folder-open'),
+(3001, 'Fases', 'views/vfas.php','1', 'fa-solid fa-gears'),
+(4001, 'Dominio', 'views/vdom.php','1', 'fa-solid fa-bars-progress'),
+(4004, 'Valor', 'views/vval.php','1', 'fa-solid fa-sheet-plastic'),
+(4003, 'Pagina', 'views/vpag.php','1', 'fa-solid fa-clipboard-question'),
+(4002, 'Lista de Institucion', 'views/vlisin.php','1', 'fa-solid fa-school-flag');
 CREATE TABLE perfil(
   codper INT(11) PRIMARY KEY AUTO_INCREMENT,
   nomper VARCHAR(255),
