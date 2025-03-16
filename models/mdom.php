@@ -74,9 +74,6 @@ class Mdom{
         if ($result->execute()) {
             // Mensaje de éxito
             echo "<script>alert('El registro con código $coddom fue eliminado exitosamente.');</script>";
-        } else {
-            // Mensaje de error
-            echo "<script>alert('No se pudo eliminar el registro con código $coddom.');</script>";
         }
     } catch (PDOException $e) {
         // Mensaje de error para excepciones
