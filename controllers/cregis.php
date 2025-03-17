@@ -1,5 +1,10 @@
 <?php
     include("models/mregis.php");
+    require_once ('models/mval.php');
+    require_once ('models/mdom.php');
+
+    $mval = new Mval();
+    $mdom = new Mdom();
    
     $idusu = isset($_REQUEST['idusu']) ? $_REQUEST['idusu'] : NULL;
     $numdoc = isset($_POST['numdoc']) ? $_POST['numdoc'] : NULL;
@@ -42,11 +47,14 @@
         $mregtd->editCodper();
     }
     
+    
     if($ope=="eli" && $idusu) $mregtd->del();
     if($ope=="edi" && $idusu) $datOne = $mregtd->getOne($idusu);
     $datAll = $mregtd->getAll();
     $datAll = array_filter($datAll, function($dta) {
         return in_array($dta['codper'], [3, 4]);
     });
+    $datVal = $mval->getAll();
+    $datDom = $mdom-> getAll();
 
 ?>

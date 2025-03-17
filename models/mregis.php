@@ -90,7 +90,7 @@ class Mregtd{
         $this->genusu = $genusu;
     }
     function setCodper($codper){
-        $this->codval = $codper;
+        $this->codper = $codper;
     }
     function setCodval($codval){
         $this->codval = $codval;
