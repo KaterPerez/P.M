@@ -17,17 +17,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email'])) {
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Recuperar Contraseña</h2>
-        <p>Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
-        
-        <form action="controllers/cmail.php" method="POST">
-            <input type="hidden" name="accion" value="recuperar">
-            <label for="email">Correo Electrónico:</label>
-            <input type="email" name="email" required>
-            <button type="submit">Enviar</button>
-        </form>
+<div class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 border rounded-4 shadow p-5">
+            <form action="controllers/cmail.php" method="POST">
+                <h2 class="text-center mb-4">Recuperar Contraseña</h2>
+                <p class="text-center mb-4">
+                    Ingresa tu correo electrónico y te enviaremos un enlace para restablecer tu contraseña.
+                </p>
+
+                <input type="hidden" name="accion" value="recuperar">
+                
+                <!-- Input Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo Electrónico:</label>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="correo@ejemplo.com" required>
+                </div>
+                
+                <!-- Botón Enviar -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+            </form>
+        </div>
     </div>
+</div>
+
+<style>
+    .border {
+        border-color: #000; /* Mantiene solo la línea de borde */
+    }
+    .bg-light {
+        background-color: transparent !important; /* Quita el fondo blanco */
+    }
+</style>
+
+
 
     <script>
         // Redirigir si el token es válido
