@@ -63,13 +63,13 @@ i{
     background: rgb(3, 144, 251);
     position: absolute;
     bottom: -12px;
-    left: 3%;
+    left: 30%;
 }
 .input-group{
     top: -2%;
 }
 .ini{
-    margin: 15px 0;
+    margin: 25px 0;
     border-radius: 3px;
     display: flex;
     align-items: center;
@@ -91,24 +91,7 @@ i{
 }
 @media (max-width: 768px) {
     /*Vista vini.php*/
-    .inier{
-        margin-top: 5%;
-        margin-left: 35%;
-        width: 30%;
-        height: 60%;
-        border: none;
-        padding: 50px 60px 70px;
-        text-align: center;
-        border-radius: 25px;
-    }
-    .tbl{
-        font-size: 35px;
-        position: relative;
-        text-align: left;
-        top: -3%;
-        height: 13%;
-        
-    }
+
     .tbl::after{
         content: '';
         width: 40%;
@@ -117,31 +100,7 @@ i{
         background: rgb(3, 144, 251);
         position: absolute;
         bottom: -12px;
-        left: 3%;
-    }
-    .input-group{
-        top: -2%;
-    }
-    .ini{
-        margin: 15px 0;
-        border-radius: 3px;
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-        width: 100%;
-    }
-    .inl{
-        width: 100%;
-        background: transparent;
-        border: 0;
-        outline: none;
-        padding: 18px 15px;
-    }
-    .inl::placeholder{
-        color: black;
-    }
-    #btn-abm{
-        top: 7%;
+        left: 30%;
     }
 
 }
