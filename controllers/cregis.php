@@ -25,6 +25,7 @@ $dirusu = isset($_POST['dirusu']) ? $_POST['dirusu'] : NULL;
 $edausu = isset($_POST['edausu']) ? $_POST['edausu'] : NULL;
 $genusu = isset($_POST['genusu']) ? $_POST['genusu'] : NULL;
 $corusu = isset($_POST['corusu']) ? $_POST['corusu'] : NULL;
+$actusu = isset($_POST['actusu']) ? $_POST['actusu'] : NULL; // Obtener actusu desde el formulario
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 $datOne = NULL;
 
@@ -51,12 +52,19 @@ if ($ope == "save") {
     $mregtd->setEdausu($edausu);
     $mregtd->setGenusu($genusu);
     $mregtd->setCorusu($corusu);
+    $mregtd->setActusu($actusu); // Asignar el valor de actusu
 
     if ($idusu) {
-        $mregtd->edit();
+        $mregtd->edit(); // Actualizar registro existente
     } else {
-        $mregtd->save();
+        $mregtd->save(); // Crear un nuevo registro
     }
+}
+
+if ($idusu && $ope == "actusu") {
+    $mregtd->setIdusu($idusu); // Asegurarse de que se define el ID
+    $mregtd->setActusu($actusu); // Configurar actusu
+    $mregtd->ediActusu(); // Llamar al método correcto
 }
 
 if ($idusu && $ope == "codper") {
@@ -77,4 +85,3 @@ $datAll = array_filter($datAll, function($dta) {
 $datVal = $mval->getAll();
 $datDom = $mdom->getAll();
 ?>
-

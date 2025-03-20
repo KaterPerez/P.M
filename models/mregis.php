@@ -6,13 +6,14 @@ class Mregtd{
     private $tipdoc;
     private $nomusu;
     private $apeusu;
+    private $actusu;
+    private $corusu;
     private $telusu;
     private $pasusu;
     private $dirusu;
     private $edausu;
     private $genusu;
     private $codper;
-    private $corusu;
     private $codval;   
 
     //GET Y SET TABLA USUARIO
@@ -31,11 +32,14 @@ class Mregtd{
     function getApeusu(){
         return $this->apeusu;
     }
+    function getActusu(){
+        return $this->actusu;
+    }
     function getCorusu(){
         return $this->corusu;
     }
-        function getTelusu(){
-            return $this->telusu;
+    function getTelusu(){
+        return $this->telusu;
     }
     function getPasusu(){
         return $this->pasusu;
@@ -71,6 +75,10 @@ class Mregtd{
     function setApeusu($apeusu){
         $this->apeusu = $apeusu;
     }
+    function setActusu($actusu){
+        $this->actusu = $actusu;
+    }
+
     function setCorusu($corusu){
         $this->corusu = $corusu;
     }
@@ -96,7 +104,7 @@ class Mregtd{
         $this->codval = $codval;
     }
     function getAll(){
-        $sql = "SELECT idusu, numdoc, tipdoc, nomusu, apeusu, corusu, telusu, pasusu, dirusu,
+        $sql = "SELECT idusu, numdoc, tipdoc, nomusu, apeusu, actusu, corusu, telusu, pasusu, dirusu,
         edausu, genusu, codper, codval FROM usuario";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
@@ -107,8 +115,8 @@ class Mregtd{
     }
     function getOne(){
         $res = NULL;
-        $sql = "SELECT idusu, nomusu, apeusu, numdoc, tipdoc, telusu, pasusu, dirusu, 
-                edausu, genusu, codper, corusu, codval FROM usuario WHERE idusu=:idusu";
+        $sql = "SELECT idusu, numdoc, tipdoc, nomusu, apeusu, actusu, corusu, telusu, pasusu, dirusu,
+        edausu, genusu, codper, codval FROM usuario WHERE idusu=:idusu";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);    
@@ -119,9 +127,9 @@ class Mregtd{
         return $res;
     }
     function save(){
-        $sql="INSERT INTO usuario (numdoc, tipdoc, nomusu, apeusu, telusu, pasusu, dirusu, 
-        edausu, genusu, codper, corusu) VALUES (:numdoc, :tipdoc, :nomusu, :apeusu, :telusu, :pasusu, :dirusu, 
-        :edausu, :genusu, :codper, :corusu)";
+        $sql="INSERT INTO usuario (numdoc, tipdoc, nomusu, apeusu, actusu, corusu, telusu, pasusu, dirusu,
+        edausu, genusu, codper) VALUES (:numdoc, :tipdoc, :nomusu, :apeusu, :actusu, :corusu, :telusu, :pasusu, :dirusu,
+        :edausu, :genusu, :codper)";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();    
         $result = $conexion->prepare($sql);
@@ -147,12 +155,14 @@ class Mregtd{
         $result->bindParam(':codper',$codper);
         $corusu=$this->getCorusu();
         $result->bindParam(':corusu',$corusu);
+        $actusu=$this->getActusu();
+        $result->bindParam(':actusu',$actusu);
         $result->execute(); 
     }   
     function edit(){
         $sql="UPDATE usuario SET numdoc=:numdoc, tipdoc=:tipdoc, nomusu=:nomusu,
         apeusu=:apeusu, corusu=:corusu, telusu=:telusu, pasusu=:pasusu,
-        dirusu=:dirusu, edausu=:edausu, genusu=:genusu WHERE idusu=:idusu";
+        dirusu=:dirusu, edausu=:edausu, genusu=:genusu, actusu=:actusu WHERE idusu=:idusu";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();    
         $result = $conexion->prepare($sql);
@@ -176,6 +186,8 @@ class Mregtd{
         $result->bindParam(":edausu",$edausu);
         $genusu = $this->getGenusu();
         $result->bindParam(":genusu",$genusu);
+        $actusu=$this->getActusu();
+        $result->bindParam(':actusu',$actusu);
         $idusu = $this->getIdusu(); 
         $result->bindParam(":idusu",$idusu);
         $result->execute();
@@ -189,6 +201,17 @@ class Mregtd{
         $result->bindParam(":idusu", $idusu);
         $result->execute();
         
+    }
+    function ediActusu(){
+        $sql = "UPDATE usuario SET actusu=:actusu WHERE idusu=:idusu";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $idusu = $this->getIdusu();
+        $result->bindParam(":idusu",$idusu);
+        $actusu = $this->getActusu();
+        $result->bindParam(":actusu",$actusu);
+        $result->execute(); 
     }
 }
 ?>

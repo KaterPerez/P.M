@@ -46,13 +46,12 @@
                        value="<?php if($datOne) echo $datOne[0]['numdoc']; ?>" required>
             </div>
             <div class="form-group col-md-1">
-                <label for="codper">Activo</label>
-                <select name="codper" id="codper" class="form-control">
-                    <option value="4" <?php if ($datOne && $datOne[0]['codper'] == 4) echo " selected "; ?>>Estudiante</option>
-                    <option value="3" <?php if ($datOne && $datOne[0]['codper'] == 3) echo " selected "; ?>>Profesor</option>
+                <label for="actusu">Activo</label>
+                <select name="actusu" id="actusu" class="form-control">
+                    <option value="1" <?php if ($datOne && $datOne[0]['actusu'] == 1) echo " selected "; ?>>Si</option>
+                    <option value="2" <?php if ($datOne && $datOne[0]['actusu'] == 2) echo " selected "; ?>>No</option>
                 </select>
-            </div>
-            
+            </div> 
             <div class="form-group col-md-2">
                 <label for="codper">Perfil</label>
                 <select name="codper" id="codper" class="form-control">
