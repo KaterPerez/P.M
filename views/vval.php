@@ -35,13 +35,15 @@
         </div>
     </form>
 </div>
+<br>
 <div class="table-responsive">
     <table id="example" class="table table-striped">
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th>Codigo</th>
                 <th>Valor</th>
                 <th>Dominio</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

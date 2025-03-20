@@ -1,18 +1,20 @@
 <?php include("controllers/cregis.php"); ?>
 <div class="container">
-<br>
+    <br>
     <div class="row">
         <div class="col-12 col-md-10">
             <div class="d-flex align-items-center py-3">
                 <h1 class="me-3">Registrar Estudiante y Profesor</h1>
-                <!-- Cambié ID a clase para mayor flexibilidad -->
-                <button class="btn btn-dark toggleFormButton">
-                    <i class="fa-solid fa-plus"></i>
-                </button>
+                <?php if ($mostrarFormulario): ?>
+                    <button class="btn btn-dark toggleFormButton">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                <?php endif; ?>
             </div>
         </div>
     </div>
-    <form name="frm1" action="home.php?pg=<?= $pg; ?>" method="POST" class="toggleForm border border-black" style="display:none;">
+    <?php if ($mostrarFormulario): ?>
+        <form name="frm1" action="home.php?pg=<?= $pg; ?>" method="POST" class="toggleForm border border-black" style="display:none;">
         <div class="row g-3 p-3">
             <div class="form-group col-md-3">
                 <label for="nomusu">Ingrese el Nombre:</label>
@@ -93,13 +95,14 @@
             </div>
         </div>
     </form>
+    <?php endif; ?>
     <hr>
     <table id="example" class="table table-striped table-hover">
         <thead class="table-dark">
             <tr>  
-                <th>Nombre </th>
-                <th>Activo </th>
-                <th>Perfil </th>
+                <th>Nombre</th>
+                <th>Activo</th>
+                <th>Perfil</th>
                 <th></th>
             </tr>
         </thead>
@@ -107,28 +110,15 @@
             <?php 
             if ($datAll) {
                 foreach ($datAll as $dta) { 
-                    if ($dta['codper'] == 3 || $dta['codper'] == 4) { // Filtrar por codper = 3 o 4?>
+                    if ($dta['codper'] == 3 || $dta['codper'] == 4) { ?>
                         <tr>
                             <td>
                                 <strong><?=$dta['nomusu'];?> <?=$dta['apeusu'];?></strong><br>
-                            <small>
-                                
-                            <strong>Tipo. Documento: </strong>
-<?php 
-if (!empty($datVal)) { // Asegúrate de que $datVal no esté vacío
-    foreach ($datVal as $dtd) {
-        if (isset($dta['codval']) && $dtd['codval'] == $dta['codval']) { // Verifica que codval exista en $dta
-            echo htmlspecialchars($dtd['nomval']); // Escapar para prevenir inyecciones XSS
-        }
-    }
-} else {
-    echo "No disponible"; // Muestra un mensaje predeterminado si no hay datos
-}
-?><br>
-
-                                <strong>No. Documento: </strong><?=$dta['numdoc'];?><br>
-                                <strong>Correo: </strong><?=$dta['corusu'];?>
-                            </small>
+                                <small>
+                                    <strong>Tipo. Documento:</strong> <?= htmlspecialchars($dta['tipdoc']); ?><br>
+                                    <strong>No. Documento:</strong> <?= htmlspecialchars($dta['numdoc']); ?><br>
+                                    <strong>Correo:</strong> <?= htmlspecialchars($dta['corusu']); ?>
+                                </small>
                             </td>
                             <td><?= $dta['corusu']; ?></td>
                             <td><?= $dta['corusu']; ?></td>
@@ -141,8 +131,8 @@ if (!empty($datVal)) { // Asegúrate de que $datVal no esté vacío
                                 </a>
                             </td>
                         </tr>
-                    <?php } 
-                } 
+                    <?php }
+                }
             } else { ?>
                 <tr>
                     <td colspan="5" class="text-center">No hay datos disponibles</td>

@@ -29,10 +29,11 @@
 </div>
 <div class="table-responsive">
     <table id="example" class="table table-striped table-hover">
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th>Codigo</th>
                 <th>Dominio</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
