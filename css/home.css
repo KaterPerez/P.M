@@ -8,6 +8,7 @@ body{
     background-repeat: no-repeat;
     padding: 25px 25px;
     background-size: auto;
+    overflow: auto;
 }
 .container{
     overflow: auto;
@@ -238,6 +239,7 @@ body{
 
 
 /*estilo home*/
+/* Estilo base */
 .homeall {
     display: flex;
     flex-direction: row; 
@@ -248,8 +250,9 @@ body{
     max-width: 60px; 
     margin-right: 20px;
 }
+
 .fj {
-    background-color: white;;
+    background-color: white;
     width: 95%;
     position: relative;
     height: auto;
@@ -259,74 +262,88 @@ body{
     min-height: 97vh;
     box-shadow: 0 10px 20px 8px rgba(0, 0, 0, 0.2);
 }
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .homeall {
+        flex-direction: column; /* Cambia a disposición vertical */
+        align-items: center; /* Centra los elementos */
+    }
+
+    .homeall section {
+        max-width: 100%; /* Secciones ocupan todo el ancho disponible */
+        margin-right: 0; /* Elimina el margen derecho */
+    }
+
+    .fj {
+        width: 100%; /* Ajusta el ancho para ocupar la pantalla completa */
+    }
+}
+
 /*estilo hheader.php*/
-.contair{
-    height: 22%;
+.contair {
+    height: auto;
     overflow: auto;
+    position: relative; /* Esto asegura que fluye con los demás elementos */
+    z-index: auto; /* Quita cualquier prioridad innecesaria */
 }
-.hl{
-    width: 30%;
+.hl {
+    width: 30%; /* Ajustamos para un diseño estable */
+    position: relative; /* Cambia de fixed a relative */
+    left: auto; /* Reseteamos posiciones absolutas */
 }
-img{
-    width:250px;
-    height:100px;
+img {
+    width: 250px;
+    height: 100px;
+    position: relative; /* Cambia de fixed a relative */
+    left: auto; /* Posición automática para seguir flujo natural */
+    object-fit: contain; /* Mantén proporción correcta */
 }
-.jh{
+.jh {
     height: 50%;
     font-size: 40px;
     color: #000;
     text-align: center;
     padding-left: 5%;
     padding-right: 5%;
+    position: relative; /* Desplázalo junto con otros componentes */
 }
-.sd{
+.sd {
     font-size: 27px;
     text-align: left;
-    left: 24%;
+    left: auto; /* Resetea posición manual */
     font-family: 'calibri';
     color: #000;
-    text-decoration: none;   
+    text-decoration: none;
+    position: relative; /* Asegúrate de que se mueva con otros elementos */
 }
+
 @media (max-width: 768px) {
-    /*estilo hheader.php*/
-    .contair{
-        position: relative;
+    .contair {
+        height: auto; /* Ajusta altura para pantallas más pequeñas */
+        overflow: visible; /* Desactiva restricciones de scroll interno */
+        margin-left: 40px; /* Desplaza todo el contenedor hacia la derecha */
         height: 20%;
-        overflow: auto;
-        /*height: 25%;*/
-    
+    }
+    .hl, img, .jh, .sd {
+        position: relative; /* Ningún elemento debe quedar fijo */
+        left: auto; /* Alinea según el flujo normal */
+    }
+    img {
+        width: 180px;
+        height: 80px;
+        margin-left: 1%;
+
     }
     .hl{
-        width: 50%;
-        position: fixed;
-        left: 8%;
+        width: 45%;
+        margin-left: 20px;
     }
-    img{
-        width:180px;
-        height:80px;
-        position: fixed;
-        left: 70%;
-    }
-    .jh{
-        height: 50%;
-        font-size: 40px;
-        color: #000;
-        text-align: center;
-        padding-left: 5%;
-        padding-right: 5%;
-    }
-    .sd{
-        font-size: 20px;
-        text-align: left;
-        left: 24%;
-        font-family: 'calibri';
-        color: #000;
-        text-decoration: none;   
-    }
-    .fj {
-        min-height: 88vh;
+    .sd {
+        font-size: 20px; /* Ajusta tamaño para mejor usabilidad */
     }
 }
+
 /*Estilo vcrgrupo.php*/
 .conl{
     padding: 2%;
@@ -382,8 +399,7 @@ img{
     flex-direction: column;
     cursor: pointer;
     position: absolute;
-    top: 50px;
-    left: 15px;
+    left: 35px;
 }
   
 .menu-toggle .bar {
@@ -393,13 +409,18 @@ img{
 }
 @media screen and (max-width: 768px) {
     .nav-links {
+        height: 100vh;
         display: none;
         width: 10%;
         flex-direction: column;
         align-items: center;
         position: absolute;
-        top: 21%;
-        left: 0;
+        left: 10px;
+        z-index: 10; 
+        /*background-color:  rgba(143, 195, 255, 0.829);*/
+        background-color:  rgba(179, 198, 221, 0.829);
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+        
     }
     .nav-links.active {
         display: flex;

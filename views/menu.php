@@ -5,7 +5,7 @@
         <a  href="home.php?pg=456"><i class="gi fa-solid fa-file" title="Pagina por perfil"></i></a>
 </div> -->
 <?php include "Controllers/cmenu.php";?> 
-<nav class="nilba ">
+<nav class="nilba border border-black ">
     <ul class="nav-links">
     <li>  <?php if($dtAll){foreach ($dtAll AS $dt){ ?>
                 <a  href="home.php?pg=<?=$dt['codpag'];?>" title="<?=$dt['nompag'];?>">
@@ -19,7 +19,6 @@
             <i class=" bar fa-solid fa-bars"></i>
     </div>
 </nav>
-
 
 <script>
     document.getElementById("mobile-menu").addEventListener("click", function() {
