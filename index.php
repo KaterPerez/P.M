@@ -36,8 +36,8 @@
                 include("views/vini.php");
             }else if($pg==205){
                 include("views/vrcon.php");
-            }else if($pg==13){
-                include("views/vest.php");
+            }else if($pg==1896){
+                include("views/vlic.php");
             }else{
                 include("views/icont.php");
             }

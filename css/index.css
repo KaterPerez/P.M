@@ -3,10 +3,18 @@ body{
     background: linear-gradient(to bottom right,#d4dada, rgb(143, 195, 255),#d4dada );
     background-repeat: no-repeat;
     background-size: auto;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    padding: 50px 0;
 }
 
 .container{
     overflow: auto;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+
 }
 
 /*es el estilo original*/
@@ -103,4 +111,76 @@ i{
         left: 30%;
     }
 
+}
+
+/*Estilo vista vlic.php*/
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 30%;
+    min-width: 100px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    color: rgb(3, 144, 251);
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+p {
+    margin: 10px 0;
+}
+
+button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+.tachado {
+    text-decoration: line-through;
 }
