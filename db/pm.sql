@@ -1174,8 +1174,9 @@ CREATE TABLE pagina(
 );
 INSERT INTO `pagina` (`codpag`, `nompag`, `rutpag`,`mospag`, `icopag`) VALUES
 (3145, 'Perfil', 'views/vper.php','1', 'fa-solid fa-user-tie ms-auto'),
-(1001, 'Registro', 'views/vest.php', '1', 'fa-solid fa-user-graduate'),
+(1001, 'Lista', 'views/vest.php', '1', 'fa-solid fa-user-graduate'),
 (1002, 'Cursos', 'views/vcrecur.php', '1','fa-solid fa-grip'),
+(1003, 'Registro', 'views/vest.php', '1', 'fa-solid fa-users'),
 (2001, 'Grupos', 'views/vgrue.php', '1', 'fa-solid fa-users-gear'),
 (2002, 'Proyecto', 'views/vcrgrupo.php','1', 'fa-regular fa-folder-open'),
 (3001, 'Fases', 'views/vfas.php','1', 'fa-solid fa-gears'),
@@ -1220,6 +1221,9 @@ INSERT INTO `pagxper` (`codpag`, `codper`) VALUES
 (1002, 2),
 (1001, 2),
 (1001, 3),
+(1003, 3),
+(1003, 2),
+(1003, 1),
 (4001, 1),
 (4003, 1),
 (2001, 3),
@@ -1276,16 +1280,17 @@ INSERT INTO `usuario` (`idusu`, `codubi`, `numdoc`, `tipdoc`, `nomusu`, `apeusu`
 (5, NULL, 1072646589, 'CC', 'Katerin Julieth', 'Perez Amarillo','1', 'katerinp422@gmail.com', 0, 'f19583f44a57db4faf12e48c9fc4cb6fd01e8052', NULL, 18, 'F', 1, NULL, NULL),
 (6, NULL, 1076242583, 'CC', 'Alejandro', 'Wagner Carrillo','1', 'alejo.wagner03@gmail.com', 0, 'db545f47e29fa5c8a0e1b06b2ebdadc6b58a39d9', NULL, 18,'M',1,NULL, NULL);
 CREATE TABLE curso(
-  codcur INT(10) PRIMARY kEY,
+  idcur INT(10) PRIMARY kEY AUTO_INCREMENT,
+  codcur INT(10),
   nomcur VARCHAR(255),
   idusu INT(10),
   FOREIGN kEY (idusu) REFERENCES usuario(idusu)
 );
 CREATE TABLE usuxcur(
-  codcur INT(10),
+  idcur INT(10),
   idusu INT(10),
   FOREIGN kEY (idusu) REFERENCES usuario(idusu),
-  FOREIGN kEY (codcur) REFERENCES curso(codcur)
+  FOREIGN kEY (idcur) REFERENCES curso(idcur)
 );
 CREATE TABLE ie(
   nuicie INT(12) PRIMARY KEY,

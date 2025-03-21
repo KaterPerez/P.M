@@ -83,10 +83,19 @@ if ($idusu && $ope == "codper") {
     $mregtd->editCodper();
 }
 if ($idusu && $ope == "actusu") {
-    $mregtd->setIdusu($idusu);
-    $mregtd->setActusu($actusu);
-    $mregtd->ediActusu();
+    // Obtener el estado actual del usuario
+    $usuario = $mregtd->getOne();
+    if ($usuario) {
+        // Cambiar entre 1 (activo) y 2 (inactivo)
+        $nuevoEstado = $usuario[0]['actusu'] == 1 ? 2 : 1;
+
+        $mregtd->setIdusu($idusu);
+        $mregtd->setActusu($nuevoEstado); // Asignar el nuevo estado
+        $mregtd->ediActusu(); // Guardar el cambio en la base de datos
+    }
 }
+
+
 
 if ($ope == "eli" && $idusu) {
     $mregtd->del();

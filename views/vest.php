@@ -112,8 +112,24 @@
                                     <strong>Correo:</strong> <?= htmlspecialchars($dta['corusu']); ?>
                                 </small>
                             </td>
-                            <td><?= $dta['corusu']; ?></td>
-                            <td><?= $dta['corusu']; ?></td>
+                            <td>
+                                <?php if($dta['actusu'] == 1) { ?>
+                                    <a href="home.php?pg=<?= $pg; ?>&idusu=<?= $dta['idusu']; ?>&ope=actusu">
+                                        <i class="fa-solid fa-circle-check fa-2x text-success"></i>
+                                    </a>
+                                <?php } else { ?>
+                                    <a href="home.php?pg=<?= $pg; ?>&idusu=<?= $dta['idusu']; ?>&ope=actusu">
+                                        <i class="fa-solid fa-circle-xmark fa-2x text-danger"></i>
+                                    </a>
+                                <?php } ?>
+                            </td>
+                            <td>
+                                <?php if ($dta['codper'] == 3) { ?>
+                                    Profesor
+                                <?php } elseif ($dta['codper'] == 4) { ?>
+                                    Estudiante
+                                <?php }?>
+                            </td>
                             <td class="text-end">
                                 <a href="home.php?pg=<?= $pg; ?>&idusu=<?= $dta['idusu']; ?>&ope=edi" title="Editar" class="btn btn-sm btn-warning">
                                     <i class="fa-solid fa-pen-to-square"></i>
