@@ -1,5 +1,4 @@
 <?php
-// Incluir modelos necesarios
 include("models/mregis.php");
 require_once('models/mval.php');
 require_once('models/mdom.php');
@@ -8,12 +7,9 @@ require_once('models/mdom.php');
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
-// Crear instancias de los modelos
 $mval = new Mval();
 $mdom = new Mdom();
 
-// Obtener datos del usuario y solicitud
 $idusu = isset($_REQUEST['idusu']) ? $_REQUEST['idusu'] : NULL;
 $numdoc = isset($_POST['numdoc']) ? $_POST['numdoc'] : NULL;
 $tipdoc = isset($_POST['tipdoc']) ? $_POST['tipdoc'] : NULL;
@@ -32,16 +28,11 @@ $datOne = NULL;
 // Obtener el perfil del usuario desde la sesión
 $codper = isset($_SESSION['codper']) ? (int)$_SESSION['codper'] : NULL; // Asegurarse de que sea un entero
 
-// Determinar si el formulario debe mostrarse
-$mostrarFormulario = ($codper !== 3); // Ocultar si el perfil es 3
-
-// Instanciar el modelo principal
 $mregtd = new Mregtd();
 $mregtd->setIdusu($idusu);
 
-// Operaciones según la solicitud (ope)
 if ($ope == "save") {
-    $mregtd->setIdusu($idusu);  
+    $mregtd->setIdusu($idusu);
     $mregtd->setNumdoc($numdoc);        
     $mregtd->setTipdoc($tipdoc);        
     $mregtd->setNomusu($nomusu);
@@ -52,36 +43,59 @@ if ($ope == "save") {
     $mregtd->setEdausu($edausu);
     $mregtd->setGenusu($genusu);
     $mregtd->setCorusu($corusu);
-    $mregtd->setActusu($actusu); // Asignar el valor de actusu
+    $mregtd->setActusu($actusu);
+
+    // Captura y asignación de codper
+    $codper = isset($_POST['codper']) ? $_POST['codper'] : null;
+    $mregtd->setCodper($codper);
 
     if ($idusu) {
-        $mregtd->edit(); // Actualizar registro existente
+        // Actualizar registro existente
+        $mregtd->edit();
     } else {
-        $mregtd->save(); // Crear un nuevo registro
+        // Crear un nuevo registro
+        $mregtd->save();
     }
 }
 
-if ($idusu && $ope == "actusu") {
-    $mregtd->setIdusu($idusu); // Asegurarse de que se define el ID
-    $mregtd->setActusu($actusu); // Configurar actusu
-    $mregtd->ediActusu(); // Llamar al método correcto
+if ($ope == "edi" && $idusu) {
+    // Recuperar los datos del registro específico
+    $datOne = $mregtd->getOne();
+    if ($datOne) {
+        // Asegurarse de que los datos estén disponibles para la vista
+        $numdoc = $datOne[0]['numdoc'];
+        $tipdoc = $datOne[0]['tipdoc'];
+        $nomusu = $datOne[0]['nomusu'];
+        $apeusu = $datOne[0]['apeusu'];
+        $telusu = $datOne[0]['telusu'];
+        $pasusu = $datOne[0]['pasusu'];
+        $dirusu = $datOne[0]['dirusu'];
+        $edausu = $datOne[0]['edausu'];
+        $genusu = $datOne[0]['genusu'];
+        $corusu = $datOne[0]['corusu'];
+        $actusu = $datOne[0]['actusu'];
+        $codper = $datOne[0]['codper'];
+    }
 }
-
 if ($idusu && $ope == "codper") {
+    $mregtd->setIdusu($idusu);
     $mregtd->setCodper($codper);
     $mregtd->editCodper();
 }
+if ($idusu && $ope == "actusu") {
+    $mregtd->setIdusu($idusu);
+    $mregtd->setActusu($actusu);
+    $mregtd->ediActusu();
+}
 
-if ($ope == "eli" && $idusu) $mregtd->del();
-if ($ope == "edi" && $idusu) $datOne = $mregtd->getOne($idusu);
+if ($ope == "eli" && $idusu) {
+    $mregtd->del();
+}
 
 // Obtener todos los datos y filtrar por perfiles relevantes (3 y 4)
 $datAll = $mregtd->getAll();
-$datAll = array_filter($datAll, function($dta) {
+$datAll = array_filter($datAll, function ($dta) {
     return in_array($dta['codper'], [3, 4]);
 });
 
-// Obtener valores adicionales
-$datVal = $mval->getAll();
-$datDom = $mdom->getAll();
 ?>

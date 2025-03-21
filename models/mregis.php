@@ -126,68 +126,70 @@ class Mregtd{
         $res = $result->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
-    function save(){
-        $sql="INSERT INTO usuario (numdoc, tipdoc, nomusu, apeusu, actusu, corusu, telusu, pasusu, dirusu,
-        edausu, genusu, codper) VALUES (:numdoc, :tipdoc, :nomusu, :apeusu, :actusu, :corusu, :telusu, :pasusu, :dirusu,
-        :edausu, :genusu, :codper)";
+    function save() {
+        $sql = "INSERT INTO usuario (numdoc, tipdoc, nomusu, apeusu, actusu, corusu, telusu, pasusu, dirusu,edausu, genusu, codper) 
+        VALUES (:numdoc, :tipdoc, :nomusu, :apeusu, :actusu, :corusu, :telusu, :pasusu, :dirusu,:edausu, :genusu, :codper)";
         $modelo = new conexion();
-        $conexion = $modelo->get_conexion();    
+        $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
-        $numdoc=$this->getNumdoc();
-        $result->bindParam(':numdoc',$numdoc);
-        $tipdoc= $this->getTipdoc();
-        $result->bindParam(':tipdoc',$tipdoc);
-        $nomusu= $this->getNomusu();
-        $result->bindParam(':nomusu',$nomusu);
-        $apeusu=$this->getApeusu();
-        $result->bindParam(':apeusu',$apeusu);
-        $telusu=$this->getTelusu();
-        $result->bindParam(':telusu',$telusu);
-        $pasusu = password_hash($this->getPasusu(), PASSWORD_BCRYPT);
-        $result->bindParam(':pasusu', $pasusu); 
-        $dirusu=$this->getDirusu();
-        $result->bindParam(':dirusu',$dirusu);
-        $edausu=$this->getEdausu();
-        $result->bindParam(':edausu',$edausu);
-        $genusu=$this->getGenusu();
-        $result->bindParam(':genusu',$genusu);
-        $codper=$this->getCodper();
-        $result->bindParam(':codper',$codper);
-        $corusu=$this->getCorusu();
-        $result->bindParam(':corusu',$corusu);
-        $actusu=$this->getActusu();
-        $result->bindParam(':actusu',$actusu);
-        $result->execute(); 
-    }   
+        $numdoc = $this->getNumdoc();
+        $result->bindParam(':numdoc', $numdoc);
+        $tipdoc = $this->getTipdoc();
+        $result->bindParam(':tipdoc', $tipdoc);
+        $nomusu = $this->getNomusu();
+        $result->bindParam(':nomusu', $nomusu);
+        $apeusu = $this->getApeusu();
+        $result->bindParam(':apeusu', $apeusu);
+        $actusu = $this->getActusu();
+        $result->bindParam(':actusu', $actusu);
+        $corusu = $this->getCorusu();
+        $result->bindParam(':corusu', $corusu);
+        $telusu = $this->getTelusu();
+        $result->bindParam(':telusu', $telusu);
+        $pasusu = sha1(md5($this->getPasusu())); // Encriptar contraseña
+        $result->bindParam(':pasusu', $pasusu);
+        $dirusu = $this->getDirusu();
+        $result->bindParam(':dirusu', $dirusu);
+        $edausu = $this->getEdausu();
+        $result->bindParam(':edausu', $edausu);
+        $genusu = $this->getGenusu();
+        $result->bindParam(':genusu', $genusu);
+        $codper = $this->getCodper();
+        $result->bindParam(':codper', $codper);
+        $result->execute();
+    }
+    
     function edit(){
-        $sql="UPDATE usuario SET numdoc=:numdoc, tipdoc=:tipdoc, nomusu=:nomusu,
-        apeusu=:apeusu, corusu=:corusu, telusu=:telusu, pasusu=:pasusu,
-        dirusu=:dirusu, edausu=:edausu, genusu=:genusu, actusu=:actusu WHERE idusu=:idusu";
+        $sql="UPDATE usuario SET numdoc=:numdoc, tipdoc=:tipdoc, nomusu=:nomusu, apeusu=:apeusu, corusu=:corusu, 
+        telusu=:telusu, pasusu=:pasusu, dirusu=:dirusu, edausu=:edausu, genusu=:genusu, actusu=:actusu, codper=:codper WHERE idusu=:idusu";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();    
         $result = $conexion->prepare($sql);
         $numdoc = $this->getNumdoc();
-        $result->bindParam(":numdoc",$numdoc);
+        $numdoc = $this->getNumdoc();
+        $result->bindParam(':numdoc', $numdoc);
         $tipdoc = $this->getTipdoc();
-        $result->bindParam(":tipdoc",$tipdoc);
+        $result->bindParam(':tipdoc', $tipdoc);
         $nomusu = $this->getNomusu();
-        $result->bindParam(":nomusu",$nomusu);
+        $result->bindParam(':nomusu', $nomusu);
         $apeusu = $this->getApeusu();
-        $result->bindParam(":apeusu",$apeusu);
+        $result->bindParam(':apeusu', $apeusu);
+        $actusu = $this->getActusu();
+        $result->bindParam(':actusu', $actusu);
         $corusu = $this->getCorusu();
-        $result->bindParam(":corusu",$corusu);
+        $result->bindParam(':corusu', $corusu);
         $telusu = $this->getTelusu();
-        $result->bindParam(":telusu",$telusu);
-        $pasusu = $this->getPasusu();
-        $result->bindParam(":pasusu",$pasusu);
+        $result->bindParam(':telusu', $telusu);
+        $pasusu = sha1(md5($this->getPasusu())); // Encriptar contraseña
+        $result->bindParam(':pasusu', $pasusu);
         $dirusu = $this->getDirusu();
-        $result->bindParam(":dirusu",$dirusu);
+        $result->bindParam(':dirusu', $dirusu);
         $edausu = $this->getEdausu();
-        $result->bindParam(":edausu",$edausu);
+        $result->bindParam(':edausu', $edausu);
         $genusu = $this->getGenusu();
-        $result->bindParam(":genusu",$genusu);
-        $actusu=$this->getActusu();
-        $result->bindParam(':actusu',$actusu);
+        $result->bindParam(':genusu', $genusu);
+        $codper = $this->getCodper();
+        $result->bindParam(':codper', $codper);
         $idusu = $this->getIdusu(); 
         $result->bindParam(":idusu",$idusu);
         $result->execute();
@@ -200,7 +202,6 @@ class Mregtd{
         $idusu = $this->getIdusu();
         $result->bindParam(":idusu", $idusu);
         $result->execute();
-        
     }
     function ediActusu(){
         $sql = "UPDATE usuario SET actusu=:actusu WHERE idusu=:idusu";
@@ -213,5 +214,17 @@ class Mregtd{
         $result->bindParam(":actusu",$actusu);
         $result->execute(); 
     }
+    function editCodper() {
+        $sql = "UPDATE usuario SET codper=:codper WHERE idusu=:idusu";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $idusu = $this->getIdusu();
+        $codper = $this->getCodper();
+        $result->bindParam(":idusu", $idusu);
+        $result->bindParam(":codper", $codper);
+        $result->execute();
+    }
+    
 }
 ?>

@@ -5,16 +5,13 @@
         <div class="col-12 col-md-10">
             <div class="d-flex align-items-center py-3">
                 <h1 class="me-3">Registrar Estudiante y Profesor</h1>
-                <?php if ($mostrarFormulario): ?>
                     <button class="btn btn-dark toggleFormButton">
                         <i class="fa-solid fa-plus"></i>
                     </button>
-                <?php endif; ?>
             </div>
         </div>
     </div>
-    <?php if ($mostrarFormulario): ?>
-        <form name="frm1" action="home.php?pg=<?= $pg; ?>" method="POST" class="toggleForm border border-black" style="display:none;">
+        <form name="frm1" action="home.php?pg=<?= $pg; ?>" method="POST" class="toggleForm" style="display:none;">
         <div class="row g-3 p-3">
             <div class="form-group col-md-3">
                 <label for="nomusu">Ingrese el Nombre:</label>
@@ -28,18 +25,12 @@
             </div>
             <div class="form-group col-md-3">
                 <label for="tipdoc">Tipo de Documento</label>
-                <select name="tipdoc" id="tipdoc" class="form-select" required>
+            <select name="tipdoc" id="tipdoc" class="form-select" required>
                 <option value="">Seleccione...</option>
-                <?php if (!empty($datVal)) {
-                foreach ($datVal as $ddo) { ?>
-                <option value="<?= htmlspecialchars($ddo['codval']); ?>" 
-                    <?php if (!empty($datOne) && $ddo['codval'] == $datOne[0]['codval']) echo "selected"; ?>>
-                    <?= htmlspecialchars($ddo['nomval']); ?>
-                </option>
-                <?php }} ?>
-                </select>
+                <option value="T.I" <?php if (!empty($datOne) && $datOne[0]['tipdoc'] == 'T.I') echo "selected"; ?>>T.I</option>
+                <option value="C.C" <?php if (!empty($datOne) && $datOne[0]['tipdoc'] == 'C.C') echo "selected"; ?>>C.C</option>
+            </select>
             </div>
-
             <div class="form-group col-md-3">
                 <label for="numdoc">Ingrese el No. Documento:</label>
                 <input type="text" name="numdoc" id="numdoc" maxlength="70" class="form-control" 
@@ -54,23 +45,26 @@
             </div> 
             <div class="form-group col-md-2">
                 <label for="codper">Perfil</label>
-                <select name="codper" id="codper" class="form-control">
-                    <option value="4" <?php if ($datOne && $datOne[0]['codper'] == 4) echo " selected "; ?>>Estudiante</option>
-                    <option value="3" <?php if ($datOne && $datOne[0]['codper'] == 3) echo " selected "; ?>>Profesor</option>
+                <select name="codper" id="codper" class="form-control" required>
+                    <option value="4" <?php if (isset($datOne[0]['codper']) && $datOne[0]['codper'] == 4) echo "selected"; ?>>Estudiante</option>
+                    <option value="3" <?php if (isset($datOne[0]['codper']) && $datOne[0]['codper'] == 3) echo "selected"; ?>>Profesor</option>
                 </select>
             </div>
+
             <div class="form-group col-md-1">
                 <label for="edausu">Edad:</label>
                 <input type="numero" name="edausu" id="edausu" maxlength="70" class="form-control" 
                        value="<?php if($datOne) echo $datOne[0]['edausu']; ?>" required>
             </div>
             <div class="form-group col-md-2">
-                <label for="corusu">Genero:</label>
-                <select name="codper" id="codper" class="form-control">
-                    <option value="4" <?php if ($datOne && $datOne[0]['codper'] == 4) echo " selected "; ?>>Estudiante</option>
-                    <option value="3" <?php if ($datOne && $datOne[0]['codper'] == 3) echo " selected "; ?>>Profesor</option>
-                </select>
+                <label for="genusu">Género:</label>
+            <select name="genusu" id="genusu" class="form-control" required>
+                <option value="">Seleccione...</option>
+                <option value="Masculino" <?php if (!empty($datOne) && $datOne[0]['genusu'] == 'Masculino') echo "selected"; ?>>Masculino</option>
+                <option value="Femenino" <?php if (!empty($datOne) && $datOne[0]['genusu'] == 'Femenino') echo "selected"; ?>>Femenino</option>
+            </select>
             </div>
+
             <div class="form-group col-md-3">
                 <label for="telusu">Ingrese el Teléfono:</label>
                 <input type="text" name="telusu" id="telusu" maxlength="70" class="form-control" 
@@ -94,7 +88,6 @@
             </div>
         </div>
     </form>
-    <?php endif; ?>
     <hr>
     <table id="example" class="table table-striped table-hover">
         <thead class="table-dark">
