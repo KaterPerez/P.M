@@ -1,75 +1,59 @@
 <?php require_once('controllers/ccrecur.php'); ?>
 
 <div class="container">
-    <br>
-    <br>
-
-    <!-- Formulario para agregar o editar curso -->
-    <form name="frm1" action="#" method="POST">
-        <div class="row">
-            <!-- Campo para el nombre del curso -->
-            <div class="form-group col-md-4">
-                <label for="nomcur">Nombre del Curso</label>
-                <input type="text" class="form-control" name="nomcur" value="<?php if (isset($getOne) && isset($getOne[0])) echo $getOne[0]['nomcur']; ?>" required>
-            </div>
-
-            <!-- Campo para el código del curso -->
-            <div class="form-group col-md-4">
-                <label for="codcur">Código del Curso</label>
-                <input type="text" class="form-control" name="codcur" value="<?php if (isset($getOne) && isset($getOne[0])) echo $getOne[0]['codcur']; ?>" required>
-            </div>
-
-            <!-- Botón para enviar el formulario -->
-            <div class="form-group col-md-10">
-                <br>
-                <input type="hidden" name="ope" value="save">
-                <input type="submit" class="btn btn-primary" value="Enviar">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="d-flex align-items-center py-3">
+                <h1 class="me-3">Cursos</h1>
+                <button class="btn btn-dark toggleFormButton">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
             </div>
         </div>
+    </div>
+    <form name="frm1" action="home.php?pg=<?= $pg; ?>" method="POST" class="toggleForm">
+    <div class="row g-3 p-3">
+        <div class="form-group col-12 col-md-6">
+            <label for="codcur">Número del Curso</label>
+            <input type="text" class="form-control" name="codcur" value="<?php echo isset($datOne[0]['codcur']) ? $datOne[0]['codcur'] : ''; ?>" required>
+        </div>
+        <div class="form-group col-12 col-md-6">
+            <label for="nomcur">Nombre del Curso</label>
+            <input type="text" class="form-control" name="nomcur" value="<?php echo isset($datOne[0]['nomcur']) ? $datOne[0]['nomcur'] : ''; ?>" required>
+        </div>
+        <input type="hidden" name="idcur" value="<?php echo isset($datOne[0]['idcur']) ? $datOne[0]['idcur'] : ''; ?>">
+        <input type="hidden" name="ope" value="save">
+        <div class="col-12 col-md-2">
+            <input class="btn btn-primary mt-4" type="submit" value="Guardar">
+        </div>
+    </div>
     </form>
 
-    <!-- Tabla para mostrar los cursos -->
-    <table id="example" class="table table-striped" style="width:100%">
-        <thead>
+</div>
+<div class="table-responsive">
+    <table id="example" class="table table-striped table-hover">
+        <thead class="table-dark">
             <tr>
-                <th>Cod.Curso</th>
-                <th>Nombre del Curso</th>
+                <th>Nombre</th>
+                <th>Número de curso</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <?php
-            if ($datCursos) {
-                foreach ($datCursos as $curso) {
-                    ?>
-                    <tr>
-                        <td><?= $curso['codcur']; ?></td>
-                        <td><?= $curso['nomcur']; ?></td>
-                        <td>
-                            <?php
-                            ?>
-                        </td>
-                        <td>
-    <!-- Enlace para editar curso -->
-    <a href="home.php?pg=<?=$pg;?>&codcur=<?=$curso['codcur']; ?>&ope=editc" title="Editar">
-        <i class="fa-solid fa-pencil"></i>
-    </a>
-
-    <!-- Enlace para eliminar curso -->
-    <a href="home.php?pg=<?=$pg;?>&codcur=<?=$curso['codcur']; ?>&ope=delc" title="Eliminar">
-        <i class="fa-solid fa-trash"></i>
-    </a>
-</td>
-                    </tr>
-                    <?php
-                }
-            }
-            ?>
+            <?php if ($datAll) { foreach ($datAll as $dta) { ?>
+                <tr>
+                    <td><strong><?= $dta['codcur']; ?></strong></td>
+                    <td><strong><?= $dta['nomcur']; ?></strong></td>
+                    <td class="text-end">
+                        <a href="home.php?pg=<?= $pg; ?>&idcur=<?= $dta['idcur']; ?>&ope=edi" title="Editar">
+                            <i class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                        <a href="home.php?pg=<?= $pg; ?>&idcur=<?= $dta['idcur']; ?>&ope=eli" title="Eliminar" onclick="return eliminar();">
+                            <i class="fa-solid fa-trash-can fa-2x"></i></a>
+                    </td>
+                </tr>
+            <?php }} ?>
         </tbody>
-        <tfoot>
-            <tr>
-                <th>Cod.Curso</th>
-                <th>Nombre del Curso</th>
-            </tr>
-        </tfoot>
     </table>
 </div>
+
+<script type="text/javascript" src="js/java2.js"></script>

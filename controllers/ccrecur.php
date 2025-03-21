@@ -1,58 +1,26 @@
 <?php
 include("models/mcrecur.php");
 
-$codcur = isset($_REQUEST['codcur']) ? $_REQUEST['codcur'] : NULL;  
+$idcur = isset($_REQUEST['idcur']) ? $_REQUEST['idcur'] : NULL;  
+$codcur = isset($_POST['codcur']) ? $_POST['codcur'] : NULL;
 $nomcur = isset($_POST['nomcur']) ? $_POST['nomcur'] : NULL;
 $idusu = isset($_POST['idusu']) ? $_POST['idusu'] : NULL;
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
+$datOne = NULL;
 
 $mcrecur = new Mcrecur();
-$mcrecur->setCodcur($codcur); 
+$mcrecur->setIdcur($idcur); 
 
 if ($ope == "save") {
+    $mcrecur->setIdcur($idcur); 
     $mcrecur->setCodcur($codcur); 
     $mcrecur->setNomcur($nomcur);
     $mcrecur->setIdusu($idusu);
-    if ($mcrecur->savec()) {
-        $mensaje = "Curso guardado exitosamente.";
-        exit;
-    }else {
-        $mensaje = "Error al guardar el curso.";
-    }
+    if(!$idcur) $mcrecur->save();else $mcrecur->edit();
+
 }
-if ($ope == "editc" && $_POST) {
-    if (isset($_POST['nomcur']) && isset($_POST['idusu'])) {
-        $nomcur = $_POST['nomcur'];
-        $idusu = $_POST['idusu'];
+if($ope=="eli" && $idcur) $mcrecur->del();
+if($ope=="edi" && $idcur) $datOne = $mcrecur->getOne($idcur);
 
-        // Asignamos los valores a los métodos del objeto
-        $mcrecur->setNomcur($nomcur);
-        $mcrecur->setIdusu($idusu);
-
-        $mcrecur->editc();
-        $mensaje = "Curso editado exitosamente.";
-        header("Location: home.php?pg=<?=$pg;?>" . urlencode($mensaje)); 
-        exit;
-    } 
-}
-// Si se está eliminando, ejecutar la lógica de eliminación
-if ($ope == "delc") {
-    $mcrecur->setCodcur($codcur); 
-    $mcrecur->delc();  // Eliminar el curso
-}
-$getOne = ($ope == "editc" && $codcur) ? $mcrecur->getOne() : NULL;
-
-//si vamos a eliminar datos del formulario
-$getDel = ($ope == "delc"&& $codcur) ? $mcrecur->getOne() : NULL;
-
-
-// Obtener los detalles del curso para mostrar en la vista
-$getOne = $mcrecur->getOne();
-
-// Obtener todos los cursos
-$datCursos = $mcrecur->getAll();
-
-
-
+$datAll = $mcrecur->getAll();
 ?>
-
