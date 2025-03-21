@@ -127,11 +127,13 @@ class Mregtd{
         return $res;
     }
     function save() {
-        $sql = "INSERT INTO usuario (numdoc, tipdoc, nomusu, apeusu, actusu, corusu, telusu, pasusu, dirusu,edausu, genusu, codper) 
-        VALUES (:numdoc, :tipdoc, :nomusu, :apeusu, :actusu, :corusu, :telusu, :pasusu, :dirusu,:edausu, :genusu, :codper)";
+        $sql = "INSERT INTO usuario (numdoc, tipdoc, nomusu, apeusu, actusu, corusu, telusu, pasusu, dirusu, edausu, genusu, codper) 
+                VALUES (:numdoc, :tipdoc, :nomusu, :apeusu, :actusu, :corusu, :telusu, :pasusu, :dirusu, :edausu, :genusu, :codper)";
+        
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
+        
         $numdoc = $this->getNumdoc();
         $result->bindParam(':numdoc', $numdoc);
         $tipdoc = $this->getTipdoc();
@@ -156,16 +158,42 @@ class Mregtd{
         $result->bindParam(':genusu', $genusu);
         $codper = $this->getCodper();
         $result->bindParam(':codper', $codper);
-        $result->execute();
+
+        try {
+            // Intentar ejecutar la consulta
+            if ($result->execute()) {
+                // Mensaje de éxito
+                echo "<script>
+                        alert('Datos guardados exitosamente');
+                      </script>";
+            }
+        } catch (PDOException $e) {
+            // Manejo de errores si ocurre una excepción
+            $errorMessage = addslashes($e->getMessage()); // Evitar caracteres problemáticos
+            // Si el error es de tipo duplicado de datos
+            if ($e->getCode() == 23000) {
+                echo "<script>
+                        alert('Estos datos ya están registrados');
+                      </script>";
+            } else {
+                // Mensaje de error genérico
+                echo "<script>
+                        alert('Error: $errorMessage');
+                      </script>";
+            }
+        }
     }
-    
-    function edit(){
-        $sql="UPDATE usuario SET numdoc=:numdoc, tipdoc=:tipdoc, nomusu=:nomusu, apeusu=:apeusu, corusu=:corusu, 
-        telusu=:telusu, pasusu=:pasusu, dirusu=:dirusu, edausu=:edausu, genusu=:genusu, actusu=:actusu, codper=:codper WHERE idusu=:idusu";
+
+    // Otros métodos (edit, del, etc.) pueden manejarse de manera similar
+
+    function edit() {
+        $sql = "UPDATE usuario SET numdoc=:numdoc, tipdoc=:tipdoc, nomusu=:nomusu, apeusu=:apeusu, corusu=:corusu, 
+                telusu=:telusu, pasusu=:pasusu, dirusu=:dirusu, edausu=:edausu, genusu=:genusu, actusu=:actusu, codper=:codper WHERE idusu=:idusu";
+        
         $modelo = new conexion();
-        $conexion = $modelo->get_conexion();    
+        $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
-        $numdoc = $this->getNumdoc();
+        
         $numdoc = $this->getNumdoc();
         $result->bindParam(':numdoc', $numdoc);
         $tipdoc = $this->getTipdoc();
@@ -190,19 +218,48 @@ class Mregtd{
         $result->bindParam(':genusu', $genusu);
         $codper = $this->getCodper();
         $result->bindParam(':codper', $codper);
-        $idusu = $this->getIdusu(); 
-        $result->bindParam(":idusu",$idusu);
-        $result->execute();
+        $idusu = $this->getIdusu();
+        $result->bindParam(":idusu", $idusu);
+
+        try {
+            if ($result->execute()) {
+                // Mensaje de éxito
+                echo "<script>
+                        alert('Datos actualizados exitosamente');
+                      </script>";
+            }
+        } catch (PDOException $e) {
+            $errorMessage = addslashes($e->getMessage()); // Evitar caracteres problemáticos
+            echo "<script>
+                    alert('Error al actualizar los datos: $errorMessage');
+                  </script>";
+        }
     }
-    function del(){
-        $sql="DELETE FROM usuario WHERE  idusu=:idusu";
+
+    function del() {
+        $sql = "DELETE FROM usuario WHERE idusu=:idusu";
         $modelo = new conexion();
-        $conexion = $modelo->get_conexion();    
+        $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
         $idusu = $this->getIdusu();
         $result->bindParam(":idusu", $idusu);
-        $result->execute();
+
+        try {
+            if ($result->execute()) {
+                // Mensaje de éxito
+                echo "<script>
+                        alert('Datos eliminados exitosamente');
+                      </script>";
+            }
+        } catch (PDOException $e) {
+            // Mensaje de error para fallos
+            $errorMessage = addslashes($e->getMessage()); // Evitar caracteres problemáticos
+            echo "<script>
+                    alert('Error al eliminar los datos: $errorMessage');
+                  </script>";
+        }
     }
+
     function ediActusu(){
         $sql = "UPDATE usuario SET actusu=:actusu WHERE idusu=:idusu";
         $modelo = new conexion();
