@@ -1174,7 +1174,7 @@ CREATE TABLE pagina(
 );
 INSERT INTO `pagina` (`codpag`, `nompag`, `rutpag`,`mospag`, `icopag`) VALUES
 (3145, 'Perfil', 'views/vper.php','1', 'fa-solid fa-user-tie ms-auto'),
-(1001, 'Lista', 'views/vest.php', '1', 'fa-solid fa-user-graduate'),
+(1001, 'Lista', 'views/vlis.php', '1', 'fa-solid fa-user-graduate'),
 (1002, 'Cursos', 'views/vcrecur.php', '1','fa-solid fa-grip'),
 (1003, 'Registro', 'views/vest.php', '1', 'fa-solid fa-users'),
 (2001, 'Grupos', 'views/vgrue.php', '1', 'fa-solid fa-users-gear'),
@@ -1221,7 +1221,6 @@ INSERT INTO `pagxper` (`codpag`, `codper`) VALUES
 (1002, 2),
 (1001, 2),
 (1001, 3),
-(1003, 3),
 (1003, 2),
 (1003, 1),
 (4001, 1),
