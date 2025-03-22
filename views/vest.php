@@ -11,6 +11,18 @@
             </div>
         </div>
     </div>
+    
+<form action="controllers/cmas.php" method="post" enctype="multipart/form-data">
+    <div class="row align-items-end">
+    <div class="col-md-4">
+        <label for="archivo" class="form-label">Selecciona el archivo Excel:</label>
+        <input type="file" name="archivo" id="archivo" accept=".xlsx, .xls" class="form-control" style="width: 100%;">
+    </div>
+    <div class="col-md-4">
+        <button type="submit" class="btn btn-dark">Cargar Datos</button>
+    </div>
+  </div>
+</form>
         <form name="frm1" action="home.php?pg=<?= $pg; ?>" method="POST" class="toggleForm" style="display:none;">
         <div class="row g-3 p-3">
             <div class="form-group col-md-3">
