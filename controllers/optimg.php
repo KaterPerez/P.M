@@ -58,7 +58,7 @@ function opti($pict, $nomimg, $rut, $pre){
 				$nombre = $rut.'/'."fic_".$nomimg."_".$pre.".".$docext;
 				move_uploaded_file($pict['tmp_name'], $nombre);
 			}else{
-				echo "<script>alert('Los archivos de Excel debe tener un peso maximo de 97Mb');</script>";
+				echo "<script>alert('Los archivos de video debe tener un peso maximo de 97Mb');</script>";
 			}	
 		}else{
 			echo "<script>alert('Solo se permiten archivos de extensiones: png, jpg, jpeg, mp4, mov, avi.');</script>";
@@ -66,23 +66,7 @@ function opti($pict, $nomimg, $rut, $pre){
 	}
 	return $nombre;
 }
-function ManejoError($e){
-    if(strpos($e->getMessage(),'1451')){
-        echo '<script>err("No se puede eliminar este registro. Por que se encuentra relacionado en otra opción.");</script>';
-    }elseif(strpos($e->getMessage(),'1062')){
-        echo '<script>err("Registro duplicado. Intente nuevamente con otro número de identificación ó comuníquese con el administrador del sistema.");</script>';
-    }else{
-        echo '<script>err("Se generó un error comuníquese con el administrador del sistema.");</script>';
-    }
-}
-
-function arrstr($dt){
-    $txt = "";
-    if($dt){ foreach ($dt as $d) {
-        $txt .= $d['idpag'].",";
-    }}
-    return $txt;
-}
+/*
 function titulo($tx="Sin titulo"){
 	$txt = "<div class='tit'>";
 		$txt .= "<h1>";
@@ -94,24 +78,17 @@ function titulo($tx="Sin titulo"){
 			$txt .= '</button>';
 			$txt .= $tx;
 		$txt .= "</h1>";
-		$txt .= "";
+		$txt .= "<hr class='lintit'>";
 	$txt .= "</div>";
 	return $txt;
 }
 
-function titulo2($tx="Sin titulo",$mos=1){
+function titulo2($tx="Sin titulo"){
 	$txt = "<div class='tit'>";
 		$txt .= "<h1>";
-			if($mos==1){
-	            //$txt .= '<div class="titaju">';
-	                $tx .= '<i class="fa-solid fa-circle-plus" id="mas" onclick="ocul('.$mos.',1);" style="margin-left: 20px;color: #ffffff;text-shadow: 0px 0px 5px #117f09, 0px 0px 5px #117f09, 0px 0px 5px #117f09;"></i>';
-	                $tx .= '<i class="fa-solid fa-circle-minus" id="menos" onclick="ocul('.$mos.');" style="margin-left: 20px;color: #ffffff;text-shadow: 0px 0px 5px #117f09, 0px 0px 5px #117f09, 0px 0px 5px #117f09;"></i>';
-	            //$txt .= '</div>';
-	        }
-	        $txt .= $tx;
+			$txt .= $tx;
 		$txt .= "</h1>";
 		$txt .= "<hr class='lintit'>";
-		
 	$txt .= "</div>";
 	return $txt;
 }
@@ -126,10 +103,8 @@ function titulo3($tx="Sin titulo"){
 
 function ayuda($pg){
 	$txt = '<div class="btnayu">';
-		$txt .= '<a href="index.php?pg=205&vid='.$pg.'" target="_blank" title="Ver Ayuda">';
-			$txt .= '<i ';
-            if($pg==1405) $txt .='style="color:white;"';
-            $txt .=' class="fa-solid fa-circle-question fa-2x btnhelp"  title="Ver Ayuda"></i>';
+		$txt .= '<a href="index.php?pg=205&vid='.$pg.'" target="_blank" style="text-decoration: none;text-shadow: 0px 0px 2px #000;" title="Ver Ayuda">';
+			$txt .= '<i class="fa-solid fa-circle-question fa-2x"  title="Ver Ayuda"></i>';
 		$txt .= '</a>';
 	$txt .= '</div>';
 	return $txt;
@@ -238,31 +213,5 @@ function txtVisita(){
             }
         }
         return $output;
-    }
-
-function firdig($nomusu, $idasi, $fec, $tip){
-	$html = "";
-	if($tip==1){
-		$html .= "<table border='0' cellspacing='0' cellpadding='2' style='user-select: none;background-image: url(\"../img/fonfir.png\");'><tr><td style='width: 140px;text-align: right;'>";
-			$html .= $nomusu;
-		$html .= "</td><td style='width: 128px;border-left: 1px dashed #000;font-size: 8px;'>";
-			$html .= "Firmado Digitalmente ";
-			$html .= "No.: ".str_pad($idasi,6,"0", STR_PAD_LEFT)."<br>";
-			$html .= "Fecha: ".substr($fec,0,10)."<br>";
-			$html .= "Hora: ".substr($fec,11,8);
-		$html .= "</td></tr></table>";
-	}elseif($tip==2){
-		$html .= "<table border='0' cellspacing='0' cellpadding='2' style='user-select: none;background-image: url(\"../img/fonfir.png\");'><tr><td style='width: 140px;text-align: center;'>";
-			$html .= $nomusu;
-		$html .= "</td></tr></table>";
-	}elseif($tip==3){
-		$html .= "<table border='0' cellspacing='0' cellpadding='2' style='user-select: none;background-image: url(\"../img/fonfir.png\");'><tr><td style='width: 128px;font-size: 7px;text-align: left:'>";
-			$html .= "Firmado Digitalmente ";
-			$html .= "No.: ".str_pad($idasi,5,"0", STR_PAD_LEFT)."<br>";
-			$html .= "Fecha: ".substr($fec,0,10)."<br>";
-			$html .= "Hora: ".substr($fec,11,8);
-		$html .= "</td></tr></table>";
-	}
-	return $html;
-}
+    }*/
 ?>
