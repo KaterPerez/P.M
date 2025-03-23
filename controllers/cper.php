@@ -2,18 +2,12 @@
 include_once(__DIR__ . '/../models/mper.php');
 include_once(__DIR__ . '/../controllers/optimg.php');
 
-// Habilitar errores
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
 // Instancia de la clase
 $mper = new Mper();
-echo "Clase Mper instanciada correctamente.<br>";
 
 // Variables de sesión y solicitud
 $idusu = isset($_SESSION['idusu']) ? $_SESSION['idusu'] : NULL;
@@ -31,19 +25,14 @@ $fotper = isset($_FILES['fotper']) ? $_FILES['fotper'] : NULL;
 
 // Procesar archivo de imagen
 if ($fotper) {
-    echo "Archivo recibido: " . $fotper['name'] . "<br>";
-    // Procesar la imagen con opti()
     $ruta_fotper = opti($fotper, 'fotper', 'fotos', date('YmdHis'));
-    echo "Ruta del archivo procesado: $ruta_fotper<br>";
 } else {
     $ruta_fotper = NULL; // No se recibió archivo
-    echo "No se recibió archivo de imagen.<br>";
 }
 
 // Guardar o Editar
 if ($ope == "save") {
-    echo "Operación SAVE iniciada.<br>";
-
+    // Siempre se procesan todos los datos recibidos
     $mper->setIdusu($idusu);
     $mper->setNumdoc($numdoc);
     $mper->setTipdoc($tipdoc);
@@ -54,30 +43,27 @@ if ($ope == "save") {
     $mper->setDirusu($dirusu);
     $mper->setEdausu($edausu);
     $mper->setGenusu($genusu);
-    $mper->setFotper($ruta_fotper);
+
+    // Solo actualiza fotper si existe una imagen procesada
+    if ($ruta_fotper) {
+        $mper->setFotper($ruta_fotper);
+    }
 
     try {
         if ($idusu) {
-            echo "Editando usuario con ID: $idusu<br>";
-            $mper->edit();
-            echo "Usuario editado correctamente.<br>";
+            $mper->edit(); // Edita el usuario si ya existe
         } else {
-            echo "Guardando nuevo usuario.<br>";
-            $mper->save();
-            echo "Usuario guardado correctamente.<br>";
+            $mper->save(); // Crea un nuevo usuario si no existe
         }
     } catch (Exception $e) {
-        echo "Error al guardar los datos: " . $e->getMessage() . "<br>";
+        error_log("Error al guardar los datos: " . $e->getMessage());
     }
 }
 
 // Obtener datos del usuario
 if ($idusu) {
-    echo "Obteniendo datos del usuario con ID: $idusu<br>";
     $dtOne = $mper->getOne($idusu);
-    print_r($dtOne);
 } else {
-    echo "No hay usuario en la sesión.<br>";
     $dtOne = NULL;
 }
 ?>

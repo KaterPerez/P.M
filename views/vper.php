@@ -11,7 +11,13 @@ include('controllers/cper.php');
 
     <div class="perftada">
         <div class="peavat">
-            <i class="img-avatar fa-solid fa-user"></i>
+            <?php if (!empty($dtOne['fotper'])): ?>
+                <!-- Mostrar imagen si se encuentra almacenada -->
+                <img src="<?= htmlspecialchars($dtOne['fotper'], ENT_QUOTES, 'UTF-8'); ?>" alt="Foto del usuario" class="img-avatar">
+            <?php else: ?>
+                <!-- Ícono por defecto si no hay imagen -->
+                <i class="img-avatar fa-solid fa-user"></i>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -54,8 +60,9 @@ include('controllers/cper.php');
             <div class="col-md-2">
                 <br>
                 <input class="btn btn-primary" type="submit" value="Actualizar">
+                <input type="hidden" name="ope" value="save">
+                <input type="hidden" name="fotper" id="fotper" value="<?php if ($datOne) echo $datOne[0]['fotper']; ?>">
             </div>
         </div>
     </div>
 </form>
-
