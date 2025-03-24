@@ -20,9 +20,10 @@ $pasusu = isset($_POST['pasusu']) ? $_POST['pasusu'] : NULL;
 $dirusu = isset($_POST['dirusu']) ? $_POST['dirusu'] : NULL;
 $edausu = isset($_POST['edausu']) ? $_POST['edausu'] : NULL;
 $genusu = isset($_POST['genusu']) ? $_POST['genusu'] : NULL;
-$ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
+
 $fotper = isset($_FILES['fotper']) ? $_FILES['fotper'] : NULL;
 
+$ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 // Procesar archivo de imagen
 if ($fotper) {
     $ruta_fotper = opti($fotper, 'fotper', 'fotos', date('YmdHis'));
@@ -30,10 +31,7 @@ if ($fotper) {
     $ruta_fotper = NULL; // No se recibió archivo
 }
 
-// Guardar o Editar
 if ($ope == "save") {
-    // Siempre se procesan todos los datos recibidos
-    $mper->setIdusu($idusu);
     $mper->setNumdoc($numdoc);
     $mper->setTipdoc($tipdoc);
     $mper->setNomusu($nomusu);
@@ -43,27 +41,19 @@ if ($ope == "save") {
     $mper->setDirusu($dirusu);
     $mper->setEdausu($edausu);
     $mper->setGenusu($genusu);
+    $mper->setFotper($ruta_fotper);
 
-    // Solo actualiza fotper si existe una imagen procesada
-    if ($ruta_fotper) {
-        $mper->setFotper($ruta_fotper);
-    }
-
-    try {
-        if ($idusu) {
-            $mper->edit(); // Edita el usuario si ya existe
-        } else {
-            $mper->save(); // Crea un nuevo usuario si no existe
-        }
-    } catch (Exception $e) {
-        error_log("Error al guardar los datos: " . $e->getMessage());
+    if (!$idusu) {
+        $mper->save(); // Guardar nuevo registro
+    } else {
+        $mper->edit(); // Editar registro existente
     }
 }
 
 // Obtener datos del usuario
 if ($idusu) {
-    $dtOne = $mper->getOne($idusu);
+    $dtOne = $mper->getOne($idusu); // Devuelve la información del usuario
 } else {
-    $dtOne = NULL;
+    $dtOne = NULL; // Si no hay usuario, inicializa $dtOne como NULL
 }
 ?>

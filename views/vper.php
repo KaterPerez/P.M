@@ -11,19 +11,17 @@ include('controllers/cper.php');
 
     <div class="perftada">
         <div class="peavat">
-            <?php if (!empty($dtOne['fotper'])): ?>
-                <!-- Mostrar imagen si se encuentra almacenada -->
-                <img src="<?= htmlspecialchars($dtOne['fotper'], ENT_QUOTES, 'UTF-8'); ?>" alt="Foto del usuario" class="img-avatar">
-            <?php else: ?>
-                <!-- Ícono por defecto si no hay imagen -->
+            <?php if (!empty($d['fotper']) && file_exists($d['fotper'])) { ?>
+                <img src="<?= $d['fotper']; ?>" width="70px" />
+            <?php } else { ?>
                 <i class="img-avatar fa-solid fa-user"></i>
-            <?php endif; ?>
+            <?php } ?>
         </div>
     </div>
 
     <div class="perbio border">
         <h3 class="oltu">
-            <input class="on" type="text" name="nomusu" value="<?= $dtOne && isset($dtOne['nomusu'], $dtOne['apeusu']) ? $dtOne['nomusu'] . ' ' . $dtOne['apeusu'] : ''; ?>" readonly>
+            <input class="on" type="text" name="nomusu" value="<?= !empty($dtOne) && isset($dtOne['nomusu'], $dtOne['apeusu']) ? $dtOne['nomusu'] . ' ' . $dtOne['apeusu'] : ''; ?>" readonly>
         </h3>
     </div>
 
@@ -55,13 +53,16 @@ include('controllers/cper.php');
             </div>
             <div class="fi col-md-4">
                 <label for="fotper">Subir foto</label>
+                <?php if (!empty($dtOne) && !empty($dtOne['fotper'])) { ?>
+                    <input type="hidden" name="fotper" id="fotper" value="<?= $dtOne['fotper']; ?>">
+                <?php } ?>
                 <input type="file" name="fotper" id="fotper" class="form-control" accept="image/png, image/jpeg"><br>
             </div>
             <div class="col-md-2">
                 <br>
                 <input class="btn btn-primary" type="submit" value="Actualizar">
                 <input type="hidden" name="ope" value="save">
-                <input type="hidden" name="fotper" id="fotper" value="<?php if ($datOne) echo $datOne[0]['fotper']; ?>">
+                <input type="hidden" name="idusu" id="idusu" value="<?= !empty($dtOne) ? $dtOne['idusu'] : ''; ?>">
             </div>
         </div>
     </div>
