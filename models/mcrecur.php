@@ -153,5 +153,6 @@ class Mcrecur {
         $result->bindParam(":idusu", $idusu, PDO::PARAM_INT);
         $result->execute();
     }
+    
 }
 ?>
