@@ -23,6 +23,8 @@
             </div>
         </div>
     </form>
+    <br>
+    <br>
 
     <form name="frm1" action="home.php?pg=<?= $pg; ?>" method="POST" class="toggleForm" style="display:none;">
         <div class="row g-3 p-3">
@@ -37,7 +39,7 @@
             <input type="hidden" name="idcur" value="<?= isset($datOne[0]['idcur']) ? $datOne[0]['idcur'] : ''; ?>">
             <input type="hidden" name="ope" value="save">
             <div class="col-12 col-md-2">
-                <input class="btn btn-primary mt-4" type="submit" value="Guardar">
+                <input class="btn btn-dark mt-4" type="submit" value="Guardar">
             </div>
         </div>
     </form>

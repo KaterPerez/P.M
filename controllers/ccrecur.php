@@ -52,7 +52,7 @@ function generateStudentModal($idCurso, $nombreCurso, $mcrecur) {
         $html .= '<div class="modal-dialog modal-lg">';
             $html .= '<div class="modal-content">';
                 $html .= '<div class="modal-header">';
-                    $html .= '<h5 class="modal-title" id="modalCursoLabel'.$idCurso.'">Gestión de Estudiantes para el Curso: '.$nombreCurso.'</h5>';
+                    $html .= '<h5 class="modal-title" id="modalCursoLabel'.$idCurso.'">Estudiantes para el Curso: '.$nombreCurso.'</h5>';
                     $html .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
                 $html .= '</div>';
                 $html .= '<div class="modal-body">';
@@ -115,7 +115,7 @@ function generateStudentModal($idCurso, $nombreCurso, $mcrecur) {
 
                         $html .= '<div class="modal-footer">';
                             $html .= '<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>';
-                            $html .= '<button type="submit" class="btn btn-primary">Guardar Cambios</button>';
+                            $html .= '<button type="submit" class="btn btn-dark">Guardar Cambios</button>';
                             $html .= '<input type="hidden" name="ope" value="manageStudents">';
                         $html .= '</div>';
                     $html .= '</form>';

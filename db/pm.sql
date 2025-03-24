@@ -1309,7 +1309,7 @@ CREATE TABLE grupo(
   FOREIGN KEY (idusu) REFERENCES usuario(idusu)
 );
 CREATE TABLE proyecto(
-  codpro INT(10) PRIMARY KEY,
+  codpro INT(10) PRIMARY KEY AUTO_INCREMENT,
   nompro VARCHAR(255),
   tempro VARCHAR(255),
   inipro DATE, 
