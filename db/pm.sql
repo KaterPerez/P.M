@@ -1266,7 +1266,7 @@ CREATE TABLE usuario(
   genusu VARCHAR(1),
   codper INT(10),
   codval INT(10),
-  fotper VARCHAR(255) DEFAULT NULL,
+  fotper VARCHAR(255),
   FOREIGN KEY (codubi) REFERENCES ubicacion(codubi),
   FOREIGN KEY (codper) REFERENCES perfil(codper),
   FOREIGN KEY (codval) REFERENCES valor(codval)

@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-include('controllers/cper.php');
+include_once(__DIR__ . '/../controllers/cper.php');
 ?>
 
 <form class="perin" name="frm1" method="POST" action="controllers/cper.php" enctype="multipart/form-data">
@@ -51,19 +51,28 @@ include('controllers/cper.php');
                 <label for="genusu">Género</label>
                 <input class="un" type="text" name="genusu" id="genusu" value="<?= $dtOne['genusu'] ?? ''; ?>" readonly>
             </div>
-            <div class="fi col-md-4">
-                <label for="fotper">Subir foto</label>
-                <?php if (!empty($dtOne) && !empty($dtOne['fotper'])) { ?>
-                    <input type="hidden" name="fotper" id="fotper" value="<?= $dtOne['fotper']; ?>">
-                <?php } ?>
-                <input type="file" name="fotper" id="fotper" class="form-control" accept="image/png, image/jpeg"><br>
-            </div>
+            <div class="form-group col-md-4">
+			<label for="fotper">Subir foto</label>
+			<input type="file" class="form-control form-control" name="fots" accept="image/png, image/jpeg" id="fotper">
+			<input type="hidden" name="fotper" value="<?php if($dtOne && $dtOne[0]['fotper']) echo $dtOne[0]['fotper']; ?>">
+		    </div>
             <div class="col-md-2">
                 <br>
                 <input class="btn btn-primary" type="submit" value="Actualizar">
                 <input type="hidden" name="ope" value="save">
-                <input type="hidden" name="idusu" id="idusu" value="<?= !empty($dtOne) ? $dtOne['idusu'] : ''; ?>">
+                <input type="hidden" name="idusu" id="idusu" value="<?php if($dtOne && $dtOne[0]['idusu']) echo $dtOne[0]['idusu']; ?>">
             </div>
         </div>
     </div>
 </form>
+<tbody>
+		<?php if($dat){ foreach ($dat as $dt) { ?>
+			<tr>
+				<td>
+                <?php if (file_exists($dt["fotper"])) { ?>
+						<img src="<?=$dt["fotper"];?>" width="150px"> 
+					<?php } ?>
+				</td>
+			</tr>
+		<?php }} ?>
+	</tbody>
