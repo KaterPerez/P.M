@@ -308,9 +308,7 @@ class Mregtd{
         $result->bindParam(':idcur', $idcur, PDO::PARAM_INT);
         $result->bindParam(':codper', $codper, PDO::PARAM_INT);
         $result->execute();
-    
         $res = $result->fetchAll(PDO::FETCH_ASSOC);
-     
         return $res;
     }
 }
