@@ -1,3 +1,4 @@
+
 <?php
 class Mregtd{
     //Tabla usuario
@@ -283,18 +284,34 @@ class Mregtd{
         $result->execute();
     }
     function getAllByCurso($idcur, $codper = 4) {
-        $sql = "SELECT u.idusu, u.nomusu, u.apeusu, u.tipdoc, u.numdoc, u.actusu, u.codper
+        $sql = "SELECT 
+                    u.idusu, 
+                    u.nomusu, 
+                    u.apeusu, 
+                    u.tipdoc, 
+                    u.numdoc, 
+                    u.codper, 
+                    p.nomper, 
+                    c.codcur, 
+                    c.nomcur, 
+                    g.nomgru
                 FROM usuario u
                 INNER JOIN usuxcur a ON u.idusu = a.idusu
+                INNER JOIN curso c ON a.idcur = c.idcur
+                INNER JOIN perfil p ON u.codper = p.codper
+                LEFT JOIN grupo g ON u.idusu = g.idusu
                 WHERE a.idcur = :idcur AND u.codper = :codper";
+    
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
         $result->bindParam(':idcur', $idcur, PDO::PARAM_INT);
         $result->bindParam(':codper', $codper, PDO::PARAM_INT);
         $result->execute();
-        return $result->fetchAll(PDO::FETCH_ASSOC);
-        
+    
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+     
+        return $res;
     }
 }
 ?>
