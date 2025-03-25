@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="js/jlisin.js">
     <link rel="shortcut icon" href="img/Captura_de_pantalla_2024-11-19_142729-removebg-preview.png">
-    <script type="text/javascript" src="js/java2.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="js/java2.js"></script>
 </head>
 <body>
     <?php

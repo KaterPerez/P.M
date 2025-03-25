@@ -23,34 +23,24 @@ $fots = isset($_FILES['fots']['name']) ? $_FILES['fots']['name'] : NULL;
 
 if ($fots) {
     if ($fotper && file_exists($fotper)) unlink($fotper); // Elimina la foto anterior si existe
-    $fotper = opti($_FILES['fots'], 'fotper', 'fotos', date('YmdHis')); // Optimiza y guarda la nueva foto
+    $fotper = opti($_FILES['fots'], 'fot', 'fotos', date('YmdHis')); // Optimiza y guarda la nueva foto
 }
-// Instancia de la clase
+
+
 $mper = new Mper();
 $mper->setIdusu($idusu);
 try {
-    // Guardar o Editar
     if ($ope == "save") {
-        $mper->setnumdoc($numdoc);
-        $mper->setTipdoc($tipdoc);
-        $mper->setNomusu($nomusu);
-        $mper->setApeusu($apeusu);
-        $mper->setTelusu($telusu);
-        $mper->setPasusu($pasusu);
-        $mper->setDirusu($dirusu);
-        $mper->setEdausu($edausu);
-        $mper->setGenusu($genusu);
         $mper->setFotper($fotper);
 
         if ($idusu) {
-            $mper->edit(); // Edita usuario existente
+            $mper->edit(); 
         } else {
-            $mper->save(); // Guarda nuevo usuario
+            $mper->save(); 
         }
     }
 } catch (Exception $e) {
     echo "Error al procesar la solicitud: " . $e->getMessage();
-    exit();
 }
 
 // Obtener datos del usuario

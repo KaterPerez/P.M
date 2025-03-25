@@ -5,14 +5,14 @@ if (session_status() === PHP_SESSION_NONE) {
 include_once(__DIR__ . '/../controllers/cper.php');
 ?>
 
-<form class="perin" name="frm1" method="POST" action="controllers/cper.php" enctype="multipart/form-data">
-    <input type="hidden" name="idusu" value="<?= $_SESSION['idusu'] ?? ''; ?>">
+<form class="perin" name="frm1" method="POST" action="home.php?pg=3145" enctype="multipart/form-data">
+    <input type="hidden" name="idusu" value="<?=$_SESSION['idusu'] ?? ''; ?>">
     <input type="hidden" name="ope" value="<?= isset($dtOne) ? 'edit' : 'save'; ?>">
 
     <div class="perftada">
         <div class="peavat">
-            <?php if (!empty($d['fotper']) && file_exists($d['fotper'])) { ?>
-                <img src="<?= $d['fotper']; ?>" width="70px" />
+            <?php if ($dtOne && $dtOne['fotper'] && file_exists($dtOne['fotper'])) { ?>
+                <img src="<?=$dtOne['fotper']; ?>" width="250px" />
             <?php } else { ?>
                 <i class="img-avatar fa-solid fa-user"></i>
             <?php } ?>
@@ -21,7 +21,7 @@ include_once(__DIR__ . '/../controllers/cper.php');
 
     <div class="perbio border">
         <h3 class="oltu">
-            <input class="on" type="text" name="nomusu" value="<?= !empty($dtOne) && isset($dtOne['nomusu'], $dtOne['apeusu']) ? $dtOne['nomusu'] . ' ' . $dtOne['apeusu'] : ''; ?>" readonly>
+            <input class="on" type="text" name="nomusu" value="<?=$dtOne && isset($dtOne['nomusu'], $dtOne['apeusu']) ? $dtOne['nomusu'] . ' ' . $dtOne['apeusu'] : ''; ?>" readonly>
         </h3>
     </div>
 
@@ -65,14 +65,3 @@ include_once(__DIR__ . '/../controllers/cper.php');
         </div>
     </div>
 </form>
-<tbody>
-		<?php if($dat){ foreach ($dat as $dt) { ?>
-			<tr>
-				<td>
-                <?php if (file_exists($dt["fotper"])) { ?>
-						<img src="<?=$dt["fotper"];?>" width="150px"> 
-					<?php } ?>
-				</td>
-			</tr>
-		<?php }} ?>
-	</tbody>

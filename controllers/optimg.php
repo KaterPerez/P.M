@@ -9,7 +9,8 @@ function opti($pict, $nomimg, $rut, $pre) {
         $docext = pathinfo($pict["name"], PATHINFO_EXTENSION);
 
         if ($docext == "png" || $docext == "jpg" || $docext == "jpeg" || $docext == "jfif") {
-            $directorio = __DIR__ . '/../' . $rut;
+            //$directorio = __DIR__ . '/../' . $rut;
+            $directorio = $rut;
 
             // Crear directorio si no existe
             if (!is_dir($directorio)) {

@@ -132,8 +132,8 @@ class Mper {
 
     // Método para guardar un nuevo usuario
     public function save() {
-        $sql = "INSERT INTO usuario (  fotper) 
-                VALUES ( :fotper)";
+        $sql = "INSERT INTO usuario (fotper) 
+                VALUES (:fotper)";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
