@@ -31,7 +31,7 @@ $mper->setIdusu($idusu);
 try {
     // Guardar o Editar
     if ($ope == "save") {
-        $mper->setTipdoc($numdoc);
+        $mper->setnumdoc($numdoc);
         $mper->setTipdoc($tipdoc);
         $mper->setNomusu($nomusu);
         $mper->setApeusu($apeusu);
