@@ -282,6 +282,19 @@ class Mregtd{
         $result->bindParam(":codper", $codper);
         $result->execute();
     }
-    
+    function getAllByCurso($idcur, $codper = 4) {
+        $sql = "SELECT u.idusu, u.nomusu, u.apeusu, u.tipdoc, u.numdoc, u.actusu, u.codper
+                FROM usuario u
+                INNER JOIN usuxcur a ON u.idusu = a.idusu
+                WHERE a.idcur = :idcur AND u.codper = :codper";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(':idcur', $idcur, PDO::PARAM_INT);
+        $result->bindParam(':codper', $codper, PDO::PARAM_INT);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+        
+    }
 }
 ?>
