@@ -1,132 +1,82 @@
-<?php include("controllers/cfas.php") ?>
+<?php require_once('controllers/cgrue.php'); ?>
 
 <div class="container">
-
-	<div class="row">
-    <div class="col-md-6">
-      <div class="d-flex align-items-center py-3 mb-0.5">
-        <h1 class="me-3" >Crear grupos</h1>
-        <button id="toggleForm" class="btn btn-dark">
-          <i class="fa-solid fa-plus"></i>
-        </button>
-      </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="d-flex align-items-center py-3">
+                <h1 class="me-3">Grupos</h1>
+                <button class="btn btn-dark toggleFormButton">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+        </div>
     </div>
-  </div>
+	<h2>Curso al que pertenece: <?= $cursoEstudiante ? $cursoEstudiante['nomcur'] : 'No asignado'; ?></h2>
+    <form name="frm1" action="home.php?pg=<?= $pg; ?>" method="POST" class="toggleForm" style="display:none;">
+        <div class="row mb-3"> <br>
+            <div class="form-group col-12 col-md-6">
+                <label for="nomgru">Nombre del Grupo</label>
+                <input type="text" class="form-control" name="nomgru" value="<?= isset($datOne[0]['nomgru']) ? $datOne[0]['nomgru'] : ''; ?>" required>
+            </div>
+            <input type="hidden" name="idgru" value="<?= isset($datOne[0]['idgru']) ? $datOne[0]['idgru'] : ''; ?>">
+            <input type="hidden" name="ope" value="save">
+            <div class="col-12 col-md-2">
+                <input class="btn btn-dark mt-4" type="submit" value="Guardar">
+            </div>
+        </div>
+    </form>
 
-
-	<form name="frm1" action="#" method="POST" class="toggleForm" style="display:none;">
-		<div class="row">
-			<div class="form-group col-md-4">
-				<label for="disabledSelect" class="form-label">Curso</label>
-
-				<select class="form-control form-select" id="codcur" name="codcur">
-        			<option value="0">Seleccione curso</option>
-        			<?php if($dtDtp){ foreach($dtDtp as $dtD){ ?>
-        			<option value="<?=$dtD['codcur'];?>" <?php if($dtOne && $dtOne[0]['nomcur']==$dtD['codcur']) echo "selected"; ?>><?=$dtD['nomcur'];?></option><?php }} ?>
-     			</select>
-			</div>
-			<div class="form-group col-md-4">
-				<label for="nomgru">Nombre del grupo</label>
-				<br>
-				<input type="text" name="nomgru" id="nomgru" class="form-control form-control" required> 
-			</div>
-			<div class="form-group col-md-4">
-				<label for="num_integrantes" class="form-label">Cantidad de integrantes</label> 
-				<select id="num_integrantes" name="num_integrantes" class="form-select" onchange="mostrarIntegrantes(this.value)" required> 
-					<option value="">No. Integrantes</option> 
-					<?php for ($i = 1; $i <= 5; $i++) { echo "<option value='$i'>$i</option>"; } ?> 
-				</select> 
-			</div>
-			<!-- <div id="integrantes_container" class="row"></div> -->
-			<div class="form-group col-md-10"> 
-				<br>
-				<input type="hidden" name="ope" value="save"> 
-				<input type="hidden" name="codubi" required> 
-				<input type="submit" class="btn btn-dark" value="Enviar"> 
-			</div>
-		</div>
-	</form>
-
-	<br>
-
-	<table id="example" class="table table-striped" style="width:100%">
-		<thead>
-			<tr>
-				<th>Curso</th>
-				<th>Nombre G.</th>
-				<th>Integrantes</th> 
-				<th></th> 
-				<th>Opciones</th> 
-			</tr>
-		</thead>
-		<tbody>
-			<?php if($datOne){foreach($datOne AS $dat){ ?> 
-			<tr> 
-				<td><?=$dat["nomcur"]; ?></td>
-				<td><?=$dat["nomgru"]; ?></td>
-				<td><?=$dat["idusu"]; ?></td>
-				<td></td> 
-				<td><input type="button" name="ope" value="ope" class="btn btn-primary fa-truck-ramp-box"></td> 
-			</tr>
-		</tbody>
-    <?php }} ?>
-		</tbody>
-		<tfoot>
-			<tr>
-				<th>Curso</th>
-				<th>Nombre G.</th>
-				<th>Integrantes</th>
-				<th></th> 
-				<th>Opciones</th>
-			</tr>
-		</tfoot>
-	</table>
+    <div class="table-responsive">
+        <table id="example" class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre del Grupo</th>
+                    <th></th>
+                    <th></th>
+					<th></th>
+					<th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php if ($datAll) { foreach ($datAll as $grupo) { ?>
+                    <tr>
+                        <td><?= $grupo['nomgru']; ?></td>
+                        <td></td>
+                        <td>                            <!-- Botón para abrir el modal -->
+                            <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalGrupo<?= $grupo['idgru']; ?>">
+                                <i class="fa-solid fa-user-plus"></i> Añadir Estudiantes
+                            </button>
+                        </td>
+						<td>                            <!-- Botón para abrir el modal -->
+                            <button class="btn btn-dark">
+								<a href="home.php?pg=2002" style="text-decoration: none; color: white;">
+									<i class="fa-solid fa-bars-progress"></i> Crear proyecto
+								</a>
+                            </button>
+                        </td>
+                        <td class="text-end">
+                        <a href="home.php?pg=<?= $pg; ?>&idgru=<?= $grupo['idgru']; ?>&ope=edi" title="Editar">
+                            <i class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                        <a href="home.php?pg=<?= $pg; ?>&idgru=<?= $grupo['idgru']; ?>&ope=eli" title="Eliminar" onclick="return eliminar();">
+                            <i class="fa-solid fa-trash-can fa-2x"></i></a>
+                        </td>
+                    </tr>
+                <?php }} else { ?>
+                    <tr>
+                        <td colspan="3" class="text-center">No hay grupos disponibles</td>
+                    </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+    </div>
 </div>
-
 <script>
-	function mostrarIntegrantes(num) {
-		var container = document.getElementById('integrantes_container'); 
-		container.innerHTML = ''; // Limpiar los campos anteriores
-
-		for (var i = 1; i <= num; i++) {
-			var div = document.createElement('div');
-			div.className = 'form-group col-md-3';
-
-			var select = document.createElement('select');
-			select.name = 'integrante_' + i;
-			select.id = 'integrante_' + i;
-			select.className = 'form-select';
-			select.required = true;
-
-			var defaultOption = document.createElement('option');
-			defaultOption.value = '';
-			defaultOption.textContent = 'Seleccione Integrante';
-			select.appendChild(defaultOption);
-
-			estudiantes.forEach(function(estudiante) {
-				var option = document.createElement('option');
-				option.value = estudiante.id;
-				option.textContent = estudiante.nomusu + ' ' + estudiante.apeusu;
-				select.appendChild(option); 
-			});
-
-			div.appendChild(select);
-			container.appendChild(div);
-		}
-	}
+    if (typeof notificationMessage !== 'undefined' && notificationMessage !== "") {
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: notificationMessage
+        });
+    }
 </script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $("#toggleForm").click(function() {
-      $(".toggleForm").slideToggle();
-      var icon = $(this).find("i");
-      if (icon.hasClass("fa-plus")) {
-        icon.removeClass("fa-plus").addClass("fa-minus");
-      } else {
-        icon.removeClass("fa-minus").addClass("fa-plus");
-      }
-    });
-  });
-</script>
+<script type="text/javascript" src="js/java2.js"></script>
