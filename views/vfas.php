@@ -1,5 +1,4 @@
-<?php include("controllers/cfas.php")
-    ?>
+<?php include("controllers/cfas.php")?>
 
 <div class="container">
 
@@ -20,7 +19,7 @@
             <div class="form-group col-md-4">
                 <label for="nomfas">Nombre de la fase</label>
                 <input type="text" class="form-control form-control" name="nomfas" id="nomfas" value="<?php if ($datOne && $datOne[0]['nomfas'])
-                    echo $datOne[0]['nomfas']; ?>" required>
+                                                                                                            echo $datOne[0]['nomfas']; ?>" required>
             </div>
             <div class="form-group col-md-4">
                 <label for="disabledSelect" class="form-label">Proyecto</label>
@@ -29,29 +28,37 @@
                     <?php if (!empty($cdpro)) {
                         foreach ($cdpro as $dt) { ?>
                             <option value="<?= $dt['codpro']; ?>" <?php if ($datOne && $datOne[0]['codpro'] == $dt['codpro'])
-                                  echo 'selected'; ?>>
+                                                                        echo 'selected'; ?>>
                                 <?= $dt['nompro']; ?>
                             </option>
-                        <?php }
+                    <?php }
                     } ?>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="disabledSelect">Grupo</label>
+                <select class="form-control form-select" id="codpro" name="codpro">
+                            <option value="<?= $dt['codpro']; ?>" <?php if ($datOne && $datOne[0]['codpro'] == $dt['idgru'])echo 'selected'; ?>>
+                                <?= $dt['nomgru']; ?>
+                            </option>
                 </select>
             </div>
             <div class="form-group col-md-4">
                 <label for="inifas">Fecha de inicio</label>
                 <input type="date" class="form-control form-control" name="inifas" id="inifas" value="<?php if ($datOne && $datOne[0]['inifas'])
-                    echo $datOne[0]['inifas']; ?>" required>
+                                                                                                            echo $datOne[0]['inifas']; ?>" required>
             </div>
             <div class="form-group col-md-4">
                 <label for="finfas">Fecha de finalizacion</label>
                 <input type="date" class="form-control form-control" name="finfas" id="finfas" value="<?php if ($datOne && $datOne[0]['finfas'])
-                    echo $datOne[0]['finfas']; ?>" required>
+                                                                                                            echo $datOne[0]['finfas']; ?>" required>
             </div>
 
             <div class="form-group col-md-4">
                 <br>
                 <input type="hidden" name="ope" value="save">
                 <input type="hidden" name="codfas" value="<?php if ($datOne && $datOne[0]['codfas'])
-                    echo $datOne[0]['codfas']; ?>" required>
+                                                                echo $datOne[0]['codfas']; ?>" required>
                 <input type="submit" class="btn btn-dark" value="Enviar">
             </div>
 
@@ -74,10 +81,9 @@
             <?php if ($datAll) {
                 foreach ($datAll as $dt) { ?>
                     <tr>
-
                         <td><?= $dt["nomfas"]; ?></td>
-                        <td><?= $dt["nompro"]; ?></td>
-                        <td>Grupo</td>
+                        <td><?= $dt["nompro"]; ?></td> 
+                        <td><?= $dt["nomgru"]; ?></td>
                         <td><?= $dt["inifas"]; ?></td>
                         <td><?= $dt["finfas"]; ?></td>
                         <td class="text-center">
@@ -87,11 +93,8 @@
                             <a href="home.php?pg=3001&ope=edi&codfas=<?= $dt["codfas"]; ?>" title="Editar"><i
                                     class="fa-solid fa-pen-to-square text-success" style="color: #000000;"></i></a>
                         </td>
-
-
                     </tr>
-
-                <?php }
+            <?php }
             } ?>
         </tbody>
     </table>
