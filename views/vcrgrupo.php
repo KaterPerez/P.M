@@ -22,11 +22,11 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="disabledSelect" class="form-label">Grupo</label>
-                <select class="form-control form-select" id="codgru" name="codgru">
+                <select class="form-control form-select" id="idgru" name="idgru">
                     <option value="0">Seleccione...</option>
                     <?php if (!empty($cdgru)) {
                         foreach ($cdgru as $dt) { ?>
-                            <option value="<?= $dt['codgru']; ?>" <?php if ($datOne && $datOne[0]['codgru'] == $dt['codgru'])
+                            <option value="<?= $dt['idgru']; ?>" <?php if ($datOne && $datOne[0]['idgru'] == $dt['idgru'])
                                   echo 'selected'; ?>>
                                 <?= $dt['nomgru']; ?>
                             </option>
