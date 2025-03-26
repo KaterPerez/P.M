@@ -1,15 +1,39 @@
 <?php
 include('models/mcrgrupo.php');
 
-$mcrgrupo = new Mcrgrupo();
-$mcrgrupo->setIdnomp($_SESSION['idnomp']);
-$dat = $mcrgrupo->getMen();
+$nompro = isset($_POST['nompro']) ? $_POST['nompro'] : NULL;
+$codpro = isset($_REQUEST['codpro']) ? $_REQUEST['codpro'] : NULL;
+$codgru = isset($_POST['codgru']) ? $_POST['codgru'] : NULL;
+$tempro = isset($_POST['tempro']) ? $_POST['tempro'] : NULL;
+$inipro = isset($_POST['inipro']) ? $_POST['inipro'] : NULL;
+$finpro = isset($_POST['finpro']) ? $_POST['finpro'] : NULL;
+$ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
-function validar($idtproy){
-    $mcrgrupo = new Mcrgrupo();
-    $mcrgrupo->setIdtproy($idtproy);
-    $mcrgrupo->setIdnomp($_SESSION['idnomp']);
-    $dat = $mcrgrupo->getVal();
-    return $dat;
+
+$mcrgrupo = new Mcrgrupo();
+$mcrgrupo->setCodpro($codpro);
+
+if ($ope == "save") {
+    $mcrgrupo->setNompro($nompro);
+    $mcrgrupo->setCodgru($codgru);
+    $mcrgrupo->setTempro($tempro);
+    $mcrgrupo->setInipro($inipro);
+    $mcrgrupo->setFinpro($finpro);
+
+    if ($codpro)
+        $mcrgrupo->edit();
+    else
+        $mcrgrupo->save();
+
 }
+
+if($ope=="del" && $codpro) $mcrgrupo->del();
+if($ope=="edi" && $codpro){
+    $datOne = $mcrgrupo->getOne();
+}else{
+    $datOne=NULL;
+}
+
+$cdgru = $mcrgrupo->getCgru();
+$datAll = $mcrgrupo->getAll(); // Recupera todos los datos necesarios
 ?>
