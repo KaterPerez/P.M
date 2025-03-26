@@ -1,111 +1,140 @@
-<?php include("controllers/clisin.php"); ?>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="d-flex align-items-center py-3 mb-0.5">
-        <h1 class="me-3">Instituciones en el sistema</h1>
-        <button id="toggleForm" class="btn btn-dark">
-          <i class="fa-solid fa-plus"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-  <form name="frm1" action="#" method="POST" class="toggleForm" style="display:none;">
-    <div class="row">
-      <div class="form-group col-md-4">
-        <label for="depubi">Departamento</label>
-        <select class="form-control form-select" id="depubi" name="depubi" onchange="reloadMun(this.value)">
-          <option value="0">Selecciona Departamento</option>
-          <?php if(isset($dep) && is_array($dep)) { foreach($dep as $d) { ?>
-            <option value="<?=$d['codubi'];?>" <?php if(isset($dtOne) && is_array($dtOne) && $dtOne && $dtOne[0]['depubi']==$d['codubi']) echo "selected"; ?>><?=$d['nomubi'];?></option>
-          <?php }} ?>
-        </select>
-      </div>
-      <div class="form-group col-md-4">
-        <label for="munubi">Municipio</label>
-        <div id="reload">
-          <select class="form-control form-select" id="munubi" name="munubi">
-            <option value="0">Selecciona Municipio</option>
-            <?php if(isset($dtMuni) && is_array($dtMuni)) { foreach($dtMuni as $m) { ?>
-              <option value="<?=$m['codubi'];?>" <?php if(isset($dtOne) && is_array($dtOne) && $dtOne && $dtOne[0]['munubi']==$m['codubi']) echo "selected"; ?>><?=$m['nomubi'];?></option>
-            <?php }} ?>
-          </select>
-        </div>
-      </div>
-      <div class="form-group col-md-4">
-        <label for="nuicie">Codigo Ins.</label>
-        <input type="text" class="form-control" id="nuicie" name="nuicie" required>
-      </div>
-      <input type="hidden" name="ope" value="save">
-      <div class="form-group col-md-4">
-        <br>
-        <input type="submit" class="btn btn-dark" value="Buscar">
-      </div>
-    </div>
-  </form>
-  <table id="example" class="table table-striped" style="width:100%">
-    <br>
-    <thead>
-      <tr>
-        <th>Nombre Ins.</th>
-        <th>Codigo Ins.</th>
-        <th>Departamento</th>
-        <th>Municipio</th>
-        <th>Correo Ins.</th>
-        <th>Numero Ins.</th>
-      </tr>
-    </thead>
-    <tbody>
-      <?php if(isset($datOne) && is_array($datOne)) { foreach($datOne as $dat) { ?>
-      <tr>
-        <td><?=$dat["nomie"];?></td>
-        <td><?=$dat["nuicie"];?></td>
-        <td><?=$dat["depubi"];?></td>
-        <td><?=$dat["munubi"];?></td>
-        <td><?=$dat["corie"];?></td>
-        <td><?=$dat["telie"];?></td>
-      </tr>
-      <?php }} ?>
-    </tbody>
-    <tfoot>
-      <tr>
-        <th>Nombre Ins.</th>
-        <th>Codigo Ins.</th>
-        <th>Departamento</th>
-        <th>Municipio</th>
-        <th>Correo Ins.</th>
-        <th>Numero Ins.</th>
-      </tr>
-    </tfoot>
-  </table>
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  function reloadMun(departmentId) {
-    if (departmentId !== "0") {
-      $.ajax({
-        url: 'controllers/clisin.php',
-        type: 'POST',
-        data: {depubi: departmentId, ope: 'getMunicipios'},
-        success: function(response) {
-          $('#reload').html(response);
-        },
-        error: function() {
-          alert('Error al cargar los municipios.');
-        }
-      });
-    }
-  }
+<?php include("controllers/clisin.php"); 
+include("controllers/cubiins") ?>
 
-  $(document).ready(function() {
-    $("#toggleForm").click(function() {
-      $(".toggleForm").slideToggle();
-      var icon = $(this).find("i");
-      if (icon.hasClass("fa-plus")) {
-        icon.removeClass("fa-plus").addClass("fa-minus");
-      } else {
-        icon.removeClass("fa-minus").addClass("fa-plus");
-      }
-    });
-  });
-</script>
+<div class="container">
+
+    <div class="row">
+        <div class="col-12 col-md-10">
+            <div class="d-flex align-items-center py-3">
+                <h1 class="me-3">Instituciones</h1>
+                <button class="btn btn-dark toggleFormButton">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <form name="frm1" action="#" method="POST" class="toggleForm"
+        style="<?= isset($m) && $m == 1 ? '' : 'display:none;' ?>">
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label for="nomie">Nombre de la institución</label>
+                <input type="text" class="form-control form-control" name="nomie" id="nomie" value="<?php if ($datOne && $datOne[0]['nomie'])
+                    echo $datOne[0]['nomie']; ?>" required>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="tipie">Tema del proyecto</label>
+              <select name="tipie" id="tipie" class="form-select" required>
+                  <option value="">Seleccione...</option>
+                  <option value="Educacion superior" <?= isset($datOne[0]['tipie']) && $datOne[0]['tipie'] == 'Educacion superior' ? 'selected' : ''; ?>>Educación superior</option>
+                  <option value="Educacion publica" <?= isset($datOne[0]['tipie']) && $datOne[0]['tipie'] == 'Educacion publica' ? 'selected' : ''; ?>>Educación publica</option>
+                  <option value="Educacion privada" <?= isset($datOne[0]['tipie']) && $datOne[0]['tipie'] == 'Educacion privada' ? 'selected' : ''; ?>>Educación privada</option>
+              </select>
+          </div>
+            <div class="form-group col-md-3">
+              <label for="nuicie">Numero de identificación</label>
+              <input type="text" class="form-control form-control" name="nuicie" id="nuicie" value="<?php if ($datOne && $datOne[0]['nuicie'])
+                  echo $datOne[0]['nuicie']; ?>" required>
+            </div>
+            <div class = "form-group col-md-2">
+              <label for="mun">Departamento</label>
+                <select class="form-control form-select" onchange="recCiudad(this.value);">
+                  <?php if($dubi){ foreach($dubi AS $ub){ ?>
+                    <option value="<?=$ub['codubi'];?>"><?=$ub['nomubi'];?></option>
+                  <?php }} ?>
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                 <label for="mun">Municipio</label>
+                 <div id="reloadMun">
+                      <input type="text" name="mun" id="mun" maxlength="255" class="form-control" value="<?php if($datOne) echo $datOne[0]['mun']; ?>">
+                 </div>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="dirie">Dirección</label>
+                <input type="text" class="form-control form-control" name="dirie" id="dirie" value="<?php if ($datOne && $datOne[0]['dirie'])
+                    echo $datOne[0]['dirie']; ?>" required>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="corie">Correo</label>
+                <input type="text" class="form-control form-control" name="corie" id="corie" value="<?php if ($datOne && $datOne[0]['corie'])
+                    echo $datOne[0]['corie']; ?>" required>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="telie">Telefono</label>
+                <input type="text" class="form-control form-control" name="telie" id="telie" value="<?php if ($datOne && $datOne[0]['telie'])
+                    echo $datOne[0]['telie']; ?>" required>
+            </div>
+            <div class="form-group col-md-1">
+                <label for="actie">Activo</label>
+                <select name="actie" id="actie" class="form-control">
+                    <option value="0">...</option>
+                    <option value="1" <?php if ($datOne && $datOne[0]['actie'] == 1) echo " selected "; ?>>Si</option>
+                    <option value="2" <?php if ($datOne && $datOne[0]['actie'] == 2) echo " selected "; ?>>No</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-3">
+                <br>
+                <input type="hidden" name="ope" value="save">
+                <input type="hidden" name="codie" value="<?php if ($datOne && $datOne[0]['codie'])echo $datOne[0]['codie']; ?>">
+                <input type="submit" class="btn btn-dark" value="Enviar">
+            </div>
+        </div>
+        <br>
+    </form>
+
+    <table id="example" class="table table-striped text-center" style="width:100%">
+        <thead class="table-dark">
+            <tr>
+                <th>Institución</th>
+                <th>Tipo</th>
+                <th># Identificacion</th>
+                <th>Departamento</th> 
+                <th>Municipio</th>
+                <th>Dirección</th>
+                <th>Correo</th>
+                <th>Telefono</th>
+                <th>Activo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if ($datAll) {
+                foreach ($datAll as $dt) { ?>
+                    <tr>
+
+                      <td><?= $dt["nomie"]; ?></td>
+                      <td><?= $dt["tipie"]; ?></td>
+                      <td><?= $dt["nuicie"]; ?></td>
+                      <td><?= $dt[""]; ?></td>
+                      <td><?= $dt[""]; ?></td>
+                      <td><?= $dt["dirie"]; ?></td>
+                      <td><?= $dt["corie"]; ?></td>
+                      <td><?= $dt["telie"]; ?></td>
+                      <td>
+                        <?php if($dt['actie'] == 1) { ?>
+                          <a href="home.php?pg=<?= $pg; ?>&codie=<?= $dt['codie']; ?>&ope=actie">
+                            <i class="fa-solid fa-circle-check fa-2x text-success"></i>
+                          </a>
+                        <?php } else { ?>
+                          <a href="home.php?pg=<?= $pg; ?>&codie=<?= $dt['codie']; ?>&ope=actie">
+                            <i class="fa-solid fa-circle-xmark fa-2x text-danger"></i>
+                          </a>
+                        <?php } ?>
+                      </td>
+                        <td class="text-center">
+                            <a href="home.php?pg=4002&ope=del&codie=<?= $dt["codie"]; ?>" title="Eliminar"
+                                onclick="return confirm('¿Estás seguro de que deseas eliminar esta fase?');"><i
+                                    class="fa-solid fa-trash text-danger" style="color: #000000;"></i></a>
+                            <a href="home.php?pg=4002&ope=edi&codie=<?= $dt["codie"]; ?>" title="Editar"><i
+                                    class="fa-solid fa-pen-to-square text-success" style="color: #000000;"></i></a>
+                        </td>
+                    </tr>
+                <?php }
+            } ?>
+        </tbody>
+    </table>
+</div>
+
+<script type="text/javascript" src="js/java2.js"></script>
