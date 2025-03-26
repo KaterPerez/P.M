@@ -1,56 +1,56 @@
 <?php
-include(__DIR__ . "/../models/mlisin.php");
-include(__DIR__ . "/../models/mubi.php");
+include('models/mlisin.php');
 
-$idins = isset($_REQUEST['idins']) ? $_REQUEST['idins'] : NULL;
+$codie = isset($_REQUEST['codie']) ? $_REQUEST['codie'] : NULL;
+$nomie = isset($_POST['nomie']) ? $_POST['nomie'] : NULL;
+$tipie = isset($_POST['tipie']) ? $_POST['tipie'] : NULL;
+$dirie = isset($_POST['dirie']) ? $_POST['dirie'] : NULL;
 $nuicie = isset($_POST['nuicie']) ? $_POST['nuicie'] : NULL;
-$depubi = isset($_POST['depubi']) ? $_POST['depubi'] : NULL;
-$munubi = isset($_POST['munubi']) ? $_POST['munubi'] : NULL;
 $corie = isset($_POST['corie']) ? $_POST['corie'] : NULL;
+$codubi = isset($_REQUEST['codubi']) ? $_REQUEST['codubi'] : NULL;
 $telie = isset($_POST['telie']) ? $_POST['telie'] : NULL;
+$actie = isset($_POST['actie']) ? $_POST['actie'] : NULL;
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
-$mins = new Mlisin();
+
+$mlisin = new Mlisin();
+$mlisin->setCodie($codie);
 
 if ($ope == "save") {
-  $mins->setNuicie($nuicie);
-  $mins->setDepubi($depubi);
-  $mins->setMunubi($munubi);
-  $mins->setCorie($corie);
-  $mins->setTelie($telie);
-  if($idins) $mins->edit();
-  else $mins->save();
+    $mlisin->setNomie($nomie);
+    $mlisin->setTipie($tipie);
+    $mlisin->setDirie($dirie);
+    $mlisin->setNuicie($nuicie);
+    $mlisin->setCorie($corie);
+    $mlisin->setCodubi($codubi);
+    $mlisin->setTelie($telie);
+    $mlisin->setActie($actie);
+    if ($codie)
+        $mlisin->edit();
+    else
+        $mlisin->save();
+
 }
 
-$m = 2;
-if ($ope == "del" && $idins) $mins->del();
-if ($ope == "edi" && $idins) {
-  $dtOne = $mins->getOne();
-  $m = 1;
-} else { 
-  $dtOne = NULL;
+if($ope=="del" && $codie) $mlisin->del();
+if($ope=="edi" && $codie){
+    $datOne = $mlisin->getOne();
+}else{
+    $datOne=NULL;
 }
 
-$mubi = new Mubicacion();
-$dep = $mubi->getDep(0);
-$dat = $mins->getAll();
-$dtMuni = isset($depubi) ? $mubi->getMun($depubi) : [];
+if ($codie && $ope == "actie") {
+    // Obtener el estado actual del ie
+    $ie = $mlisin->getOne();
+    if ($ie) {
+        // Cambiar entre 1 (activo) y 2 (inactivo)
+        $nuevoEstado = $ie[0]['actie'] == 1 ? 2 : 1;
 
-if ($ope == 'getMunicipios' && $depubi) {
-  $municipios = $mubi->getMun($depubi);
-  
-  $options = '<select class="form-control form-select" id="munubi" name="munubi">';
-  $options .= '<option value="0">Selecciona Municipio</option>';
-  
-  if (is_array($municipios)) {
-    foreach ($municipios as $municipio) {
-      $options .= '<option value="' . $municipio['codubi'] . '">' . $municipio['nomubi'] . '</option>';
+        $mlisin->setCodie($codie);
+        $mlisin->setActie($nuevoEstado); // Asignar el nuevo estado
+        $mlisin->ediActie(); // Guardar el cambio en la base de datos
     }
-  }
-  
-  $options .= '</select>';
-  
-  echo $options;
-  exit;
 }
+
+$datAll = $mlisin->getAll(); // Recupera todos los datos necesarios
 ?>
