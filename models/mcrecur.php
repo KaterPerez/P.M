@@ -77,7 +77,7 @@ class Mcrecur {
 
     // Método para editar un curso
     function edit() {
-        $sql = "UPDATE curso SET nomcur = :nomcur, codcur = :codcur WHERE idcur = :idcur";
+        $sql = "UPDATE curso SET nomcur = :nomcur, codcur = :codcur, idusu = :idusu  WHERE idcur = :idcur";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();    
         $result = $conexion->prepare($sql);
@@ -87,6 +87,8 @@ class Mcrecur {
         $result->bindParam(':nomcur', $nomcur);
         $codcur = $this->getCodcur();
         $result->bindParam(':codcur', $codcur);
+        $idusu = $this->getIdusu();
+        $result->bindParam(':idusu', $idusu);
         $result->execute();
     }
 
@@ -109,17 +111,22 @@ class Mcrecur {
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function getCoursesByTeacher($idProfesor) {
-        $sql = "SELECT idcur, codcur, nomcur FROM curso WHERE idusu = :idProfesor";
+    public function getCoursesByTeacher($idusu) {
+        $sql = "SELECT c.idcur, c.codcur, c.nomcur, CONCAT(u.nomusu, ' ', u.apeusu) AS nombre_profesor
+                FROM curso AS c
+                LEFT JOIN usuario AS u ON c.idusu = u.idusu
+                WHERE u.codper = 3"; 
         
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
-        $result->bindParam(":idProfesor", $idProfesor, PDO::PARAM_INT);
+        $result->bindParam(":idusu", $idusu, PDO::PARAM_INT);
         $result->execute();
         
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    
     
     
 

@@ -28,15 +28,15 @@
 
     <form name="frm1" action="home.php?pg=<?= $pg; ?>" method="POST" class="toggleForm" style="display:none;">
         <div class="row g-3 p-3">
-            <div class="form-group col-12 col-md-6">
+            <div class="form-group col-12 col-md-3">
                 <label for="codcur">Número del Curso</label>
                 <input type="text" class="form-control" name="codcur" value="<?= isset($datOne[0]['codcur']) ? $datOne[0]['codcur'] : ''; ?>" required>
             </div>
-            <div class="form-group col-12 col-md-6">
+            <div class="form-group col-12 col-md-3">
                 <label for="nomcur">Nombre del Curso</label>
                 <input type="text" class="form-control" name="nomcur" value="<?= isset($datOne[0]['nomcur']) ? $datOne[0]['nomcur'] : ''; ?>" required>
             </div>
-            <div class="form-group col-12 col-md-6">
+            <div class="form-group col-12 col-md-4">
             <label for="idusu">Asignar Profesor:</label>
                 <select name="idusu" id="idusu" class="form-control">
                         <option value="">-- Seleccione un profesor --</option>
@@ -54,6 +54,7 @@
             </div>
         </div>
     </form>
+    <br>
 
     <div class="table-responsive">
         <table id="example" class="table table-striped table-hover">
@@ -61,6 +62,7 @@
                 <tr>
                     <th>Número de curso</th>
                     <th>Nombre del Curso</th>
+                    <th>Profesor</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -70,6 +72,7 @@
                     <tr>
                         <td><?= $curso['codcur']; ?></td>
                         <td><?= $curso['nomcur']; ?></td>
+                        <td><?= $curso['nomusu'] ?? 'Sin asignar'; ?></td>
                         <td>                            <!-- Botón para abrir el modal -->
                             <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalCurso<?= $curso['idcur']; ?>">
                                 <i class="fa-solid fa-user-plus"></i> Añadir Estudiantes
