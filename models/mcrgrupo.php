@@ -4,7 +4,7 @@
     //atributos
     private $codpro;
     private $nompro;
-    private $codgru;
+    private $idgru;
     private $tempro;
     private $inipro;
     private $finpro;
@@ -18,9 +18,9 @@
     {
         return $this->nompro;
     }
-    public function getCodgru()
+    public function getidgru()
     {
-        return $this->codgru;
+        return $this->idgru;
     }
     public function getTempro()
     {
@@ -43,9 +43,9 @@
     {
         $this->nompro = $nompro;
     }
-    public function setCodgru($codgru)
+    public function setidgru($idgru)
     {
-        $this->codgru = $codgru;
+        $this->idgru = $idgru;
     }
     public function setTempro($tempro)
     {
@@ -64,7 +64,7 @@
     public function getAll()
     {
         $res = NULL;
-        $sql = "SELECT p.codpro, p.nompro, p.codgru, p.tempro, p.inipro, p.finpro, g.codgru, g.nomgru FROM Proyecto AS p LEFT JOIN grupo AS g ON p.codgru=g.codgru";
+        $sql = "SELECT p.codpro, p.nompro, p.idgru, p.tempro, p.inipro, p.finpro, g.idgru, g.nomgru FROM Proyecto AS p LEFT JOIN grupo AS g ON p.idgru=g.idgru";
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -75,7 +75,7 @@
     public function getOne()
     {
         $res = NULL;
-        $sql = "SELECT p.codpro, p.nompro, p.codgru, p.tempro, p.inipro, p.finpro, g.codgru, g.nomgru FROM Proyecto AS p INNER JOIN grupo AS g ON p.codgru=g.codgru WHERE p.codpro=:codpro";
+        $sql = "SELECT p.codpro, p.nompro, p.idgru, p.tempro, p.inipro, p.finpro, g.idgru, g.nomgru FROM Proyecto AS p INNER JOIN grupo AS g ON p.idgru=g.idgru WHERE p.codpro=:codpro";
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -88,7 +88,7 @@
 
     public function getCgru()
     {
-        $sql = "SELECT codgru, nomgru FROM grupo";
+        $sql = "SELECT idgru, nomgru FROM grupo";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -112,12 +112,12 @@
         } while ($exists > 0);
         try {
             // Insertar el registro
-            $sql = "INSERT INTO proyecto (nompro, codgru, tempro, inipro, finpro) VALUES (:nompro, :codgru, :tempro, :inipro, :finpro)";
+            $sql = "INSERT INTO proyecto (nompro, idgru, tempro, inipro, finpro) VALUES (:nompro, :idgru, :tempro, :inipro, :finpro)";
             $result = $conexion->prepare($sql);
             $nompro = $this->getNompro();
             $result->bindParam(":nompro", $nompro);
-            $codgru = $this->getCodgru();
-            $result->bindParam(":codgru", $codgru);
+            $idgru = $this->getidgru();
+            $result->bindParam(":idgru", $idgru);
             $tempro = $this->getTempro();
             $result->bindParam(":tempro", $tempro);
             $inipro = $this->getInipro();
@@ -137,14 +137,14 @@
     {
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "UPDATE proyecto SET nompro=:nompro, codgru=:codgru, tempro=:tempro, inipro=:inipro, finpro=:finpro WHERE codpro=:codpro";
+        $sql = "UPDATE proyecto SET nompro=:nompro, idgru=:idgru, tempro=:tempro, inipro=:inipro, finpro=:finpro WHERE codpro=:codpro";
         $result = $conexion->prepare($sql);
         $codpro = $this->getCodpro();
         $result->bindParam(":codpro", $codpro);
         $nompro = $this->getNompro();
         $result->bindParam(":nompro", $nompro);
-        $codgru = $this->getCodgru();
-        $result->bindParam(":codgru", $codgru);
+        $idgru = $this->getidgru();
+        $result->bindParam(":idgru", $idgru);
         $tempro = $this->getTempro();
         $result->bindParam(":tempro", $tempro);
         $inipro = $this->getInipro();
