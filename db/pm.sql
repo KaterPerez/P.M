@@ -1295,15 +1295,17 @@ CREATE TABLE usuxcur(
   FOREIGN kEY (idusu) REFERENCES usuario(idusu),
   FOREIGN kEY (idcur) REFERENCES curso(idcur)
 );
-CREATE TABLE ie(
-  nuicie INT(12) PRIMARY KEY,
-  pasie VARCHAR(155),
-  nomie VARCHAR(255),
-  dirie VARCHAR(255),
-  telie INT(10),
-  corie VARCHAR(255),
-  codubi VARCHAR(255),
-  tipie VARCHAR(255),
+CREATE TABLE ie (
+  codie int(10) PRIMARY KEY,
+  nuicie int(12),
+  pasie varchar(155),
+  nomie varchar(255),
+  dirie varchar(255),
+  telie int(10),
+  actie tinyint(1),
+  corie varchar(255),
+  codubi varchar(255),
+  tipie varchar(255),
   FOREIGN KEY (codubi) REFERENCES ubicacion(codubi)
 );
 CREATE TABLE grupo(
@@ -1332,7 +1334,7 @@ CREATE TABLE proyecto(
    FOREIGN KEY (idgru) REFERENCES grupo(idgru)
 );
 CREATE TABLE fase(
-  codfas INT(10) PRIMARY KEY,
+  codfas INT(10) PRIMARY KEY AUTO_INCREMENT,
   nomfas VARCHAR(255),
   codpro INT(10),
   inifas DATE,
