@@ -6,10 +6,12 @@ $codfas = isset($_REQUEST['codfas']) ? $_REQUEST['codfas'] : NULL;
 $codpro = isset($_POST['codpro']) ? $_POST['codpro'] : NULL;
 $inifas = isset($_POST['inifas']) ? $_POST['inifas'] : NULL;
 $finfas = isset($_POST['finfas']) ? $_POST['finfas'] : NULL;
+$idgru = isset($_POST['idgru']) ? $_POST['idgru'] : NULL;
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
 
 $mfas = new Mfas();
+
 $mfas->setCodfas($codfas);
 
 if ($ope == "save") {
@@ -17,7 +19,6 @@ if ($ope == "save") {
     $mfas->setCodpro($codpro);
     $mfas->setInifas($inifas);
     $mfas->setFinfas($finfas);
-
     if ($codfas)
         $mfas->edit();
     else
@@ -31,7 +32,8 @@ if($ope=="edi" && $codfas){
 }else{
     $datOne=NULL;
 }
-
-$cdpro = $mfas->getCpro();
+if (isset($_SESSION['idgru'])) { // Suponiendo que el ID del usuario está en la sesión
+    $cursoEstudiante = $mgrue->getStudentCourse($_SESSION['idgru']);
+}
 $datAll = $mfas->getAll(); // Recupera todos los datos necesarios
 ?>
