@@ -2,7 +2,7 @@
 include("models/mcrecur.php");
 include("models/mregis.php");
 
-$idcur = isset($_REQUEST['idcur']) ? $_REQUEST['idcur'] : NULL;  
+$idcur = isset($_REQUEST['idcur']) ? $_REQUEST['idcur'] : NULL;
 $codcur = isset($_POST['codcur']) ? $_POST['codcur'] : NULL;
 $nomcur = isset($_POST['nomcur']) ? $_POST['nomcur'] : NULL;
 $idusu = isset($_POST['idusu']) ? $_POST['idusu'] : NULL;
@@ -14,7 +14,7 @@ $mregtd  = new Mregtd();
 $mcrecur->setIdcur($idcur);
 
 $message = ""; // Variable para el mensaje
-
+$professors = $mcrecur->getProfessors();
 // Guardar o Editar un curso
 if ($ope == "save") {
     $mcrecur->setIdcur($idcur);
@@ -44,13 +44,11 @@ if ($ope == "edi" && $idcur) {
 // Obtener todos los cursos
 $datAll = $mcrecur->getAll();
 
-// Función para generar el modal dinámico
-
-
 // Obtener estudiantes disponibles y generar los modales
 foreach ($datAll as $curso) {
     echo generateStudentModal($curso['idcur'], $curso['nomcur'], $mcrecur);
 }
+
 
 // Añadir o quitar estudiantes del curso
 if ($ope == "manageStudents") {
@@ -79,21 +77,21 @@ if (!empty($message)) {
           </script>";
 }
 
-function generateStudentModal($idCurso, $nombreCurso, $mcrecur) {
-    // Obtener estudiantes con codper = 4 y estudiantes asignados
-    $students = $mcrecur->getAvailableStudentsWithCodper($idCurso, 4);
-    $assignedStudents = $mcrecur->getAssignedStudents($idCurso);
+function generateStudentModal($idcur, $nomcur, $mcrecur) {
+    // Obtener estudiantes disponibles (no asignados) y asignados
+    $students = $mcrecur->getAvailableStudentsWithCodper($idcur, 4); // Estudiantes no asignados
+    $assignedStudents = $mcrecur->getAssignedStudents($idcur); // Estudiantes ya asignados
 
-    $html = '<div class="modal fade" id="modalCurso'.$idCurso.'" tabindex="-1" role="dialog" aria-labelledby="modalCursoLabel'.$idCurso.'" aria-hidden="true">';
+    $html = '<div class="modal fade" id="modalCurso'.$idcur.'" tabindex="-1" role="dialog" aria-labelledby="modalCursoLabel'.$idcur.'" aria-hidden="true">';
         $html .= '<div class="modal-dialog modal-lg">';
             $html .= '<div class="modal-content">';
                 $html .= '<div class="modal-header">';
-                    $html .= '<h5 class="modal-title" id="modalCursoLabel'.$idCurso.'">Estudiantes para el Curso: '.$nombreCurso.'</h5>';
+                    $html .= '<h5 class="modal-title" id="modalCursoLabel'.$idcur.'">Estudiantes para el Curso: '.$nomcur.'</h5>';
                     $html .= '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>';
                 $html .= '</div>';
                 $html .= '<div class="modal-body">';
                     $html .= '<form action="home.php?pg='.$_REQUEST['pg'].'" method="post">';
-                        $html .= '<input type="hidden" name="idcur" value="'.$idCurso.'">';
+                        $html .= '<input type="hidden" name="idcur" value="'.$idcur.'">';
 
                         // Tabla de estudiantes no asignados
                         $html .= '<h6>Estudiantes Disponibles:</h6>';

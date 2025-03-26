@@ -100,24 +100,45 @@ class Mcrecur {
         $result->bindParam(":idcur", $idcur);
         $result->execute();
     }
+    public function getProfessors() {
+        $sql = "SELECT idusu, CONCAT(nomusu, ' ', apeusu) AS nombre FROM usuario WHERE codper = 3";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function getCoursesByTeacher($idProfesor) {
+        $sql = "SELECT idcur, codcur, nomcur FROM curso WHERE idusu = :idProfesor";
+        
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idProfesor", $idProfesor, PDO::PARAM_INT);
+        $result->execute();
+        
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    
 
     // Obtener estudiantes no asignados con codper = 4
-    public function getAvailableStudentsWithCodper($idcur, $codper) {
+    public function getAvailableStudentsWithCodper($idcur, $codper = 4) {
         $sql = "SELECT u.idusu, u.numdoc, u.nomusu, u.apeusu, u.corusu 
                 FROM usuario AS u 
                 WHERE u.codper = :codper 
                 AND u.idusu NOT IN (
-                    SELECT uc.idusu FROM usuxcur AS uc WHERE uc.idcur = :idcur
-                )";
+                    SELECT uc.idusu FROM usuxcur AS uc
+                )"; 
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
         $result->bindParam(":codper", $codper, PDO::PARAM_INT);
-        $result->bindParam(":idcur", $idcur, PDO::PARAM_INT);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
-
+    
     // Obtener estudiantes asignados a un curso
     public function getAssignedStudents($idcur) {
         $sql = "SELECT u.idusu, u.numdoc, u.nomusu, u.apeusu, u.corusu 

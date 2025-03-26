@@ -36,6 +36,17 @@
                 <label for="nomcur">Nombre del Curso</label>
                 <input type="text" class="form-control" name="nomcur" value="<?= isset($datOne[0]['nomcur']) ? $datOne[0]['nomcur'] : ''; ?>" required>
             </div>
+            <div class="form-group col-12 col-md-6">
+            <label for="idusu">Asignar Profesor:</label>
+                <select name="idusu" id="idusu" class="form-control">
+                        <option value="">-- Seleccione un profesor --</option>
+                        <?php foreach ($professors as $prof) { ?>
+                            <option value="<?= $prof['idusu'] ?>" <?= ($idusu == $prof['idusu']) ? 'selected' : '' ?>>
+                                <?= $prof['nombre'] ?>
+                            </option>
+                        <?php } ?>
+                </select>
+            </div>
             <input type="hidden" name="idcur" value="<?= isset($datOne[0]['idcur']) ? $datOne[0]['idcur'] : ''; ?>">
             <input type="hidden" name="ope" value="save">
             <div class="col-12 col-md-2">
