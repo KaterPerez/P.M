@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <form action="controllers/cmas.php" method="post" enctype="multipart/form-data">
+    <form action="controllers/cmac.php" method="post" enctype="multipart/form-data">
         <div class="row align-items-end">
             <div class="col-md-4">
                 <label for="archivo" class="form-label">Selecciona el archivo Excel:</label>
