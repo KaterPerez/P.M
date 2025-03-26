@@ -1,220 +1,147 @@
 <?php
-class Mgrue{
-    //Tabla grupo
-    private $codgru;
+class Mgrue {
+    
+    private $idgru;      
     private $nomgru;
-    private $idusu;
-    //Tabla usuario
-    private $codubi;
-    private $numdoc;
-    private $tipdoc;
-    private $nomusu;
-    private $apeusu;
-    private $corusu;
-    private $telusu;
-    private $pasusu;
-    private $dirusu;
-    private $edausu;
-    private $genusu;
-    private $codper;
-    private $codval;
-    //Tabla proyecto 
-    private $codpro;
-    private $nompro;
-    private $tempro;
-    private $inipro;
-    private $finpro;
-
-    //Metodos GET y SET grupo
-    function getCodgru(){
-        return $this->codgru;
+    private $idusu;  
+    
+    function getIdgru(){
+        return $this->idgru;
     }
     function getNomgru(){
         return $this->nomgru;
-    }
-    function getIdusu(){
+    }    
+    function getIdusu() {
         return $this->idusu;
     }
-
-    function setCodgru($codgru){
-        $this->codgru=$codgru;
+    function setIdusu($idusu) {
+        $this->idusu = $idusu;
+    }
+    function setIdgru($idgru){
+        $this->idgru = $idgru;
     }
     function setNomgru($nomgru){
-        $this->nomgru=$nomgru;
-    }
-    function setIdusu($idusu){
-        $this->idusu=$idusu;
-    }
-
-    //Metodos GET y SET usuario
-    function getCodubi(){
-        return $this->codubi;
-    }
-    function getNumdoc(){
-        return $this->numdoc;
-    }
-    function getTipdoc(){
-        return $this->tipdoc;
-    }
-    function getNomusu(){
-        return $this->nomusu;
-    }
-    function getApeusu(){
-        return $this->apeusu;
-    }
-    function getCorusu(){
-        return $this->corusu;
-    }
-    function getTelusu(){
-        return $this->telusu;
-    }
-    function getPasusu(){
-        return $this->pasusu;
-    }
-    function getDirusu(){
-        return $this->dirusu;
-    }
-    function getEdausu(){
-        return $this->edausu;
-    }
-    function getGenusu(){
-        return $this->genusu;
-    }
-    function getCodper(){
-        return $this->codper;
-    }
-    function getCodval(){
-        return $this->codval;
-    }
-
-    function setCodubi($codubi){
-        $this->codubi=$codubi;
-    }
-    function setNumdoc($numdoc){
-        $this->numdoc=$numdoc;
-    }
-    function setTipdoc($tipdoc){
-        $this->tipdoc=$tipdoc;
-    }
-    function setNomusu($nomusu){
-        $this->nomusu=$nomusu;
-    }
-    function setApeusu($apeusu){
-        $this->apeusu=$apeusu;
-    }
-    function setCorusu($corusu){
-        $this->corusu=$corusu;
-    }
-    function setTelusu($telusu){
-        $this->telusu=$telusu;
-    }
-    function setPasusu($pasusu){
-        $this->pasusu=$pasusu;
-    }
-    function setDirusu($dirusu){
-        $this->dirusu=$dirusu;
-    }
-    function setEdausu($edausu){
-        $this->edausu=$edausu;
-    }
-    function setGenusu($genusu){
-        $this->genusu=$genusu;
-    }
-    function setCodper($codper){
-        $this->codper=$codper;
-    }
-    function setCodval($codval){
-        $this->codval=$codval;
-    }
-
-    //Metodos GET y SET proyecto 
-    function getcodpro(){
-        return $this->codpro;
-    }
-    function getnompro(){
-        return $this->nompro;
-    }
-    function gettempro(){
-        return $this->tempro;
-    }
-    function getinipro(){
-        return $this->inipro;
-    }
-    function getfinpro(){
-        return $this->finpro;
-    }
-
-    function setCodubi($codpro){
-        $this->codpro=$codpro;
-    }
-    function setCodubi($nompro){
-        $this->nompro=$nompro;
-    }
-    function setCodubi($tempro){
-        $this->tempro=$tempro;
-    }
-    function setCodubi($inipro){
-        $this->inipro=$inipro;
-    }
-    function setCodubi($finpro){
-        $this->finpro=$finpro;
-    }
-
-
-
-    function getAll(){
+        $this->nomgru = $nomgru;
+    } 
+    
+    function getOne() {
         $res = NULL;
-        $sql = "";
+        $sql = "SELECT idgru, nomgru, idusu FROM grupo WHERE idgru = :idgru";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
-        $result->execute();
-        $res = $result->fetchall(PDO::FETCH_ASSOC);
-        return $res;
-    }
-
-    function getOne(){
-        $res = NULL;
-        $sql = "";
-        $modelo = new conexion();
-        $conexion = $modelo->get_conexion();
-        $result = $conexion->prepare($sql);
-        $codgru = $this->getCodfas();
-        $result->bindParam(":codgru", $codgru);
+        $idgru = $this->getIdgru();
+        $result->bindParam(":idgru", $idgru);
         $result->execute(); 
         $res = $result->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
-
-
-
-
-
-
-
-
-    public function guardarGrupo($curso, $nombreGrupo, $cantidadIntegrantes, $integrantes) {
-        $stmt = $this->db->prepare("INSERT INTO grupos (curso, nombre_grupo, cantidad_integrantes) VALUES (?, ?, ?)");
-        $stmt->bind_param("ssi", $curso, $nombreGrupo, $cantidadIntegrantes);
-        $stmt->execute();
-        $grupoId = $stmt->insert_id;
-
-        foreach ($integrantes as $integrante) {
-            $stmtIntegrante = $this->db->prepare("INSERT INTO integrantes (grupo_id, nombre_integrante) VALUES (?, ?)");
-            $stmtIntegrante->bind_param("is", $grupoId, $integrante);
-            $stmtIntegrante->execute();
-        }
+    function getAll() {
+        $res = NULL;
+        $sql = "SELECT idgru, nomgru, idusu FROM grupo";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->execute();
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
+        return $res;
+    }
+    function save() {
+        $sql = "INSERT INTO grupo (idgru, nomgru, idusu) VALUES (:idgru, :nomgru, :idusu)";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $idgru = $this->getIdgru();
+        $result->bindParam(':idgru', $idgru);
+        $nomgru = $this->getNomgru();      
+        $result->bindParam(':nomgru', $nomgru);
+        $idusu = $this->getIdusu();
+        $result->bindParam(':idusu', $idusu);
+        $result->execute();      
+    }
+    function edit() {
+        $sql = "UPDATE grupo SET nomgru = :nomgru WHERE idgru = :idgru";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();    
+        $result = $conexion->prepare($sql);
+        $idgru = $this->getIdgru();
+        $result->bindParam(':idgru', $idgru);
+        $nomgru = $this->getNomgru();
+        $result->bindParam(':nomgru', $nomgru);
+        $result->execute();
+    }
+    function del() {
+        $sql = "DELETE FROM grupo WHERE idgru = :idgru";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $idgru = $this->getIdgru();
+        $result->bindParam(":idgru", $idgru);
+        $result->execute();
+    }
+    public function getAvailableStudentsWithCodper($idgru, $codper) {
+        $sql = "SELECT u.idusu, u.numdoc, u.nomusu, u.apeusu, u.corusu 
+                FROM usuario AS u 
+                WHERE u.codper = :codper 
+                AND u.idusu NOT IN (
+                    SELECT uc.idusu FROM usuxgru AS uc WHERE uc.idgru = :idgru
+                )";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idgru", $idgru, PDO::PARAM_INT);
+        $result->bindParam(":codper", $codper, PDO::PARAM_INT); // Agregar este parámetro
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function obtenerGrupos() {
-        $stmt = $this->db->prepare("SELECT * FROM grupos");
-        $stmt->execute();
-        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    // Obtener estudiantes asignados a un curso
+    public function getAssignedStudents($idgru) {
+        $sql = "SELECT u.idusu, u.numdoc, u.nomusu, u.apeusu, u.corusu 
+                FROM usuario AS u 
+                INNER JOIN usuxgru AS uc ON u.idusu = uc.idusu 
+                WHERE uc.idgru = :idgru";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idgru", $idgru, PDO::PARAM_INT);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function eliminarGrupo($id) {
-        $stmt = $this->db->prepare("DELETE FROM grupos WHERE id = ?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
+    // Asignar un estudiante a un curso
+    public function assignStudentsToCourse($idgru, $idusu) {
+        $sql = "INSERT INTO usuxgru (idgru, idusu) VALUES (:idgru, :idusu)";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idgru", $idgru, PDO::PARAM_INT); // Se usa $idgru en vez de $idcur
+        $result->bindParam(":idusu", $idusu, PDO::PARAM_INT);
+        $result->execute();
+    }
+
+    // Quitar un estudiante de un curso
+    public function removeStudentFromCourse($idgru, $idusu) {
+        $sql = "DELETE FROM usuxgru WHERE idgru = :idgru AND idusu = :idusu";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idgru", $idgru, PDO::PARAM_INT); // Corregir variable
+        $result->bindParam(":idusu", $idusu, PDO::PARAM_INT);
+        $result->execute();
+    }
+    public function getStudentCourse($idusu) {
+        $sql = "SELECT g.nomcur 
+                FROM curso g
+                INNER JOIN usuxcur ug ON g.idcur = ug.idcur
+                WHERE ug.idusu = :idusu
+                LIMIT 1"; // Tomamos un solo resultado si está en varios grupos
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idusu", $idusu, PDO::PARAM_INT);
+        $result->execute();
+        return $result->fetch(PDO::FETCH_ASSOC);
     }
 }
+?>
