@@ -3,7 +3,7 @@ include('models/mcrgrupo.php');
 
 $nompro = isset($_POST['nompro']) ? $_POST['nompro'] : NULL;
 $codpro = isset($_REQUEST['codpro']) ? $_REQUEST['codpro'] : NULL;
-$codgru = isset($_POST['codgru']) ? $_POST['codgru'] : NULL;
+$idgru = isset($_POST['idgru']) ? $_POST['idgru'] : NULL;
 $tempro = isset($_POST['tempro']) ? $_POST['tempro'] : NULL;
 $inipro = isset($_POST['inipro']) ? $_POST['inipro'] : NULL;
 $finpro = isset($_POST['finpro']) ? $_POST['finpro'] : NULL;
@@ -15,7 +15,7 @@ $mcrgrupo->setCodpro($codpro);
 
 if ($ope == "save") {
     $mcrgrupo->setNompro($nompro);
-    $mcrgrupo->setCodgru($codgru);
+    $mcrgrupo->setIdgru($idgru);
     $mcrgrupo->setTempro($tempro);
     $mcrgrupo->setInipro($inipro);
     $mcrgrupo->setFinpro($finpro);
