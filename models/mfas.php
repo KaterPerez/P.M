@@ -7,6 +7,7 @@
     private $codpro;
     private $inifas;
     private $finfas;
+    private $idgru;
 
     //metodos get
     public function getCodfas()
@@ -29,6 +30,10 @@
     {
         return $this->finfas;
     }
+    public function getidgru()
+    {
+        return $this->idgru;
+    }
     //metodos SET
     public function setCodfas($codfas)
     {
@@ -50,12 +55,16 @@
     {
         $this->finfas = $finfas;
     }
+    public function setidgru($idgru)
+    {
+        $this->idgru = $idgru;
+    }
 
     //metodos publicos
     public function getAll()
     {
         $res = NULL;
-        $sql = "SELECT f.codfas, f.nomfas, f.codpro, f.inifas, f.finfas, p.codpro, p.nompro FROM fase AS f LEFT JOIN proyecto AS p ON f.codpro=p.codpro";
+        $sql = "SELECT f.codfas, f.nomfas, f.codpro, f.inifas, f.finfas, g.idgru, g.nomgru ,p.codpro, p.nompro FROM fase AS f INNER JOIN grupo AS g INNER JOIN proyecto AS p ON f.codpro=p.codpro";
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -66,7 +75,7 @@
     public function getOne()
     {
         $res = NULL;
-        $sql = "SELECT f.codfas, f.nomfas, f.codpro, f.inifas, f.finfas, p.codpro, p.nompro FROM fase AS f INNER JOIN grupo AS g INNER JOIN proyecto AS p ON f.codpro=p.codpro WHERE f.codfas=:codfas";
+        $sql = "SELECT f.codfas, f.nomfas, f.codpro, f.inifas, f.finfas, g.idgru, g.nomgru ,p.codpro, p.nompro FROM fase AS f INNER JOIN grupo AS g INNER JOIN proyecto AS p ON f.codpro=p.codpro WHERE f.codfas=:codfas";
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -79,7 +88,7 @@
 
     public function getCpro()
     {
-        $sql = "SELECT codpro, nompro FROM proyecto";
+        $sql = "SELECT codpro, nompro, idgru FROM proyecto";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -119,7 +128,7 @@
         } while ($exists > 0);
         try {
             // Insertar el registro
-            $sql = "INSERT INTO fase (nomfas, codpro, inifas, finfas) VALUES (:nomfas, :codpro, :inifas, :finfas)";
+            $sql = "INSERT INTO fase (nomfas, codpro, inifas, finfas, idgru) VALUES (:nomfas, :codpro, :inifas, :finfas, :idgru)";
             $result = $conexion->prepare($sql);
             $nomfas = $this->getNomfas();
             $result->bindParam(":nomfas", $nomfas);
@@ -129,6 +138,8 @@
             $result->bindParam(":inifas", $inifas);
             $finfas = $this->getFinfas();
             $result->bindParam(":finfas", $finfas);
+            $idgru = $this->getIdgru();
+            $result->bindParam(":idgru", $idgru);
 
             if ($result->execute()) {
                 echo "<script>alert('Fase creada exitosamente.');</script>";
@@ -142,7 +153,7 @@
     {
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "UPDATE fase SET nomfas=:nomfas, codpro=:codpro, inifas=:inifas, finfas=:finfas WHERE codfas=:codfas";
+        $sql = "UPDATE fase SET nomfas=:nomfas, codpro=:codpro, inifas=:inifas, finfas=:finfas, idgru=:idgru WHERE codfas=:codfas";
         $result = $conexion->prepare($sql);
         $codfas = $this->getCodfas();
         $result->bindParam(":codfas", $codfas);
@@ -154,6 +165,8 @@
         $result->bindParam(":inifas", $inifas);
         $finfas = $this->getFinfas();
         $result->bindParam(":finfas", $finfas);
+        $idgru = $this->getIdgru();
+        $result->bindParam(":idgru", $idgru);
 
         try {
             if ($result->execute()) {
@@ -181,6 +194,19 @@
         } catch (PDOException $e) {
             echo "<script>alert('Error al eliminar la fase: " . addslashes($e->getMessage()) . "');</script>";
         }
+    }
+    public function getStudentCourse($idgru) {
+        $sql = "SELECT g.nomcur 
+                FROM curso g
+                INNER JOIN usuxcur ug ON g.idcur = ug.idcur
+                WHERE ug.idgru
+                LIMIT 1"; // Tomamos un solo resultado si está en varios grupos
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idgru", $idgru, PDO::PARAM_INT);
+        $result->execute();
+        return $result->fetch(PDO::FETCH_ASSOC);
     }
 }
 ?>
