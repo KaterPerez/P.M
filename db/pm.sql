@@ -1303,10 +1303,16 @@ CREATE TABLE ie(
   FOREIGN KEY (codubi) REFERENCES ubicacion(codubi)
 );
 CREATE TABLE grupo(
-  codgru INT(10) PRIMARY KEY,
+  idgru INT(10) PRIMARY KEY AUTO_INCREMENT,
   nomgru VARCHAR(255),
   idusu INT(10),
   FOREIGN KEY (idusu) REFERENCES usuario(idusu)
+);
+CREATE TABLE usuxgru(
+  idgru INT(10),
+  idusu INT(10),
+  FOREIGN kEY (idusu) REFERENCES usuario(idusu),
+  FOREIGN kEY (idgru) REFERENCES grupo(idgru)
 );
 CREATE TABLE proyecto(
   codpro INT(10) PRIMARY KEY AUTO_INCREMENT,
@@ -1315,11 +1321,11 @@ CREATE TABLE proyecto(
   inipro DATE, 
   finpro DATE,
   idusu INT(10),
-  codgru INT(10),
+  idgru INT(10),
   codval INT(10),
   FOREIGN KEY (idusu) REFERENCES usuario(idusu),
   FOREIGN kEY (codval) REFERENCES valor(codval),
-  FOREIGN KEY (codgru) REFERENCES grupo(codgru)
+   FOREIGN KEY (idgru) REFERENCES grupo(idgru)
 );
 CREATE TABLE fase(
   codfas INT(10) PRIMARY KEY,
