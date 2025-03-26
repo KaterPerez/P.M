@@ -1180,6 +1180,7 @@ INSERT INTO `pagina` (`codpag`, `nompag`, `rutpag`,`mospag`, `icopag`) VALUES
 (2001, 'Grupos', 'views/vgrue.php', '1', 'fa-solid fa-users-gear'),
 (2002, 'Proyecto', 'views/vcrgrupo.php','1', 'fa-regular fa-folder-open'),
 (3001, 'Fases', 'views/vfas.php','1', 'fa-solid fa-gears'),
+(3002, 'Actividad', 'views/vact.php','1', 'fa-solid fa-gears'),
 (4001, 'Dominio', 'views/vdom.php','1', 'fa-solid fa-bars-progress'),
 (4004, 'Valor', 'views/vval.php','1', 'fa-solid fa-sheet-plastic'),
 (4003, 'Pagina', 'views/vpag.php','1', 'fa-solid fa-clipboard-question'),
@@ -1216,6 +1217,9 @@ INSERT INTO `pagxper` (`codpag`, `codper`) VALUES
 (3145, 4),
 (4002, 1),
 (1001, 1),
+(3002, 1),
+(3002, 4),
+(3002, 3),
 (4004, 1),
 (1002, 1),
 (1002, 2),
@@ -1303,10 +1307,16 @@ CREATE TABLE ie(
   FOREIGN KEY (codubi) REFERENCES ubicacion(codubi)
 );
 CREATE TABLE grupo(
-  codgru INT(10) PRIMARY KEY,
+  idgru INT(10) PRIMARY KEY AUTO_INCREMENT,
   nomgru VARCHAR(255),
   idusu INT(10),
   FOREIGN KEY (idusu) REFERENCES usuario(idusu)
+);
+CREATE TABLE usuxgru(
+  idgru INT(10),
+  idusu INT(10),
+  FOREIGN kEY (idusu) REFERENCES usuario(idusu),
+  FOREIGN kEY (idgru) REFERENCES grupo(idgru)
 );
 CREATE TABLE proyecto(
   codpro INT(10) PRIMARY KEY AUTO_INCREMENT,
@@ -1315,11 +1325,11 @@ CREATE TABLE proyecto(
   inipro DATE, 
   finpro DATE,
   idusu INT(10),
-  codgru INT(10),
+  idgru INT(10),
   codval INT(10),
   FOREIGN KEY (idusu) REFERENCES usuario(idusu),
   FOREIGN kEY (codval) REFERENCES valor(codval),
-  FOREIGN KEY (codgru) REFERENCES grupo(codgru)
+   FOREIGN KEY (idgru) REFERENCES grupo(idgru)
 );
 CREATE TABLE fase(
   codfas INT(10) PRIMARY KEY,
