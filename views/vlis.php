@@ -48,5 +48,12 @@ foreach ($datAll as $curso) {
     echo generateListStudentsModal($curso['idcur'], $curso['nomcur'], $datEstudiantes);
 }
 ?>
+<script>
+function verProyecto(idusu) {
+    window.location.href = "home.php?pg=2002&id=" + idusu;
+
+}
+</script>
+
 
 <script type="text/javascript" src="js/java2.js"></script>

@@ -35,22 +35,25 @@ if ($ope == "save") {
     $mcrecur->setIdusu($idusu);
 }
 
-$idcur = 1; // Supongamos un ID de curso fijo para probar
-$datAll = $mregtd->getAllByCurso($idcur, 4);
-if ($datAll) {
-    $nomcur = isset($datAll[0]['nomcur']) ? $datAll[0]['nomcur'] : 'Sin nombre';
-    $numeroCurso = isset($datAll[0]['codcur']) ? $datAll[0]['codcur'] : 'Sin número';
-    
-    // Pasa solo el nombre y número del curso al modal
-    echo generateListStudentsModal($idcur, "$nomcur (Número: $numeroCurso)", $datAll);
+// Obtener todos los cursos del profesor
+$datAll = $mcrecur->getCoursesByTeacher($idProfesor);
+
+if (!$datAll) {
+    echo "<script>alert('No tienes cursos asignados.');</script>";
 } else {
-    echo "No se encontraron estudiantes para este curso.";
+    foreach ($datAll as $curso) {
+        // Obtener los estudiantes de este curso
+        $datEstudiantes = $mregtd->getAllByCurso($curso['idcur'], 4); 
+
+        // Verificar si hay estudiantes
+        if ($datEstudiantes) {
+            echo generateListStudentsModal($curso['idcur'], $curso['nomcur'], $datEstudiantes);
+        } else {
+            echo "<script>alert('No se encontraron estudiantes para el curso: " . htmlspecialchars($curso['nomcur']) . "');</script>";
+        }
+    }
 }
 
-
-// Obtener el ID del usuario logueado (profesor)
-
-$datAll = $mcrecur->getCoursesByTeacher($idProfesor);
 
 // Función para generar el modal dinámico
 
@@ -87,7 +90,7 @@ function generateListStudentsModal($idcur, $nomcur, $datEstudiantes) {
                                             $html .= '<td>' .  htmlspecialchars($dta['nomgru']) . '</td>';
                                             $html .= '<td>' . htmlspecialchars($dta['nomper']) . '</td>';
                                             $html .= '<td>';
-                                                $html .= '<button class="btn btn-primary btn-sm" onclick="verProyecto(\'' . htmlspecialchars($dta['idusu']) . '\')">Ver Proyecto</button>';
+                                            $html .= '<button class="btn btn-primary btn-sm" onclick="verProyecto(\'' . htmlspecialchars($dta['idusu']) . '\')">Ver Proyecto</button>';
                                             $html .= '</td>';
                                         $html .= '</tr>';
                                     }

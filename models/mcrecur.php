@@ -97,10 +97,19 @@ class Mcrecur {
         $sql = "DELETE FROM curso WHERE idcur = :idcur";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
-        $result = $conexion->prepare($sql);
-        $idcur = $this->getIdcur();
-        $result->bindParam(":idcur", $idcur);
-        $result->execute();
+        try {
+            $result = $conexion->prepare($sql);
+            $idcur = $this->getIdcur();
+            $result->bindParam(":idcur", $idcur);
+            if ($result->execute()) {
+                // Mensaje de éxito
+                echo "<script>alert('El curso  $idcur fue eliminado exitosamente.');</script>";
+            }
+        } catch (PDOException $e) {
+            // Mensaje de error para excepciones
+            $errorMessage = addslashes($e->getMessage()); // Evitar caracteres problemáticos
+            echo "<script>alert('No se puede eliminar este curso porque tiene estudiantes asignados. Por favor, elimine primero los estudiantes antes de borrar el curso.');</script>";
+        }
     }
     public function getProfessors() {
         $sql = "SELECT idusu, CONCAT(nomusu, ' ', apeusu) AS nombre FROM usuario WHERE codper = 3";
@@ -176,6 +185,24 @@ class Mcrecur {
         $result->bindParam(":idusu", $idusu, PDO::PARAM_INT);
         $result->execute();
     }
+
+    public function getCursoById($idcur) {
+        $sql = "SELECT c.idcur, c.codcur, c.nomcur, 
+                       u.nomusu, u.apeusu 
+                FROM curso AS c 
+                INNER JOIN usuario AS u ON c.idusu = u.idusu 
+                WHERE c.idcur = :idcur";
+    
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":idcur", $idcur, PDO::PARAM_INT);
+        $result->execute();
+    
+        return $result->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    
     
 }
 ?>

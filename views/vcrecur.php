@@ -72,11 +72,29 @@
                     <tr>
                         <td><?= $curso['codcur']; ?></td>
                         <td><?= $curso['nomcur']; ?></td>
-                        <td><?= $curso['nomusu'] ?? 'Sin asignar'; ?></td>
+                        <td>
+                            <?php 
+                            // Buscar el profesor asignado al curso
+                            $nombreProfesor = "No asignado"; // Por defecto
+                            foreach ($professors as $prof) { 
+                                if ($prof['idusu'] == $curso['idusu']) { 
+                                    $nombreProfesor = $prof['nombre']; 
+                                    break; // Encontró el profesor, no sigue buscando
+                                }
+                            }
+                            echo $nombreProfesor;
+                            ?>
+                        </td>
                         <td>                            <!-- Botón para abrir el modal -->
                             <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalCurso<?= $curso['idcur']; ?>">
                                 <i class="fa-solid fa-user-plus"></i> Añadir Estudiantes
                             </button>
+                        </td>
+                        <td>
+                            <a href="views/vpdfcur.php?idcur=<?= $curso['idcur']; ?>" class="btn btn-danger">
+                                <i class="fa-solid fa-file-pdf"></i> Descargar PDF
+                            </a>
+
                         </td>
                         <td class="text-end">
                         <a href="home.php?pg=<?= $pg; ?>&idcur=<?= $curso['idcur']; ?>&ope=edi" title="Editar">
@@ -84,6 +102,7 @@
                         <a href="home.php?pg=<?= $pg; ?>&idcur=<?= $curso['idcur']; ?>&ope=eli" title="Eliminar" onclick="return eliminar();">
                             <i class="fa-solid fa-trash-can fa-2x"></i></a>
                         </td>
+
                     </tr>
                 <?php }} else { ?>
                     <tr>

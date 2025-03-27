@@ -33,8 +33,8 @@ if ($ope == "save") {
 // Eliminar un curso
 if ($ope == "eli" && $idcur) {
     $mcrecur->del();
-    $message = "El curso ha sido eliminado con éxito.";
 }
+
 
 // Editar un curso (obtener datos para edición)
 if ($ope == "edi" && $idcur) {
