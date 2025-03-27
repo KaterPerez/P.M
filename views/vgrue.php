@@ -27,7 +27,7 @@
     </form>
 
     <div class="table-responsive">
-        <table id="example" class="table table-striped table-hover">
+        <table id="example" class="table table-striped table-hover text-center">
             <thead class="table-dark">
                 <tr>
                     <th>Nombre del Grupo</th>
