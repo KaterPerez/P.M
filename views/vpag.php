@@ -6,7 +6,7 @@
             <div class="d-flex align-items-center py-3">
                 <h1 class="me-3">Paginas</h1>
                 <!-- Cambié ID a clase para mayor flexibilidad -->
-                <button class="btn btn-dark toggleFormButton">
+                <button class="btn btn-dark toggleFormButton" onclick="toggleFormulario()">
                     <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
@@ -32,7 +32,7 @@
                 </select>
             </div>
             <div class="form-group col-12 col-md-2 d-flex align-items-center justify-content-center">
-                <input class="btn btn-primary mt-4" type="submit" value="Guardar">
+                <input class="btn btn-dark mt-4" type="submit" value="Guardar">
                 <input type="hidden" name="codpag" id="codpag" value="<?php if($datOne) echo $datOne[0]['codpag']; ?>">
                 <input type="hidden" name="opera" value="save">
             </div>
@@ -43,19 +43,19 @@
             <table id="example" class="table table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
-                        <th>Página</th>
-                        <th>Mostrar</th>
+                        <th class="text-center">Página</th>
+                        <th class="text-center">Mostrar</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php if ($datAll) { foreach ($datAll as $dta) { ?>       
                         <tr>
-                            <td>
+                            <td class="text-center">
                                 <strong><?=$dta['codpag'];?> - <?=$dta['nompag'];?></strong><br>
                                 <small><strong>Ruta: </strong><?=$dta['rutpag'];?></small>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <?php if($dta['mospag']==1){ ?>
                                     <a href="home.php?pg=<?=$pg;?>&codpag=<?=$dta['codpag'];?>&opera=acti&mospag=2">
                                         <i id="vp" class="fa-solid fa-circle-check fa-2x text-success"></i>
@@ -68,9 +68,9 @@
                             </td>
                             <td class="text-end">
                                 <a href="home.php?pg=<?=$pg;?>&codpag=<?=$dta['codpag'];?>&opera=edi" title="Editar">
-                                    <i class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                                    <i class="fa-solid fa-pen-to-square fa-2x text-success"></i></a>
                                 <a href="home.php?pg=<?=$pg;?>&codpag=<?=$dta['codpag'];?>&opera=eli" title="Eliminar" onclick="return eliminar();">
-                                    <i class="fa-solid fa-trash-can fa-2x"></i></a>
+                                    <i class="fa-solid fa-trash-can fa-2x text-danger"></i></a>
                             </td>
                         </tr>
                     <?php }} ?>      

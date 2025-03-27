@@ -5,7 +5,7 @@
         <div class="col-12 col-md-6">
             <div class="d-flex align-items-center py-3">
                 <h1 class="me-3">Crear Actividad</h1>
-                <button class="btn btn-dark toggleFormButton">
+                <button class="btn btn-dark toggleFormButton" onclick="toggleFormulario()">
                     <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
@@ -29,8 +29,8 @@
         <table id="example" class="table table-striped table-hover">
             <thead class="table-dark">
                 <tr>
-                    <th>Nombre de la Actividad</th>
-                    <th></th>
+                    <th class="text-center">Nombre de la Actividad</th>
+                    <th class="text-center">Proyecto</th>
                     <th></th>
 					<th></th>
 					<th></th>
@@ -39,20 +39,22 @@
             <tbody>
                 <?php if ($datAll) { foreach ($datAll as $grupo) { ?>
                     <tr>
-                        <td><?= $grupo['nomgru']; ?></td>
-                        <td></td>
-						<td>                            <!-- Botón para abrir el modal -->
+                        <td class="text-center"><?= $grupo['nomgru']; ?></td>
+
+						<td class="text-center">                            <!-- Botón para abrir el modal -->
                             <button class="btn btn-dark">
 								<a href="home.php?pg=2002" style="text-decoration: none; color: white;">
 									<i class="fa-solid fa-bars-progress"></i> Crear proyecto
 								</a>
                             </button>
                         </td>
+                        <td></td>
+                        <td></td>
                         <td class="text-end">
                         <a href="home.php?pg=<?= $pg; ?>&idgru=<?= $grupo['idgru']; ?>&ope=edi" title="Editar">
-                            <i class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                            <i class="fa-solid fa-pen-to-square fa-2x text-success"></i></a>
                         <a href="home.php?pg=<?= $pg; ?>&idgru=<?= $grupo['idgru']; ?>&ope=eli" title="Eliminar" onclick="return eliminar();">
-                            <i class="fa-solid fa-trash-can fa-2x"></i></a>
+                            <i class="fa-solid fa-trash-can fa-2x text-danger"></i></a>
                         </td>
                     </tr>
                 <?php }} else { ?>

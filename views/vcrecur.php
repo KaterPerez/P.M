@@ -5,7 +5,7 @@
         <div class="col-12 col-md-6">
             <div class="d-flex align-items-center py-3">
                 <h1 class="me-3">Cursos</h1>
-                <button class="btn btn-dark toggleFormButton">
+                <button class="btn btn-dark toggleFormButton" onclick="toggleFormulario()">
                     <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
@@ -60,19 +60,20 @@
         <table id="example" class="table table-striped table-hover">
             <thead class="table-dark">
                 <tr>
-                    <th>Número de curso</th>
-                    <th>Nombre del Curso</th>
-                    <th>Profesor</th>
-                    <th></th>
-                    <th></th>
+                    <th class="text-center">Número de curso</th>
+                    <th class="text-center">Nombre del Curso</th>
+                    <th class="text-center">Profesor</th>
+                    <th class="text-center">Añadir Estudiante</th>
+                    <th class="text-center">Descargar Lista</th>
+                    <th class="text-center"></th>
                 </tr>
             </thead>
             <tbody>
                 <?php if ($datAll) { foreach ($datAll as $curso) { ?>
                     <tr>
-                        <td><?= $curso['codcur']; ?></td>
-                        <td><?= $curso['nomcur']; ?></td>
-                        <td>
+                        <td class="text-center"><?= $curso['codcur']; ?></td>
+                        <td class="text-center"><?= $curso['nomcur']; ?></td>
+                        <td class="text-center">
                             <?php 
                             // Buscar el profesor asignado al curso
                             $nombreProfesor = "No asignado"; // Por defecto
@@ -85,22 +86,22 @@
                             echo $nombreProfesor;
                             ?>
                         </td>
-                        <td>                            <!-- Botón para abrir el modal -->
+                        <td class="text-center"><!-- Botón para abrir el modal -->
                             <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalCurso<?= $curso['idcur']; ?>">
-                                <i class="fa-solid fa-user-plus"></i> Añadir Estudiantes
+                                <i class="fa-solid fa-user-plus"></i>
                             </button>
                         </td>
-                        <td>
+                        <td class="text-center">
                             <a href="views/vpdfcur.php?idcur=<?= $curso['idcur']; ?>" class="btn btn-danger">
-                                <i class="fa-solid fa-file-pdf"></i> Descargar PDF
+                                <i class="fa-solid fa-file-pdf"></i>PDF
                             </a>
 
                         </td>
                         <td class="text-end">
                         <a href="home.php?pg=<?= $pg; ?>&idcur=<?= $curso['idcur']; ?>&ope=edi" title="Editar">
-                            <i class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                            <i class="fa-solid fa-pen-to-square fa-2x text-success "></i></a>
                         <a href="home.php?pg=<?= $pg; ?>&idcur=<?= $curso['idcur']; ?>&ope=eli" title="Eliminar" onclick="return eliminar();">
-                            <i class="fa-solid fa-trash-can fa-2x"></i></a>
+                            <i class="fa-solid fa-trash-can fa-2x text-danger"></i></a>
                         </td>
 
                     </tr>

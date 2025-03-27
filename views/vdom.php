@@ -5,9 +5,10 @@
             <div class="d-flex align-items-center py-3">
                 <h1 class="me-3">Dominio</h1>
                 <!-- Cambié ID a clase para mayor flexibilidad -->
-                <button class="btn btn-dark toggleFormButton">
+                <button class="btn btn-dark toggleFormButton" onclick="toggleFormulario()">
                     <i class="fa-solid fa-plus"></i>
                 </button>
+
             </div>
         </div>
     </div>
@@ -20,7 +21,7 @@
                        class="form-control" value="<?php if ($datOne) echo $datOne[0]['nomdom']; ?>" required>
             </div>
             <div class="col-12 col-md-2">
-                <input class="btn btn-primary mt-4" type="submit" value="Guardar">
+                <input class="btn btn-dark mt-4" type="submit" value="Guardar">
                 <input type="hidden" name="coddom" id="coddom" value="<?php if ($datOne) echo $datOne[0]['coddom']; ?>">
                 <input type="hidden" name="opera" value="save">
             </div>
@@ -31,21 +32,21 @@
     <table id="example" class="table table-striped table-hover">
         <thead class="table-dark">
             <tr>
-                <th>Codigo</th>
-                <th>Dominio</th>
+                <th class="text-center">Codigo</th>
+                <th class="text-center">Dominio</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <?php if ($datAll) { foreach ($datAll as $dta) { ?>
                 <tr>
-                    <td><strong><?= $dta['coddom']; ?></strong></td>
-                    <td><strong><?= $dta['nomdom']; ?></strong></td>
+                    <td class="text-center"><strong><?= $dta['coddom']; ?></strong></td>
+                    <td class="text-center"><strong><?= $dta['nomdom']; ?></strong></td>
                     <td class="text-end">
                         <a href="home.php?pg=<?= $pg; ?>&coddom=<?= $dta['coddom']; ?>&opera=edi" title="Editar">
-                            <i class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                            <i class="fa-solid fa-pen-to-square fa-2x text-success"></i></a>
                         <a href="home.php?pg=<?= $pg; ?>&coddom=<?= $dta['coddom']; ?>&opera=eli" title="Eliminar" onclick="return eliminar();">
-                            <i class="fa-solid fa-trash-can fa-2x"></i></a>
+                            <i class="fa-solid fa-trash-can fa-2x text-danger"></i></a>
                     </td>
                 </tr>
             <?php }} ?>

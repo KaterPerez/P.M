@@ -4,9 +4,9 @@
         <div class="col-12 col-md-6">
             <div class="d-flex align-items-center py-3">
                 <h1 class="me-3">Valor</h1>
-                <!-- <button class="btn btn-dark toggleFormButton">
+                <button class="btn btn-dark toggleFormButton" onclick="toggleFormulario()">
                     <i class="fa-solid fa-plus"></i>
-                </button> -->
+                </button>
             </div>
         </div>
     </div>
@@ -40,9 +40,9 @@
     <table id="example" class="table table-striped">
         <thead class="table-dark">
             <tr>
-                <th>Codigo</th>
-                <th>Valor</th>
-                <th>Dominio</th>
+                <th class="text-center">Codigo</th>
+                <th class="text-center">Valor</th>
+                <th class="text-center">Dominio</th>
                 <th></th>
             </tr>
         </thead>
@@ -50,9 +50,9 @@
             <?php if ($datAll) {
                 foreach ($datAll as $dta) { ?>
                     <tr>
-                        <td><?= $dta['codval']; ?></td>
-                        <td><?= $dta['nomval']; ?></td>
-                        <td>
+                        <td class="text-center"><?= $dta['codval']; ?></td>
+                        <td class="text-center"><?= $dta['nomval']; ?></td>
+                        <td class="text-center">
                             <?php if ($datDom) {
                                 foreach ($datDom as $dtd) {
                                     if ($dtd['coddom'] == $dta['coddom']) {
@@ -63,9 +63,9 @@
                         </td>
                         <td class="text-end">
                             <a href="home.php?pg=<?= $pg; ?>&codval=<?= $dta['codval']; ?>&opera=edi" title="Editar">
-                                <i class="fa-solid fa-pen-to-square fa-2x"></i></a>
+                                <i class="fa-solid fa-pen-to-square fa-2x text-success"></i></a>
                             <a href="home.php?pg=<?= $pg; ?>&codval=<?= $dta['codval']; ?>&opera=eli" title="Eliminar" onclick="return eliminar();">
-                                <i class="fa-solid fa-trash-can fa-2x"></i></a>
+                                <i class="fa-solid fa-trash-can fa-2x text-danger"></i></a>
                         </td>
                     </tr>
             <?php }} ?>

@@ -12,7 +12,7 @@ include_once(__DIR__ . '/../controllers/cper.php');
     <div class="perftada">
         <div class="peavat">
             <?php if ($dtOne && $dtOne['fotper'] && file_exists($dtOne['fotper'])) { ?>
-                <img src="<?=$dtOne['fotper']; ?>" width="250px" />
+                <img src="<?=$dtOne['fotper']; ?>" width="250px"/>
             <?php } else { ?>
                 <i class="img-avatar fa-solid fa-user"></i>
             <?php } ?>
@@ -58,7 +58,7 @@ include_once(__DIR__ . '/../controllers/cper.php');
 		    </div>
             <div class="col-md-2">
                 <br>
-                <input class="btn btn-primary" type="submit" value="Actualizar">
+                <input class="btn btn-dark" type="submit" value="Actualizar">
                 <input type="hidden" name="ope" value="save">
                 <input type="hidden" name="idusu" id="idusu" value="<?php if($dtOne && $dtOne[0]['idusu']) echo $dtOne[0]['idusu']; ?>">
             </div>

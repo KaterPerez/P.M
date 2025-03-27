@@ -1,25 +1,14 @@
+function toggleFormulario() {
+    let form = document.querySelector(".toggleForm"); // Encuentra el formulario
+    let icon = document.querySelector(".toggleFormButton i"); // Encuentra el ícono del botón
 
-$(document).ready(function() {
-    $(".toggleFormButton").click(function() {
-        var form = $(this).closest(".container").find(".toggleForm"); // Buscar el formulario dentro del contenedor
-        form.slideToggle(); // Alternar visibilidad del formulario
-
-        var icon = $(this).find("i"); // Buscar ícono dentro del botón
-        if (icon.hasClass("fa-plus")) {
-            icon.removeClass("fa-plus").addClass("fa-minus"); // Cambia de '+' a '-'
-        } else {
-            icon.removeClass("fa-minus").addClass("fa-plus"); // Cambia de '-' a '+'
-        }
-    });
-
-    // Verifica si el formulario tiene datos cargados y asegúrate de que esté visible
-    $(".toggleForm").each(function() {
-        if ($(this).find("input[name='nomdom']").val() !== "") {
-            $(this).show(); // Muestra el formulario si tiene datos
-            $(this).closest(".container").find(".toggleFormButton i")
-                .removeClass("fa-plus").addClass("fa-minus"); // Cambia el ícono
-        }
-    });
-});
-
-
+    if (form.style.display === "none" || form.style.display === "") {
+        form.style.display = "block"; // 🔥 Muestra el formulario
+        icon.classList.remove("fa-plus");
+        icon.classList.add("fa-minus");
+    } else {
+        form.style.display = "none"; // ❌ Oculta el formulario
+        icon.classList.remove("fa-minus");
+        icon.classList.add("fa-plus");
+    }
+}

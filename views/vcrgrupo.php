@@ -5,7 +5,7 @@
         <div class="col-12 col-md-10">
             <div class="d-flex align-items-center py-3">
                 <h1 class="me-3">Crear Proyecto</h1>
-                <button class="btn btn-dark toggleFormButton">
+                <button class="btn btn-dark toggleFormButton" onclick="toggleFormulario()">
                     <i class="fa-solid fa-plus"></i>
                 </button>
             </div>
@@ -71,26 +71,25 @@
     <table id="example" class="table table-striped text-center" style="width:100%">
         <thead class="table-dark">
             <tr>
-                <th>Proyecto</th>
-                <th>Grupo</th>
-                <th>Tema del proyecto</th>
-                <th>Fecha de inicio</th>
-                <th>Fecha de finalización</th>
-                <th></th>
-                <th>Acciones</th>
+                <th class="text-center">Proyecto</th>
+                <th class="text-center">Grupo</th>
+                <th class="text-center">Tema del proyecto</th>
+                <th class="text-center">Fecha de inicio</th>
+                <th class="text-center">Fecha de finalización</th>
+                <th class="text-center">Fases</th>
+                <th class="text-center">Acciones</th>
             </tr>
         </thead>
         <tbody>
             <?php if ($datAll) {
                 foreach ($datAll as $dt) { ?>
                     <tr>
-
-                        <td><?= $dt["nompro"]; ?></td>
-                        <td><?= $dt["nomgru"]; ?></td>
-                        <td><?= $dt["tempro"]; ?></td>
-                        <td><?= $dt["inipro"]; ?></td>
-                        <td><?= $dt["finpro"]; ?></td>
-                        <td>                            <!-- Botón para abrir el modal -->
+                        <td class="text-center"><?= $dt["nompro"]; ?></td>
+                        <td class="text-center"><?= $dt["nomgru"]; ?></td>
+                        <td class="text-center"><?= $dt["tempro"]; ?></td>
+                        <td class="text-center"><?= $dt["inipro"]; ?></td>
+                        <td class="text-center"><?= $dt["finpro"]; ?></td>
+                        <td class="text-center">                            <!-- Botón para abrir el modal -->
                             <button class="btn btn-dark">
 								<a href="home.php?pg=3001" style="text-decoration: none; color: white;">
 									<i class="fa-solid fa-bars-progress"></i> Crear fase
@@ -100,14 +99,11 @@
                         <td class="text-center">
                             <a href="home.php?pg=2002&ope=del&codpro=<?= $dt["codpro"]; ?>" title="Eliminar"
                                 onclick="return confirm('¿Estás seguro de que deseas eliminar este proyecto?');"><i
-                                    class="fa-solid fa-trash text-danger" style="color: #000000;"></i></a>
+                                    class="fa-solid fa-trash fa-2x text-danger" style="color: #000000;"></i></a>
                             <a href="home.php?pg=2002&ope=edi&codpro=<?= $dt["codpro"]; ?>" title="Editar"><i
-                                    class="fa-solid fa-pen-to-square text-success" style="color: #000000;"></i></a>
+                                    class="fa-solid fa-pen-to-square fa-2x text-success" style="color: #000000;"></i></a>
                         </td>
-
-
                     </tr>
-
                 <?php }
             } ?>
         </tbody>

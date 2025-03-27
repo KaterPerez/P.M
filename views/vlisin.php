@@ -7,7 +7,7 @@ include("controllers/cubiins") ?>
         <div class="col-12 col-md-10">
             <div class="d-flex align-items-center py-3">
                 <h1 class="me-3">Instituciones</h1>
-                <button class="btn btn-dark toggleFormButton">
+                <button class="btn btn-dark toggleFormButton" onclick="toggleFormulario()">
                     <i class="fa-solid fa-plus"></i>
                 </button>
             </div>

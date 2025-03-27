@@ -5,9 +5,9 @@
         <div class="col-12 col-md-10">
             <div class="d-flex align-items-center py-3">
                 <h1 class="me-3">Registrar Estudiante y Profesor</h1>
-                    <button class="btn btn-dark toggleFormButton">
-                        <i class="fa-solid fa-plus"></i>
-                    </button>
+                <button class="btn btn-dark toggleFormButton" onclick="toggleFormulario()">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -93,7 +93,7 @@
                        value="<?php if($datOne) echo $datOne[0]['pasusu']; ?>" required>
             </div>
             <div class="col-12 col-md-2">
-                <input class="btn btn-primary mt-4" type="submit" value="Registrar">
+                <input class="btn btn-dark mt-4" type="submit" value="Registrar">
                 <input type="hidden" name="idusu" id="idusu" 
                        value="<?php echo isset($datOne[0]['idusu']) ?($datOne[0]['idusu']) : ''; ?>">
                 <input type="hidden" name="ope" value="save">
@@ -104,9 +104,9 @@
     <table id="example" class="table table-striped table-hover">
         <thead class="table-dark">
             <tr>  
-                <th>Nombre</th>
-                <th>Activo</th>
-                <th>Perfil</th>
+                <th >Nombre</th>
+                <th class="text-center">Activo</th>
+                <th class="text-center">Perfil</th>
                 <th></th>
             </tr>
         </thead>
@@ -124,7 +124,7 @@
                                     <strong>Correo:</strong> <?= htmlspecialchars($dta['corusu']); ?>
                                 </small>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <?php if($dta['actusu'] == 1) { ?>
                                     <a href="home.php?pg=<?= $pg; ?>&idusu=<?= $dta['idusu']; ?>&ope=actusu">
                                         <i class="fa-solid fa-circle-check fa-2x text-success"></i>
@@ -135,7 +135,7 @@
                                     </a>
                                 <?php } ?>
                             </td>
-                            <td>
+                            <td class="text-center">
                                 <?php if ($dta['codper'] == 3) { ?>
                                     Profesor
                                 <?php } elseif ($dta['codper'] == 4) { ?>
@@ -143,12 +143,10 @@
                                 <?php }?>
                             </td>
                             <td class="text-end">
-                                <a href="home.php?pg=<?= $pg; ?>&idusu=<?= $dta['idusu']; ?>&ope=edi" title="Editar" class="btn btn-sm btn-warning">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </a>
-                                <a href="home.php?pg=<?= $pg; ?>&idusu=<?= $dta['idusu']; ?>&ope=eli" title="Eliminar" class="btn btn-sm btn-danger" onclick="return eliminar();">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </a>
+                                <a href="home.php?pg=<?= $pg; ?>&idusu=<?= $dta['idusu']; ?>&ope=edi" title="Editar">
+                                    <i class="fa-solid fa-pen-to-square fa-2x text-success"></i></a>
+                                <a href="home.php?pg=<?= $pg; ?>&idusu=<?= $dta['idusu']; ?>&ope=eli" title="Eliminar" onclick="return eliminar();">
+                                    <i class="fa-solid fa-trash-can fa-2x text-danger"></i></a>
                             </td>
                         </tr>
                     <?php }
