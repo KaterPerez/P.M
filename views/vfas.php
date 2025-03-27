@@ -36,14 +36,6 @@
                 </select>
             </div>
             <div class="form-group col-md-4">
-                <label for="disabledSelect">Grupo</label>
-                <select class="form-control form-select" id="codpro" name="codpro">
-                            <option value="<?= $dt['codpro']; ?>" <?php if ($datOne && $datOne[0]['codpro'] == $dt['idgru'])echo 'selected'; ?>>
-                                <?= $dt['nomgru']; ?>
-                            </option>
-                </select>
-            </div>
-            <div class="form-group col-md-4">
                 <label for="inifas">Fecha de inicio</label>
                 <input type="date" class="form-control form-control" name="inifas" id="inifas" value="<?php if ($datOne && $datOne[0]['inifas'])
                                                                                                             echo $datOne[0]['inifas']; ?>" required>
