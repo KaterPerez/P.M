@@ -112,21 +112,16 @@ class Mcrecur {
     }
     
     public function getCoursesByTeacher($idusu) {
-        $sql = "SELECT c.idcur, c.codcur, c.nomcur, CONCAT(u.nomusu, ' ', u.apeusu) AS nombre_profesor
-                FROM curso AS c
-                LEFT JOIN usuario AS u ON c.idusu = u.idusu
-                WHERE u.codper = 3"; 
+        $sql = "SELECT idcur, codcur, nomcur FROM curso WHERE idusu = :idProfesor";
         
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
-        $result->bindParam(":idusu", $idusu, PDO::PARAM_INT);
+        $result->bindParam(":idProfesor", $idusu, PDO::PARAM_INT);
         $result->execute();
         
         return $result->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    
     
     
 
