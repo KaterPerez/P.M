@@ -32,8 +32,8 @@ if($ope=="edi" && $codfas){
 }else{
     $datOne=NULL;
 }
-if (isset($_SESSION['idgru'])) { // Suponiendo que el ID del usuario está en la sesión
-    $cursoEstudiante = $mgrue->getStudentCourse($_SESSION['idgru']);
-}
+
+$fases = $mfas->getAll();  // Obtener todas las fases con los grupos vinculados
+$cdpro = $mfas->getCpro(); 
 $datAll = $mfas->getAll(); // Recupera todos los datos necesarios
 ?>
