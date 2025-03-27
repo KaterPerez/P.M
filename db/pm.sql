@@ -1281,7 +1281,31 @@ INSERT INTO `usuario` (`idusu`, `codubi`, `numdoc`, `tipdoc`, `nomusu`, `apeusu`
 (3, NULL, 1003659307, 'CC', 'Jorge Dominguez', 'Dominguez Torres','1', 'jorgedt1013@gmail.com', 0, '10470c3b4b1fed12c3baac014be15fac67c6e815', NULL, 23, 'M', 1, NULL, NULL),
 (4, NULL, 1072645195, 'CC', 'fabian camilo ', 'gonzalez rodriquez', '1','senseigonzalez06@gmail.com', 0, '49b4fbeb27a59e63ec60746fc34474fefcc89124', NULL, 19, 'M', 1, NULL, NULL),
 (5, NULL, 1072646589, 'CC', 'Katerin Julieth', 'Perez Amarillo','1', 'katerinp422@gmail.com', 0, 'f19583f44a57db4faf12e48c9fc4cb6fd01e8052', NULL, 18, 'F', 1, NULL, NULL),
-(6, NULL, 1076242583, 'CC', 'Alejandro', 'Wagner Carrillo','1', 'alejo.wagner03@gmail.com', 0, 'db545f47e29fa5c8a0e1b06b2ebdadc6b58a39d9', NULL, 18,'M',1,NULL, NULL);
+(6, NULL, 1076242583, 'CC', 'Alejandro', 'Wagner Carrillo','1', 'alejo.wagner03@gmail.com', 0, 'db545f47e29fa5c8a0e1b06b2ebdadc6b58a39d9', NULL, 18,'M',1,NULL, NULL),
+(7, NULL, 1044332212, 'TI', 'Sofia', 'Nieto Cortez','1', 'sofinxicor12@gmail.com', 3123456687, '10470c3b4b1fed12c3baac014be15fac67c6e815', NULL, 13,'F',4,NULL, NULL),
+(8, NULL, 1078945210, 'TI', 'Juan Felipe', 'Solorzano Jimenez','1', 'junasol@gmail.com', 3123456999, 'e7fe2435a38af10b88af974e00351d81d034c320', NULL, 16,'M',4,NULL, NULL),
+(9, NULL, 1024332219, 'TI', 'Ana Gabriela', 'Arboleda Vanegas','1', 'angar34@gmail.com', 3329856684, '7b1eae8c5373dcf85d588fca24dc15754992e7b0', NULL, 10,'F',4,NULL, NULL),
+(10, NULL,1173377212, 'TI', 'Martin Lorenzo', 'Contreras Rivera','1', 'martinrivera@gmail.com', 3853756999, 'f61a6f65efb6f2be99d76217a54cf415591bbf74', NULL, 11,'M',4,NULL, NULL),
+(11, NULL, 1145830005, 'TI', 'Aurora', 'Salazar Rueda','1', 'Auroritasalazar@gmail.com', 3852456333, '732302116f5437a4133aa2230246bcd8ffe794ba', NULL, 12,'F',4,NULL, NULL),
+(12, NULL, 1254787773, 'TI', 'Daniel Esteban', 'Castro chaparro','1', 'Daniesteban@gmail.com', 389632199, '16c0adbf7b29c600e24fc0d53a0e95e949156439', NULL, 12,'M',4,NULL, NULL),
+(13, NULL, 1024998997, 'TI', 'Angela Emilia', 'Suarez Mora','1', 'Angelaemilia@gmail.com', 3964321684, 'f4979a0a11f56085a7de464910fa0904d7e738a4', NULL, 16,'F',4,NULL, NULL),
+(14, NULL, 159884410, 'TI', 'Marta Liliana', 'Poveda Grisales','1', 'grisales34@gmail.com', 3951756753, '78827c9501f8bbc433524831150028d28f6a5157', NULL, 11,'F',4,NULL, NULL),
+(15, NULL, 128695423, 'TI', 'Juan David', 'Murillo Penagos','1', 'juandamurillo@gmail.com', 396315986, 'e40c09ee3797454b37e962a05631384b69a475a9', NULL, 12,'M',4,NULL, NULL),
+(16, NULL, 1024998000, 'TI', 'Emma Catalina', 'Lopez Cañon','1', 'emmacatialina@gmail.com', 3964374174, 'd716ef40e5aad558d27863edc19b0e013b4fe11c', NULL, 13,'F',4,NULL, NULL),
+(17, NULL, 1986574324, 'TI', 'Carlos Wilson', 'Porras Sanchez','1', 'carlosparra34@gmail.com', 3951778546,'8e5ab1b840270c97e72a8b96f604a17f3c8c0f74', NULL, 17,'M',4,NULL, NULL),
+(18, NULL, 8561247, 'CC', 'María José', 'García López','1', 'majomajo12@gmail.com', 3123456687, NULL, NULL, 28,'F',3,NULL, NULL),
+(19, NULL, 9865472, 'CC', 'Ricardo Felipe', 'Pérez Martínez','1', 'felipelop@gmail.com', 3123485899, NULL, NULL, 36,'M',3,NULL, NULL),
+(20, NULL,7532146, 'CC', 'Laura Isabel', 'Sánchez Rodríguez','1', 'laurita2234@gmail.com', 33125556684, NULL, NULL, 26,'F',3,NULL, NULL),
+(21, NULL,5473201, 'CC', 'Miguel Ángel', 'Gómez Fernández','1', 'miguelangel22ra@gmail.com', 385399776999, NULL, NULL, 45,'M',3,NULL, NULL),
+(22, NULL, 6568974, 'CC', 'Carmen Elena', 'López Sánchez','1', 'carmenezar@gmail.com', 3878546333, NULL, NULL, 22,'F',3,NULL, NULL),
+(23, NULL, 787555001, 'CC', 'José Luis', 'Romero Díaz','1', 'joseluis12n@gmail.com', 389132199, NULL, NULL, 25,'M',3,NULL, NULL),
+(24, NULL, 6532189, 'CC', 'Patricia Beatriza', 'Mendoza Ruiz','1', 'patricialia@gmail.com', 3978441684, NULL, NULL, 24,'F',3,NULL, NULL),
+(25, NULL, 78945658, 'CC', 'Antonio Manuel', 'Álvarez González','1', 'alvarez@gmail.com', 3963756753, NULL, NULL, 42,'F',3,NULL, NULL),
+(26, NULL, 98965004, 'CC', 'Juan Carlos', 'Torres Romero','1', 'juaplo@gmail.com', 393625986, NULL, NULL, 40,'M',3,NULL, NULL),
+(27, NULL, 66548321, 'CC', 'Marta Elena', 'Castro Ramírez','1', 'Artaelenaa@gmail.com', 3978452174, NULL, NULL, 37,'F',3,NULL, NULL),
+(28, NULL, 95662475, 'CC', 'Maritza', 'Ortega Pérez','1', 'marorteg@gmail.com', 3996325546, NULL, NULL, 39,'F',3,NULL, NULL);
+
+
 CREATE TABLE curso(
   idcur INT(10) PRIMARY kEY AUTO_INCREMENT,
   codcur INT(10),

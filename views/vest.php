@@ -28,16 +28,16 @@
             <div class="form-group col-md-3">
                 <label for="nomusu">Ingrese el Nombre:</label>
                 <input type="text" name="nomusu" id="nomusu" maxlength="70" class="form-control" 
-                       value="<?php if($datOne) echo $datOne[0]['nomusu']; ?>" required>
+                       value="<?php if($datOne) echo $datOne[0]['nomusu']; ?>" >
             </div>
             <div class="form-group col-md-3">
                 <label for="apeusu">Ingrese el Apellido:</label>
                 <input type="text" name="apeusu" id="apeusu" maxlength="70" class="form-control" 
-                       value="<?php if($datOne) echo $datOne[0]['apeusu']; ?>" required>
+                       value="<?php if($datOne) echo $datOne[0]['apeusu']; ?>" >
             </div>
             <div class="form-group col-md-3">
                 <label for="tipdoc">Tipo de Documento</label>
-            <select name="tipdoc" id="tipdoc" class="form-select" required>
+            <select name="tipdoc" id="tipdoc" class="form-select" >
                 <option value="">Seleccione...</option>
                 <option value="T.I" <?php if (!empty($datOne) && $datOne[0]['tipdoc'] == 'T.I') echo "selected"; ?>>T.I</option>
                 <option value="C.C" <?php if (!empty($datOne) && $datOne[0]['tipdoc'] == 'C.C') echo "selected"; ?>>C.C</option>
@@ -46,7 +46,7 @@
             <div class="form-group col-md-3">
                 <label for="numdoc">Ingrese el No. Documento:</label>
                 <input type="text" name="numdoc" id="numdoc" maxlength="70" class="form-control" 
-                       value="<?php if($datOne) echo $datOne[0]['numdoc']; ?>" required>
+                       value="<?php if($datOne) echo $datOne[0]['numdoc']; ?>" >
             </div>
             <div class="form-group col-md-1">
                 <label for="actusu">Activo</label>
@@ -57,7 +57,7 @@
             </div> 
             <div class="form-group col-md-2">
                 <label for="codper">Perfil</label>
-                <select name="codper" id="codper" class="form-control" required>
+                <select name="codper" id="codper" class="form-control" >
                     <option value="4" <?php if (isset($datOne[0]['codper']) && $datOne[0]['codper'] == 4) echo "selected"; ?>>Estudiante</option>
                     <option value="3" <?php if (isset($datOne[0]['codper']) && $datOne[0]['codper'] == 3) echo "selected"; ?>>Profesor</option>
                 </select>
@@ -66,11 +66,11 @@
             <div class="form-group col-md-1">
                 <label for="edausu">Edad:</label>
                 <input type="numero" name="edausu" id="edausu" maxlength="70" class="form-control" 
-                       value="<?php if($datOne) echo $datOne[0]['edausu']; ?>" required>
+                       value="<?php if($datOne) echo $datOne[0]['edausu']; ?>" >
             </div>
             <div class="form-group col-md-2">
                 <label for="genusu">Género:</label>
-            <select name="genusu" id="genusu" class="form-control" required>
+            <select name="genusu" id="genusu" class="form-control" >
                 <option value="">Seleccione...</option>
                 <option value="Masculino" <?php if (!empty($datOne) && $datOne[0]['genusu'] == 'Masculino') echo "selected"; ?>>Masculino</option>
                 <option value="Femenino" <?php if (!empty($datOne) && $datOne[0]['genusu'] == 'Femenino') echo "selected"; ?>>Femenino</option>
@@ -80,17 +80,17 @@
             <div class="form-group col-md-3">
                 <label for="telusu">Ingrese el Teléfono:</label>
                 <input type="text" name="telusu" id="telusu" maxlength="70" class="form-control" 
-                       value="<?php if($datOne) echo $datOne[0]['telusu']; ?>" required>
+                       value="<?php if($datOne) echo $datOne[0]['telusu']; ?>" >
             </div>
             <div class="form-group col-md-3">
                 <label for="corusu">Ingrese el Correo:</label>
                 <input type="email" name="corusu" id="corusu" maxlength="70" class="form-control" 
-                       value="<?php if($datOne) echo $datOne[0]['corusu']; ?>" required>
+                       value="<?php if($datOne) echo $datOne[0]['corusu']; ?>" >
             </div>
             <div class="form-group col-md-3">
                 <label for="pasusu">Ingrese la Contraseña:</label>
                 <input type="password" name="pasusu" id="pasusu" maxlength="70" class="form-control" 
-                       value="<?php if($datOne) echo $datOne[0]['pasusu']; ?>" required>
+                       value="<?php if($datOne) echo $datOne[0]['pasusu']; ?>" >
             </div>
             <div class="col-12 col-md-2">
                 <input class="btn btn-dark mt-4" type="submit" value="Registrar">

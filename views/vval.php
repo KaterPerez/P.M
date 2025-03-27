@@ -28,7 +28,7 @@
                 </select>
             </div>
             <div class="form-group col-5 col-md-2 text-center">
-                <button type="submit" class="btn btn-primary mt-md-4 mt-2 w-100">Guardar</button>
+                <button type="submit" class="btn btn-dark mt-md-4 mt-2 w-100">Guardar</button>
                 <input type="hidden" name="opera" value="save">
                 <input type="hidden" name="codval" id="codval" value="<?php if ($datOne) echo $datOne[0]['codval']; ?>">
             </div>
