@@ -76,6 +76,7 @@
                 <th>Tema del proyecto</th>
                 <th>Fecha de inicio</th>
                 <th>Fecha de finalización</th>
+                <th></th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -89,6 +90,13 @@
                         <td><?= $dt["tempro"]; ?></td>
                         <td><?= $dt["inipro"]; ?></td>
                         <td><?= $dt["finpro"]; ?></td>
+                        <td>                            <!-- Botón para abrir el modal -->
+                            <button class="btn btn-dark">
+								<a href="home.php?pg=3001" style="text-decoration: none; color: white;">
+									<i class="fa-solid fa-bars-progress"></i> Crear fase
+								</a>
+                            </button>
+                        </td>
                         <td class="text-center">
                             <a href="home.php?pg=2002&ope=del&codpro=<?= $dt["codpro"]; ?>" title="Eliminar"
                                 onclick="return confirm('¿Estás seguro de que deseas eliminar este proyecto?');"><i
