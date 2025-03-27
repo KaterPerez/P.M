@@ -66,6 +66,7 @@
                 <th>Grupo</th>
                 <th>Fecha de inicio</th>
                 <th>Fecha de finalización</th>
+                <th></th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -78,6 +79,13 @@
                         <td><?= $dt["nomgru"]; ?></td>
                         <td><?= $dt["inifas"]; ?></td>
                         <td><?= $dt["finfas"]; ?></td>
+                        <td>                            <!-- Botón para abrir el modal -->
+                            <button class="btn btn-dark">
+								<a href="home.php?pg=3002" style="text-decoration: none; color: white;">
+									<i class="fa-solid fa-bars-progress"></i> Crear acividad
+								</a>
+                            </button>
+                        </td>
                         <td class="text-center">
                             <a href="home.php?pg=3001&ope=del&codfas=<?= $dt["codfas"]; ?>" title="Eliminar"
                                 onclick="return confirm('¿Estás seguro de que deseas eliminar esta fase?');"><i
