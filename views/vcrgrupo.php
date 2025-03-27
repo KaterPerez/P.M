@@ -90,10 +90,10 @@
                         <td><?= $dt["inipro"]; ?></td>
                         <td><?= $dt["finpro"]; ?></td>
                         <td class="text-center">
-                            <a href="home.php?pg=2003&ope=del&codpro=<?= $dt["codpro"]; ?>" title="Eliminar"
+                            <a href="home.php?pg=2002&ope=del&codpro=<?= $dt["codpro"]; ?>" title="Eliminar"
                                 onclick="return confirm('¿Estás seguro de que deseas eliminar este proyecto?');"><i
                                     class="fa-solid fa-trash text-danger" style="color: #000000;"></i></a>
-                            <a href="home.php?pg=2003&ope=edi&codpro=<?= $dt["codpro"]; ?>" title="Editar"><i
+                            <a href="home.php?pg=2002&ope=edi&codpro=<?= $dt["codpro"]; ?>" title="Editar"><i
                                     class="fa-solid fa-pen-to-square text-success" style="color: #000000;"></i></a>
                         </td>
 
