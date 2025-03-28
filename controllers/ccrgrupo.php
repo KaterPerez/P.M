@@ -5,6 +5,7 @@ $nompro = isset($_POST['nompro']) ? $_POST['nompro'] : NULL;
 $codpro = isset($_REQUEST['codpro']) ? $_REQUEST['codpro'] : NULL;
 $idgru = isset($_POST['idgru']) ? $_POST['idgru'] : NULL;
 $tempro = isset($_POST['tempro']) ? $_POST['tempro'] : NULL;
+$despro = isset($_POST['despro']) ? $_POST['despro'] : NULL;
 $inipro = isset($_POST['inipro']) ? $_POST['inipro'] : NULL;
 $finpro = isset($_POST['finpro']) ? $_POST['finpro'] : NULL;
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
@@ -17,6 +18,7 @@ if ($ope == "save") {
     $mcrgrupo->setNompro($nompro);
     $mcrgrupo->setIdgru($idgru);
     $mcrgrupo->setTempro($tempro);
+    $mcrgrupo->setDespro($despro);
     $mcrgrupo->setInipro($inipro);
     $mcrgrupo->setFinpro($finpro);
 
