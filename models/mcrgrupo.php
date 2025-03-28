@@ -1,11 +1,11 @@
 <?php class Mcrgrupo
 {
-
     //atributos
     private $codpro;
     private $nompro;
     private $idgru;
     private $tempro;
+    private $despro;
     private $inipro;
     private $finpro;
 
@@ -25,6 +25,10 @@
     public function getTempro()
     {
         return $this->tempro;
+    }
+    public function getDespro()
+    {
+        return $this->despro;
     }
     public function getInipro()
     {
@@ -51,6 +55,10 @@
     {
         $this->tempro = $tempro;
     }
+    public function setDespro($despro)
+    {
+        $this->despro = $despro;
+    }
     public function setInipro($inipro)
     {
         $this->inipro = $inipro;
@@ -64,7 +72,7 @@
     public function getAll()
     {
         $res = NULL;
-        $sql = "SELECT p.codpro, p.nompro, p.idgru, p.tempro, p.inipro, p.finpro, g.idgru, g.nomgru FROM Proyecto AS p LEFT JOIN grupo AS g ON p.idgru=g.idgru";
+        $sql = "SELECT p.codpro, p.nompro, p.idgru, p.tempro,  p.despro, p.inipro, p.finpro, g.idgru, g.nomgru FROM Proyecto AS p LEFT JOIN grupo AS g ON p.idgru=g.idgru";
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -75,7 +83,7 @@
     public function getOne()
     {
         $res = NULL;
-        $sql = "SELECT p.codpro, p.nompro, p.idgru, p.tempro, p.inipro, p.finpro, g.idgru, g.nomgru FROM Proyecto AS p INNER JOIN grupo AS g ON p.idgru=g.idgru WHERE p.codpro=:codpro";
+        $sql = "SELECT p.codpro, p.nompro, p.idgru, p.tempro,  p.despro, p.inipro, p.finpro, g.idgru, g.nomgru FROM Proyecto AS p INNER JOIN grupo AS g ON p.idgru=g.idgru WHERE p.codpro=:codpro";
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -112,7 +120,7 @@
         } while ($exists > 0);
         try {
             // Insertar el registro
-            $sql = "INSERT INTO proyecto (nompro, idgru, tempro, inipro, finpro) VALUES (:nompro, :idgru, :tempro, :inipro, :finpro)";
+            $sql = "INSERT INTO proyecto (nompro, idgru, tempro, despro, inipro, finpro) VALUES (:nompro, :idgru, :tempro, :despro, :inipro, :finpro)";
             $result = $conexion->prepare($sql);
             $nompro = $this->getNompro();
             $result->bindParam(":nompro", $nompro);
@@ -120,6 +128,8 @@
             $result->bindParam(":idgru", $idgru);
             $tempro = $this->getTempro();
             $result->bindParam(":tempro", $tempro);
+            $despro = $this->getDespro();
+            $result->bindParam(":despro", $despro);
             $inipro = $this->getInipro();
             $result->bindParam(":inipro", $inipro);
             $finpro = $this->getFinpro();
@@ -137,7 +147,7 @@
     {
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "UPDATE proyecto SET nompro=:nompro, idgru=:idgru, tempro=:tempro, inipro=:inipro, finpro=:finpro WHERE codpro=:codpro";
+        $sql = "UPDATE proyecto SET nompro=:nompro, idgru=:idgru, tempro=:tempro, despro=:despro, inipro=:inipro, finpro=:finpro WHERE codpro=:codpro";
         $result = $conexion->prepare($sql);
         $codpro = $this->getCodpro();
         $result->bindParam(":codpro", $codpro);
@@ -147,6 +157,8 @@
         $result->bindParam(":idgru", $idgru);
         $tempro = $this->getTempro();
         $result->bindParam(":tempro", $tempro);
+        $despro = $this->getDespro();
+        $result->bindParam(":despro", $despro);
         $inipro = $this->getInipro();
         $result->bindParam(":inipro", $inipro);
         $finpro = $this->getFinpro();
