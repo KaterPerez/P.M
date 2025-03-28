@@ -44,7 +44,12 @@
                   <option value="Arte y Cultura" <?= isset($datOne[0]['tempro']) && $datOne[0]['tempro'] == 'Arte y Cultura' ? 'selected' : ''; ?>>Arte y Cultura</option>
                   <option value="Ciencias sociales y Educacion" <?= isset($datOne[0]['tempro']) && $datOne[0]['tempro'] == 'Ciencias sociales y Educacion' ? 'selected' : ''; ?>>Ciencias sociales y Educacion</option>
               </select>
-          </div>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="despro">Descripción del proyecto</label>
+                <input type="text" class="form-control form-control" name="despro" id="despro" value="<?php if ($datOne && $datOne[0]['despro'])
+                    echo $datOne[0]['despro']; ?>" required>
+            </div>
             <div class="form-group col-md-4">
                 <label for="inipro">Fecha de inicio</label>
                 <input type="date" class="form-control form-control" name="inipro" id="inipro" value="<?php if ($datOne && $datOne[0]['inipro'])
@@ -72,6 +77,7 @@
         <thead class="table-dark">
             <tr>
                 <th class="text-center">Proyecto</th>
+                <th class="text-center">Descripción</th>
                 <th class="text-center">Grupo</th>
                 <th class="text-center">Tema del proyecto</th>
                 <th class="text-center">Fecha de inicio</th>
@@ -85,6 +91,7 @@
                 foreach ($datAll as $dt) { ?>
                     <tr>
                         <td class="text-center"><?= $dt["nompro"]; ?></td>
+                        <td class="text-center"><?= $dt["despro"]; ?></td>
                         <td class="text-center"><?= $dt["nomgru"]; ?></td>
                         <td class="text-center"><?= $dt["tempro"]; ?></td>
                         <td class="text-center"><?= $dt["inipro"]; ?></td>
