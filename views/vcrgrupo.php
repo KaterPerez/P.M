@@ -20,7 +20,23 @@
                 <input type="text" class="form-control form-control" name="nompro" id="nompro" value="<?php if ($datOne && $datOne[0]['nompro'])
                     echo $datOne[0]['nompro']; ?>" required>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
+              <label for="tempro">Tema del proyecto</label>
+              <select name="tempro" id="tempro" class="form-select" required>
+                  <option value="">Seleccione...</option>
+                  <option value="Tecnologicos y de Programacion" <?= isset($datOne[0]['tempro']) && $datOne[0]['tempro'] == 'Tecnologicos y de Programacion' ? 'selected' : ''; ?>>Tecnologicos y de Programacion</option>
+                  <option value="Ciencias y Medio Ambiente" <?= isset($datOne[0]['tempro']) && $datOne[0]['tempro'] == 'Ciencias y Medio Ambiente' ? 'selected' : ''; ?>>Ciencias y Medio Ambiente</option>
+                  <option value="Emprendimiento y Negocios" <?= isset($datOne[0]['tempro']) && $datOne[0]['tempro'] == 'Emprendimiento y Negocios' ? 'selected' : ''; ?>>Emprendimiento y Negocios</option>
+                  <option value="Arte y Cultura" <?= isset($datOne[0]['tempro']) && $datOne[0]['tempro'] == 'Arte y Cultura' ? 'selected' : ''; ?>>Arte y Cultura</option>
+                  <option value="Ciencias sociales y Educacion" <?= isset($datOne[0]['tempro']) && $datOne[0]['tempro'] == 'Ciencias sociales y Educacion' ? 'selected' : ''; ?>>Ciencias sociales y Educacion</option>
+              </select>
+            </div>
+            <div class="form-group col-md-5">
+                <label for="despro">Descripción del proyecto</label>
+                <input type="text" class="form-control form-control" name="despro" id="despro" value="<?php if ($datOne && $datOne[0]['despro'])
+                    echo $datOne[0]['despro']; ?>" required>
+            </div>
+            <div class="form-group col-md-3">
                 <label for="disabledSelect" class="form-label">Grupo</label>
                 <select class="form-control form-select" id="idgru" name="idgru">
                     <option value="0">Seleccione...</option>
@@ -34,34 +50,18 @@
                     } ?>
                 </select>
             </div>
-            <div class="form-group col-md-4">
-              <label for="tempro">Tema del proyecto</label>
-              <select name="tempro" id="tempro" class="form-select" required>
-                  <option value="">Seleccione...</option>
-                  <option value="Tecnologicos y de Programacion" <?= isset($datOne[0]['tempro']) && $datOne[0]['tempro'] == 'Tecnologicos y de Programacion' ? 'selected' : ''; ?>>Tecnologicos y de Programacion</option>
-                  <option value="Ciencias y Medio Ambiente" <?= isset($datOne[0]['tempro']) && $datOne[0]['tempro'] == 'Ciencias y Medio Ambiente' ? 'selected' : ''; ?>>Ciencias y Medio Ambiente</option>
-                  <option value="Emprendimiento y Negocios" <?= isset($datOne[0]['tempro']) && $datOne[0]['tempro'] == 'Emprendimiento y Negocios' ? 'selected' : ''; ?>>Emprendimiento y Negocios</option>
-                  <option value="Arte y Cultura" <?= isset($datOne[0]['tempro']) && $datOne[0]['tempro'] == 'Arte y Cultura' ? 'selected' : ''; ?>>Arte y Cultura</option>
-                  <option value="Ciencias sociales y Educacion" <?= isset($datOne[0]['tempro']) && $datOne[0]['tempro'] == 'Ciencias sociales y Educacion' ? 'selected' : ''; ?>>Ciencias sociales y Educacion</option>
-              </select>
-            </div>
-            <div class="form-group col-md-4">
-                <label for="despro">Descripción del proyecto</label>
-                <input type="text" class="form-control form-control" name="despro" id="despro" value="<?php if ($datOne && $datOne[0]['despro'])
-                    echo $datOne[0]['despro']; ?>" required>
-            </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
                 <label for="inipro">Fecha de inicio</label>
                 <input type="date" class="form-control form-control" name="inipro" id="inipro" value="<?php if ($datOne && $datOne[0]['inipro'])
                     echo $datOne[0]['inipro']; ?>" required>
             </div>
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-2">
                 <label for="finpro">Fecha de finalizacion</label>
                 <input type="date" class="form-control form-control" name="finpro" id="finpro" value="<?php if ($datOne && $datOne[0]['finpro'])
                     echo $datOne[0]['finpro']; ?>" required>
             </div>
 
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-3">
                 <br>
                 <input type="hidden" name="ope" value="save">
                 <input type="hidden" name="codpro" value="<?php if ($datOne && $datOne[0]['codpro'])
