@@ -124,11 +124,11 @@ include("controllers/cubiins") ?>
                         <?php } ?>
                       </td>
                         <td class="text-center">
+                            <a href="home.php?pg=4002&ope=edi&codie=<?= $dt["codie"]; ?>" title="Editar"><i
+                                    class="fa-solid fa-pen-to-square text-success" style="color: #000000;"></i></a>
                             <a href="home.php?pg=4002&ope=del&codie=<?= $dt["codie"]; ?>" title="Eliminar"
                                 onclick="return confirm('¿Estás seguro de que deseas eliminar esta fase?');"><i
                                     class="fa-solid fa-trash text-danger" style="color: #000000;"></i></a>
-                            <a href="home.php?pg=4002&ope=edi&codie=<?= $dt["codie"]; ?>" title="Editar"><i
-                                    class="fa-solid fa-pen-to-square text-success" style="color: #000000;"></i></a>
                         </td>
                     </tr>
                 <?php }
