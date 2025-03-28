@@ -67,7 +67,7 @@
                 <th class="text-center">Fecha de inicio</th>
                 <th class="text-center">Fecha de finalización</th>
                 <th class="text-center">Actividad</th>
-                <th class="text-center">Acciones</th>
+                <th class="text-center"></th>
             </tr>
         </thead>
         <tbody>
@@ -87,11 +87,11 @@
                             </button>
                         </td>
                         <td class="text-center">
-                            <a href="home.php?pg=3001&ope=del&codfas=<?= $dt["codfas"]; ?>" title="Eliminar"
+                            	<a href="home.php?pg=3001&ope=edi&codfas=<?= $dt["codfas"]; ?>" title="Editar"><i
+                                    class="fa-solid fa-pen-to-square fa-2x text-success" style="color: #000000;"></i></a>
+				<a href="home.php?pg=3001&ope=del&codfas=<?= $dt["codfas"]; ?>" title="Eliminar"
                                 onclick="return confirm('¿Estás seguro de que deseas eliminar esta fase?');"><i
                                     class="fa-solid fa-trash fa-2x text-danger" style="color: #000000;"></i></a>
-                            <a href="home.php?pg=3001&ope=edi&codfas=<?= $dt["codfas"]; ?>" title="Editar"><i
-                                    class="fa-solid fa-pen-to-square fa-2x text-success" style="color: #000000;"></i></a>
                         </td>
                     </tr>
             <?php }
