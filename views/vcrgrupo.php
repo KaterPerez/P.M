@@ -83,7 +83,7 @@
                 <th class="text-center">Fecha de inicio</th>
                 <th class="text-center">Fecha de finalización</th>
                 <th class="text-center">Fases</th>
-                <th class="text-center">Acciones</th>
+                <th class="text-center"></th>
             </tr>
         </thead>
         <tbody>
@@ -104,11 +104,11 @@
                             </button>
                         </td>
                         <td class="text-center">
-                            <a href="home.php?pg=2002&ope=del&codpro=<?= $dt["codpro"]; ?>" title="Eliminar"
+                        	<a href="home.php?pg=2002&ope=edi&codpro=<?= $dt["codpro"]; ?>" title="Editar"><i
+                                    class="fa-solid fa-pen-to-square fa-2x text-success" style="color: #000000;"></i></a>
+				<a href="home.php?pg=2002&ope=del&codpro=<?= $dt["codpro"]; ?>" title="Eliminar"
                                 onclick="return confirm('¿Estás seguro de que deseas eliminar este proyecto?');"><i
                                     class="fa-solid fa-trash fa-2x text-danger" style="color: #000000;"></i></a>
-                            <a href="home.php?pg=2002&ope=edi&codpro=<?= $dt["codpro"]; ?>" title="Editar"><i
-                                    class="fa-solid fa-pen-to-square fa-2x text-success" style="color: #000000;"></i></a>
                         </td>
                     </tr>
                 <?php }
