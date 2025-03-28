@@ -1332,12 +1332,17 @@ CREATE TABLE ie (
   tipie varchar(255),
   FOREIGN KEY (codubi) REFERENCES ubicacion(codubi)
 );
+INSERT INTO `ie` (`codie`, `nuicie`, `pasie`, `nomie`, `dirie`, `telie`, `actie`, `corie`, `codubi`, `tipie`) VALUES
+(0, 2345555, NULL, 'wsdf', 'asdf', 2147483647, 1, 'asdfgs@gmail.com', NULL, 'Educacion superior');
 CREATE TABLE grupo(
   idgru INT(10) PRIMARY KEY AUTO_INCREMENT,
   nomgru VARCHAR(255),
   idusu INT(10),
   FOREIGN KEY (idusu) REFERENCES usuario(idusu)
 );
+INSERT INTO `grupo` (`idgru`, `nomgru`, `idusu`) VALUES
+(1, 'sdfsd', NULL),
+(2, 'wawa', NULL);
 CREATE TABLE usuxgru(
   idgru INT(10),
   idusu INT(10),
@@ -1348,6 +1353,7 @@ CREATE TABLE proyecto(
   codpro INT(10) PRIMARY KEY AUTO_INCREMENT,
   nompro VARCHAR(255),
   tempro VARCHAR(255),
+  despro TEXT,
   inipro DATE, 
   finpro DATE,
   idusu INT(10),
@@ -1357,6 +1363,8 @@ CREATE TABLE proyecto(
   FOREIGN kEY (codval) REFERENCES valor(codval),
    FOREIGN KEY (idgru) REFERENCES grupo(idgru)
 );
+INSERT INTO `proyecto` (`codpro`, `nompro`, `tempro`, `despro`, `inipro`, `finpro`, `idusu`, `idgru`, `codval`) VALUES
+(4, 'essss ', 'Ciencias y Medio Ambiente', 'holaaa', '2025-03-08', '2025-03-27', NULL, 2, NULL);
 CREATE TABLE fase(
   codfas INT(10) PRIMARY KEY AUTO_INCREMENT,
   nomfas VARCHAR(255),
@@ -1365,9 +1373,12 @@ CREATE TABLE fase(
   finfas DATE,
   FOREIGN KEY (codpro) REFERENCES proyecto(codpro)
 );
+INSERT INTO `fase` (`codfas`, `nomfas`, `codpro`, `inifas`, `finfas`) VALUES
+(6, 'assdasdas', 4, '2025-03-29', '2025-03-29');
 CREATE TABLE actividad(
   codact INT(10) PRIMARY KEY AUTO_INCREMENT,
   codfas INT(10),
+  desact TEXT,
   iniact DATE,
   finact DATE,
   FOREIGN KEY (codfas) REFERENCES fase(codfas) 
