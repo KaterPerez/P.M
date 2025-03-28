@@ -77,7 +77,13 @@ class Mgrue {
         $result = $conexion->prepare($sql);
         $idgru = $this->getIdgru();
         $result->bindParam(":idgru", $idgru);
-        $result->execute();
+        try {
+            if ($result->execute()) {
+                echo "<script>alert(Grupo eliminado exitosamente.');</script>";
+            }
+        } catch (PDOException $e) {
+            echo "<script>alert('Error al eliminar el grupo. Antes de eliminar grupos verifique que ningun estudiante se encuentre vinculado al el.');</script>";
+        }
     }
     public function getAvailableStudentsWithCodper($idgru, $codper) {
         $sql = "SELECT u.idusu, u.numdoc, u.nomusu, u.apeusu, u.corusu 
