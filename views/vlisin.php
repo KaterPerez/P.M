@@ -1,5 +1,4 @@
-<?php include("controllers/clisin.php"); 
-include("controllers/cubiins") ?>
+<?php include("controllers/clisin.php")?>
 
 <div class="container">
 
@@ -36,19 +35,10 @@ include("controllers/cubiins") ?>
               <input type="text" class="form-control form-control" name="nuicie" id="nuicie" value="<?php if ($datOne && $datOne[0]['nuicie'])
                   echo $datOne[0]['nuicie']; ?>" required>
             </div>
-            <div class = "form-group col-md-2">
-              <label for="mun">Departamento</label>
-                <select class="form-control form-select" onchange="recCiudad(this.value);">
-                  <?php if($dubi){ foreach($dubi AS $ub){ ?>
-                    <option value="<?=$ub['codubi'];?>"><?=$ub['nomubi'];?></option>
-                  <?php }} ?>
-                </select>
-            </div>
-            <div class="form-group col-md-2">
-                 <label for="mun">Municipio</label>
-                 <div id="reloadMun">
-                      <input type="text" name="mun" id="mun" maxlength="255" class="form-control" value="<?php if($datOne) echo $datOne[0]['mun']; ?>">
-                 </div>
+            <div class="form-group col-md-3">
+                <label for="munie">Municipio</label>
+                <input type="text" class="form-control form-control" name="munie" id="munie" value="<?php if ($datOne && $datOne[0]['munie'])
+                    echo $datOne[0]['munie']; ?>" required>
             </div>
             <div class="form-group col-md-3">
                 <label for="dirie">Dirección</label>
@@ -92,7 +82,6 @@ include("controllers/cubiins") ?>
                 <th># Identificacion</th>
                 <th>Departamento</th> 
                 <th>Municipio</th>
-                <th>Dirección</th>
                 <th>Correo</th>
                 <th>Telefono</th>
                 <th>Activo</th>
@@ -107,8 +96,7 @@ include("controllers/cubiins") ?>
                       <td><?= $dt["nomie"]; ?></td>
                       <td><?= $dt["tipie"]; ?></td>
                       <td><?= $dt["nuicie"]; ?></td>
-                      <td><?= $dt[""]; ?></td>
-                      <td><?= $dt[""]; ?></td>
+                      <td><?= $dt["munie"]; ?></td>
                       <td><?= $dt["dirie"]; ?></td>
                       <td><?= $dt["corie"]; ?></td>
                       <td><?= $dt["telie"]; ?></td>
