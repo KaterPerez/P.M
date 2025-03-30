@@ -8,7 +8,7 @@
     private $dirie;
     private $nuicie;
     private $corie;
-    private $codubi;
+    private $munie;
     private $telie;
     private $actie;
 
@@ -37,9 +37,9 @@
     {
         return $this->corie;
     }
-    public function getCodubi()
+    public function getMunie()
     {
-        return $this->codubi;
+        return $this->munie;
     }
     public function getTelie()
     {
@@ -76,9 +76,9 @@
     {
         $this->corie = $corie;
     }
-    public function setCodubi($codubi)
+    public function setMunie($munie)
     {
-        $this->codubi = $codubi;
+        $this->munie = $munie;
     }
     public function setTelie($telie)
     {
@@ -92,7 +92,7 @@
     public function getAll()
     {
         $res = NULL;
-        $sql = "SELECT codie, nomie, tipie, dirie, nuicie, corie, codubi, telie, actie FROM ie";
+        $sql = "SELECT codie, nomie, tipie, dirie, nuicie, corie, munie, telie, actie FROM ie";
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -103,7 +103,7 @@
     public function getOne()
     {
         $res = NULL;
-        $sql = "SELECT codie, nomie, tipie, dirie, nuicie, corie, codubi, telie, actie FROM ie WHERE codie=:codie";
+        $sql = "SELECT codie, nomie, tipie, dirie, nuicie, corie, munie, telie, actie FROM ie WHERE codie=:codie";
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -129,7 +129,7 @@
         } while ($exists > 0);
         try {
             // Insertar el registro
-            $sql = "INSERT INTO ie  (nomie, tipie, dirie, nuicie, corie, codubi, telie, actie) VALUES (:nomie, :tipie, :dirie, :nuicie, :corie, :codubi, :telie, :actie)";
+            $sql = "INSERT INTO ie  (nomie, tipie, dirie, nuicie, corie, munie, telie, actie) VALUES (:nomie, :tipie, :dirie, :nuicie, :corie, :munie, :telie, :actie)";
             $result = $conexion->prepare($sql);
             $nomie = $this->getNomie();
             $result->bindParam(":nomie", $nomie);
@@ -141,8 +141,8 @@
             $result->bindParam(":nuicie", $nuicie);
             $corie = $this->getCorie();
             $result->bindParam(":corie", $corie);
-            $codubi = $this->getCodubi();
-            $result->bindParam(":codubi", $codubi);
+            $munie = $this->getMunie();
+            $result->bindParam(":munie", $munie);
             $telie = $this->getTelie();
             $result->bindParam(":telie", $telie);
             $actie = $this->getActie();
@@ -159,7 +159,7 @@
     {
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "UPDATE ie SET SELECT nomie=:nomie, tipie=:tipie, dirie=:dirie, nuicie=:nuicie, corie=:corie, codubi=:codubi, telie=:telie, actie=:actie WHERE codie=:codie";
+        $sql = "UPDATE ie SET SELECT nomie=:nomie, tipie=:tipie, dirie=:dirie, nuicie=:nuicie, corie=:corie, munie=:munie, telie=:telie, actie=:actie WHERE codie=:codie";
         $result = $conexion->prepare($sql);
         $codie = $this->getCodie();
         $result->bindParam(":codie", $codie);
@@ -173,8 +173,8 @@
         $result->bindParam(":nuicie", $nuicie);
         $corie = $this->getCorie();
         $result->bindParam(":corie", $corie);
-        $codubi = $this->getCodubi();
-        $result->bindParam(":codubi", $codubi);
+        $munie = $this->getMunie();
+        $result->bindParam(":munie", $munie);
         $telie = $this->getTelie();
         $result->bindParam(":telie", $telie);
         $actie = $this->getActie();
@@ -210,7 +210,7 @@
 
         try {
             if ($result->execute()) {
-                echo "<script>alert('Fase eliminada exitosamente.');</script>";
+                echo "<script>alert('Institución eliminada exitosamente.');</script>";
             }
         } catch (PDOException $e) {
             echo "<script>alert('Error al eliminar la Institución. " . addslashes($e->getMessage()) . "');</script>";
