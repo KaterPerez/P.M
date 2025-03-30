@@ -7,7 +7,7 @@ $tipie = isset($_POST['tipie']) ? $_POST['tipie'] : NULL;
 $dirie = isset($_POST['dirie']) ? $_POST['dirie'] : NULL;
 $nuicie = isset($_POST['nuicie']) ? $_POST['nuicie'] : NULL;
 $corie = isset($_POST['corie']) ? $_POST['corie'] : NULL;
-$codubi = isset($_REQUEST['codubi']) ? $_REQUEST['codubi'] : NULL;
+$munie = isset($_REQUEST['munie']) ? $_REQUEST['munie'] : NULL;
 $telie = isset($_POST['telie']) ? $_POST['telie'] : NULL;
 $actie = isset($_POST['actie']) ? $_POST['actie'] : NULL;
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
@@ -22,7 +22,7 @@ if ($ope == "save") {
     $mlisin->setDirie($dirie);
     $mlisin->setNuicie($nuicie);
     $mlisin->setCorie($corie);
-    $mlisin->setCodubi($codubi);
+    $mlisin->setMunie($munie);
     $mlisin->setTelie($telie);
     $mlisin->setActie($actie);
     if ($codie)
