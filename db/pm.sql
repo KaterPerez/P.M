@@ -1320,7 +1320,7 @@ CREATE TABLE usuxcur(
   FOREIGN kEY (idcur) REFERENCES curso(idcur)
 );
 CREATE TABLE ie (
-  codie int(10) PRIMARY KEY,
+  codie int(10) PRIMARY KEY AUTO_INCREMENT,
   nuicie int(12),
   pasie varchar(155),
   nomie varchar(255),
@@ -1328,11 +1328,10 @@ CREATE TABLE ie (
   telie int(10),
   actie tinyint(1),
   corie varchar(255),
-  codubi varchar(255),
-  tipie varchar(255),
-  FOREIGN KEY (codubi) REFERENCES ubicacion(codubi)
+  munie TEXT,
+  tipie varchar(255)
 );
-INSERT INTO `ie` (`codie`, `nuicie`, `pasie`, `nomie`, `dirie`, `telie`, `actie`, `corie`, `codubi`, `tipie`) VALUES
+INSERT INTO `ie` (`codie`, `nuicie`, `pasie`, `nomie`, `dirie`, `telie`, `actie`, `corie`, `munie`, `tipie`) VALUES
 (0, 2345555, NULL, 'wsdf', 'asdf', 2147483647, 1, 'asdfgs@gmail.com', NULL, 'Educacion superior');
 CREATE TABLE grupo(
   idgru INT(10) PRIMARY KEY AUTO_INCREMENT,
