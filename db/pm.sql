@@ -1332,7 +1332,7 @@ CREATE TABLE ie (
   tipie varchar(255)
 );
 INSERT INTO `ie` (`codie`, `nuicie`, `pasie`, `nomie`, `dirie`, `telie`, `actie`, `corie`, `munie`, `tipie`) VALUES
-(0, 2345555, NULL, 'wsdf', 'asdf', 2147483647, 1, 'asdfgs@gmail.com', NULL, 'Educacion superior');
+(2, 345678, NULL, 'ale', 'av 28', 23456543, 1, 'ghfgdxfchgjgk@gmail.com', 'Zipaquira', 'Educacion superior');
 CREATE TABLE grupo(
   idgru INT(10) PRIMARY KEY AUTO_INCREMENT,
   nomgru VARCHAR(255),
