@@ -1232,8 +1232,8 @@ CREATE TABLE ie (
   tipie varchar(255),
   FOREIGN kEY (codubi) REFERENCES ubicacion(codubi)
 );
-INSERT INTO `ie` (`codie`, `nuicie`, `pasie`, `nomie`, `dirie`, `telie`, `actie`, `corie`, `munie`, `tipie`) VALUES
-(2, 345678, NULL, 'ale', 'av 28', 23456543, 1, 'ghfgdxfchgjgk@gmail.com', 'Zipaquira', 'Educacion superior');
+INSERT INTO `ie` (`codie`, `nuicie`, `pasie`, `nomie`, `dirie`, `telie`, `actie`, `corie`, `codubi`, `munie`, `tipie`) VALUES
+(5, 345678, NULL, 'ale', 'av 26', 23456543, 1, 'ghfgdxfchgjgk@gmail.com', 9, NULL, 'Educacion superior');
 CREATE TABLE grupo(
   idgru INT(10) PRIMARY KEY AUTO_INCREMENT,
   nomgru VARCHAR(255),
