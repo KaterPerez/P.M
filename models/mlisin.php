@@ -8,7 +8,7 @@
     private $dirie;
     private $nuicie;
     private $corie;
-    private $munie;
+    private $codubi;
     private $telie;
     private $actie;
 
@@ -37,9 +37,9 @@
     {
         return $this->corie;
     }
-    public function getMunie()
+    public function getCodubi()
     {
-        return $this->munie;
+        return $this->codubi;
     }
     public function getTelie()
     {
@@ -76,9 +76,9 @@
     {
         $this->corie = $corie;
     }
-    public function setMunie($munie)
+    public function setCodubi($codubi)
     {
-        $this->munie = $munie;
+        $this->codubi = $codubi;
     }
     public function setTelie($telie)
     {
@@ -92,7 +92,7 @@
     public function getAll()
     {
         $res = NULL;
-        $sql = "SELECT codie, nomie, tipie, dirie, nuicie, corie, munie, telie, actie FROM ie";
+        $sql = "SELECT i.codie, i.nomie, i.tipie, i.dirie, i.nuicie, i.corie, i.codubi, i.telie, i.actie, u.codubi, u.munubi FROM ie AS i INNER JOIN ubicacion AS u ON i.codubi = u.codubi";
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -103,7 +103,7 @@
     public function getOne()
     {
         $res = NULL;
-        $sql = "SELECT codie, nomie, tipie, dirie, nuicie, corie, munie, telie, actie FROM ie WHERE codie=:codie";
+        $sql = "SELECT i.codie, i.nomie, i.tipie, i.dirie, i.nuicie, i.corie, i.codubi, i.telie, i.actie, u.codubi, u.munubi FROM ie AS i INNER JOIN ubicacion AS u ON i.codubi = u.codubi WHERE codie=:codie";
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -111,6 +111,16 @@
         $result->bindParam(":codie", $codie);
         $result->execute();
         $res = $result->fetchall(PDO::FETCH_ASSOC);
+        return $res;
+    }
+    public function getCgru()
+    {
+        $sql = "SELECT codubi, munubi FROM ubicacion";
+        $modelo = new conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->execute();
+        $res = $result->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
     public function save()
@@ -129,7 +139,7 @@
         } while ($exists > 0);
         try {
             // Insertar el registro
-            $sql = "INSERT INTO ie  (nomie, tipie, dirie, nuicie, corie, munie, telie, actie) VALUES (:nomie, :tipie, :dirie, :nuicie, :corie, :munie, :telie, :actie)";
+            $sql = "INSERT INTO ie  (nomie, tipie, dirie, nuicie, corie, codubi, telie, actie) VALUES (:nomie, :tipie, :dirie, :nuicie, :corie, :codubi, :telie, :actie)";
             $result = $conexion->prepare($sql);
             $nomie = $this->getNomie();
             $result->bindParam(":nomie", $nomie);
@@ -141,8 +151,8 @@
             $result->bindParam(":nuicie", $nuicie);
             $corie = $this->getCorie();
             $result->bindParam(":corie", $corie);
-            $munie = $this->getMunie();
-            $result->bindParam(":munie", $munie);
+            $codubi = $this->getCodubi();
+            $result->bindParam(":codubi", $codubi);
             $telie = $this->getTelie();
             $result->bindParam(":telie", $telie);
             $actie = $this->getActie();
@@ -159,7 +169,7 @@
     {
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "UPDATE ie SET SELECT nomie=:nomie, tipie=:tipie, dirie=:dirie, nuicie=:nuicie, corie=:corie, munie=:munie, telie=:telie, actie=:actie WHERE codie=:codie";
+        $sql = "UPDATE ie SET SELECT nomie=:nomie, tipie=:tipie, dirie=:dirie, nuicie=:nuicie, corie=:corie, codubi=:cosubi, telie=:telie, actie=:actie WHERE codie=:codie";
         $result = $conexion->prepare($sql);
         $codie = $this->getCodie();
         $result->bindParam(":codie", $codie);
@@ -173,8 +183,8 @@
         $result->bindParam(":nuicie", $nuicie);
         $corie = $this->getCorie();
         $result->bindParam(":corie", $corie);
-        $munie = $this->getMunie();
-        $result->bindParam(":munie", $munie);
+        $codubi = $this->getCodubi();
+        $result->bindParam(":codubi", $codubi);
         $telie = $this->getTelie();
         $result->bindParam(":telie", $telie);
         $actie = $this->getActie();
