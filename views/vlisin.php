@@ -36,9 +36,18 @@
                   echo $datOne[0]['nuicie']; ?>" required>
             </div>
             <div class="form-group col-md-3">
-                <label for="munie">Municipio</label>
-                <input type="text" class="form-control form-control" name="munie" id="munie" value="<?php if ($datOne && $datOne[0]['munie'])
-                    echo $datOne[0]['munie']; ?>" required>
+                <label for="disabledSelect" class="form-label">Municipio</label>
+                <select class="form-control form-select" id="codubi" name="codubi">
+                    <option value="0">Seleccione...</option>
+                    <?php if (!empty($cdgru)) {
+                        foreach ($cdgru as $dt) { ?>
+                            <option value="<?= $dt['codubi']; ?>" <?php if ($datOne && $datOne[0]['codubi'] == $dt['codubi'])
+                                  echo 'selected'; ?>>
+                                <?= $dt['munubi']; ?>
+                            </option>
+                        <?php }
+                    } ?>
+                </select>
             </div>
             <div class="form-group col-md-3">
                 <label for="dirie">Dirección</label>
@@ -79,9 +88,9 @@
             <tr>
                 <th>Institución</th>
                 <th>Tipo</th>
-                <th># Identificacion</th>
-                <th>Departamento</th> 
-                <th>Municipio</th>
+                <th># Identificación</th>
+                <th>Municipio</th> 
+                <th>Dirección</th>
                 <th>Correo</th>
                 <th>Telefono</th>
                 <th>Activo</th>
@@ -96,7 +105,7 @@
                       <td><?= $dt["nomie"]; ?></td>
                       <td><?= $dt["tipie"]; ?></td>
                       <td><?= $dt["nuicie"]; ?></td>
-                      <td><?= $dt["munie"]; ?></td>
+                      <td><?= $dt["munubi"]; ?></td>
                       <td><?= $dt["dirie"]; ?></td>
                       <td><?= $dt["corie"]; ?></td>
                       <td><?= $dt["telie"]; ?></td>
