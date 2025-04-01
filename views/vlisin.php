@@ -94,7 +94,7 @@
                 <th>Correo</th>
                 <th>Telefono</th>
                 <th>Activo</th>
-                <th>Acciones</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
