@@ -13,55 +13,44 @@
         </div>
     </div>
 
-    <form name="frm1" action="#" method="POST" class="toggleForm"
-        style="<?= isset($m) && $m == 1 ? '' : 'display:none;' ?>">
-        <div class="row">
-            <div class="form-group col-md-4">
-                <label for="nomact">Nombre de la actividad</label>
-                <input type="text" class="form-control form-control" name="nomact" id="nomact" value="<?php if ($datOne && $datOne[0]['nomact'])
-                    echo $datOne[0]['nomact']; ?>" required>
-            </div>
-            <div class="form-group col-md-5">
-                <label for="desact">Descripción de la actividad</label>
-                <input type="text" class="form-control form-control" name="desact" id="desact" value="<?php if ($datOne && $datOne[0]['desact'])
-                    echo $datOne[0]['desact']; ?>" required>
-            </div>
-            <div class="form-group col-md-3">
-                <label for="disabledSelect" class="form-label">Fase</label>
-                <select class="form-control form-select" id="codfas" name="codfas">
-                    <option value="0">Seleccione...</option>
-                    <?php if (!empty($cdpro)) {
-                        foreach ($cdpro as $dt) { ?>
-                            <option value="<?= $dt['codfas']; ?>" <?php if ($datOne && $datOne[0]['codfas'] == $dt['codfas'])
-                                  echo 'selected'; ?>>
-                                <?= $dt['nomfas']; ?>
-                            </option>
-                        <?php }
-                    } ?>
-                </select>
-            </div>
-            <div class="form-group col-md-4">
-                <label for="iniact">Fecha de inicio</label>
-                <input type="date" class="form-control form-control" name="iniact" id="iniiniactas" value="<?php if ($datOne && $datOne[0]['iniact'])
-                    echo $datOne[0]['iniact']; ?>" required>
-            </div>
-            <div class="form-group col-md-4">
-                <label for="finact">Fecha de finalizacion</label>
-                <input type="date" class="form-control form-control" name="finact" id="finact" value="<?php if ($datOne && $datOne[0]['finact'])
-                    echo $datOne[0]['finact']; ?>" required>
-            </div>
-
-            <div class="form-group col-md-4">
-                <br>
-                <input type="hidden" name="ope" value="save">
-                <input type="hidden" name="codact" value="<?php if ($datOne && $datOne[0]['codact'])
-                    echo $datOne[0]['codact']; ?>" required>
-                <input type="submit" class="btn btn-dark" value="Enviar">
-            </div>
-
+    <form name="frm1" action="#" method="POST" enctype="multipart/form-data" class="toggleForm" style="<?= isset($m) && $m == 1 ? '' : 'display:none;' ?>">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="nomact">Nombre de la actividad</label>
+            <input type="text" class="form-control" name="nomact" id="nomact" value="<?= $datOne ? $datOne[0]['nomact'] : ''; ?>" required>
         </div>
-        <br>
-    </form>
+        <div class="form-group col-md-5">
+            <label for="desact">Descripción de la actividad</label>
+            <input type="text" class="form-control" name="desact" id="desact" value="<?= $datOne ? $datOne[0]['desact'] : ''; ?>" required>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="codfas">Fase</label>
+            <select class="form-control" id="codfas" name="codfas" required>
+                <option value="0">Seleccione...</option>
+                <?php foreach ($fases as $fase) { ?>
+                    <option value="<?= $fase['codfas']; ?>" <?= ($datOne && $datOne[0]['codfas'] == $fase['codfas']) ? 'selected' : ''; ?>><?= $fase['nomfas']; ?></option>
+                <?php } ?>
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="iniact">Fecha de inicio</label>
+            <input type="date" class="form-control" name="iniact" id="iniact" value="<?= $datOne ? $datOne[0]['iniact'] : ''; ?>" required>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="finact">Fecha de finalización</label>
+            <input type="date" class="form-control" name="finact" id="finact" value="<?= $datOne ? $datOne[0]['finact'] : ''; ?>" required>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="archivo">Archivo</label>
+            <input type="file" class="form-control" name="archivo" id="archivo" <?= !$datOne ? '' : ''; ?>>
+        </div>
+        <div class="form-group col-md-4">
+            <input type="hidden" name="ope" value="save">
+            <input type="hidden" name="codact" value="<?= $datOne ? $datOne[0]['codact'] : ''; ?>">
+            <input type="submit" class="btn btn-dark" value="Enviar">
+        </div>
+    </div>
+</form>
 
     <table id="example" class="table table-striped text-center" style="width:100%">
         <thead class="table-dark">
@@ -71,7 +60,7 @@
                 <th class="text-center">Fase</th>
                 <th class="text-center">Fecha de inicio</th>
                 <th class="text-center">Fecha de finalización</th>
-                <th class="text-center"></th>
+                <th class="text-center">Archivo</th>
                 <th class="text-center"></th>
             </tr>
         </thead>
@@ -84,16 +73,12 @@
                         <td class="text-center"><?= $dt["nomfas"]; ?></td>
                         <td class="text-center"><?= $dt["iniact"]; ?></td>
                         <td class="text-center"><?= $dt["finact"]; ?></td>
-                        <td class="text-center"> <!-- Botón para abrir el modal -->
-                            <button>
-                                <div class="col-md-5">
-                                    <input type="file" name="archivo" id="archivo" accept=".pdf, .docx, .xlsx, .xls"
-                                        class="form-control" style="width: 100%;">
-                                </div>
-                                <div class="col-md-2">
-                                    <button type="submit" class="btn btn-dark">Cargar Datos</button>
-                                </div>
-                            </button>
+                        <td>
+                            <?php if (!empty($dt['archivo'])) { ?>
+                                <a href="uploads/<?= htmlspecialchars($dt['archivo']); ?>" target="_blank">Ver archivo</a>
+                            <?php } else { ?>
+                                No hay archivo
+                            <?php } ?>
                         </td>
                         <td class="text-center">
                             <a href="home.php?pg=3002&ope=edi&codact=<?= $dt["codact"]; ?>" title="Editar">
