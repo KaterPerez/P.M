@@ -1,39 +1,40 @@
 <?php
-include('models/mfas.php');
+include('models/mact.php');
 
-$nomfas = isset($_POST['nomfas']) ? $_POST['nomfas'] : NULL;
-$codfas = isset($_REQUEST['codfas']) ? $_REQUEST['codfas'] : NULL;
-$codpro = isset($_POST['codpro']) ? $_POST['codpro'] : NULL;
-$inifas = isset($_POST['inifas']) ? $_POST['inifas'] : NULL;
-$finfas = isset($_POST['finfas']) ? $_POST['finfas'] : NULL;
-$idgru = isset($_POST['idgru']) ? $_POST['idgru'] : NULL;
+$codact = isset($_REQUEST['codact']) ? $_REQUEST['codact'] : NULL;
+$nomact = isset($_POST['nomact']) ? $_POST['nomact'] : NULL;
+$desact = isset($_POST['desact']) ? $_POST['desact'] : NULL;
+$codfas = isset($_POST['codfas']) ? $_POST['codfas'] : NULL;
+$iniact = isset($_POST['iniact']) ? $_POST['iniact'] : NULL;
+$finact = isset($_POST['finact']) ? $_POST['finact'] : NULL;
 $ope = isset($_REQUEST['ope']) ? $_REQUEST['ope'] : NULL;
 
+$mact = new Mact();
 
-$mfas = new Mfas();
-
-$mfas->setCodfas($codfas);
+$mact->setCodact($codact);
 
 if ($ope == "save") {
-    $mfas->setNomfas($nomfas);
-    $mfas->setCodpro($codpro);
-    $mfas->setInifas($inifas);
-    $mfas->setFinfas($finfas);
-    if ($codfas)
-        $mfas->edit();
+    $mact->setNomact($nomact);
+    $mact->setDesact($desact);
+    $mact->setCodfas($codfas);
+    $mact->setIniact($iniact);
+    $mact->setFinact($finact);
+    if ($codact)
+        $mact->edit();
     else
-        $mfas->save();
+        $mact->save();
 
 }
 
-if($ope=="del" && $codfas) $mfas->del();
-if($ope=="edi" && $codfas){
-    $datOne = $mfas->getOne();
-}else{
-    $datOne=NULL;
+if ($ope == "del" && $codact)
+    $mact->del();
+if ($ope == "edi" && $codact) {
+    $datOne = $mact->getOne();
+} else {
+    $datOne = NULL;
 }
 
-$fases = $mfas->getAll();  // Obtener todas las fases con los grupos vinculados
-$cdpro = $mfas->getCpro(); 
-$datAll = $mfas->getAll(); // Recupera todos los datos necesarios
+$fases = $mact->getAll();  // Obtener todas las fases con los grupos vinculados
+$cdpro = $mact->getCpro();
+$datAll = $mact->getAll(); // Recupera todos los datos necesarios
 ?>
