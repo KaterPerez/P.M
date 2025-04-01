@@ -66,7 +66,7 @@
                 <th class="text-center">Grupo</th>
                 <th class="text-center">Fecha de inicio</th>
                 <th class="text-center">Fecha de finalización</th>
-                <th class="text-center">Actividad</th>
+                <th class="text-center"></th>
                 <th class="text-center"></th>
             </tr>
         </thead>
