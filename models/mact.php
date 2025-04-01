@@ -7,6 +7,15 @@
     private $codfas;
     private $iniact;
     private $finact;
+    private $archivo;
+
+public function getArchivo() {
+    return $this->archivo;
+}
+
+public function setArchivo($archivo) {
+    $this->archivo = $archivo;
+}
 
 
     //metodos get
@@ -63,22 +72,21 @@
     //metodos publicos
     public function getAll()
     {
-        $res = NULL;
-        // Modificación de la consulta para incluir el nombre del grupo vinculado al proyecto
-        $sql = "SELECT a.codact, a.nomact, a.desact, a.codfas, a.iniact, a.finact, f.codfas, f.nomfas FROM actividad AS a INNER JOIN fase AS f ON a.codfas = f.codfas";  // Relación entre proyecto y grupo
-        $modelo = new Conexion();
-        $conexion = $modelo->get_conexion();
+        $modelo = new conexion();
+        $conexion = $modelo->get_Conexion();
+        $sql = "SELECT a.codact, a.nomact, a.desact, a.codfas, a.iniact, a.finact, a.archivo, f.nomfas 
+                FROM actividad a 
+                INNER JOIN fase f ON a.codfas = f.codfas";
         $result = $conexion->prepare($sql);
         $result->execute();
-        $res = $result->fetchAll(PDO::FETCH_ASSOC);
-        return $res;
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     }
     public function getOne()
     {
         $res = NULL;
         $sql = "SELECT a.codact, a.nomact, a.desact, a.codfas, a.iniact, a.finact, f.codfas, f.nomfas FROM actividad AS a INNER JOIN fase AS f ON a.codfas = f.codfas WHERE a.codact=:codact";
-        $modelo = new Conexion();
-        $conexion = $modelo->get_conexion();
+        $modelo = new conexion();
+        $conexion = $modelo->get_Conexion();
         $result = $conexion->prepare($sql);
         $codact = $this->getCodact();
         $result->bindParam(":codact", $codact);
@@ -87,86 +95,68 @@
         return $res;
     }
 
-    public function getCpro()
+    public function getFases()
     {
-        $sql = "SELECT codfas, nomfas FROM fase";
+        $res = NULL;
+        $sql = "SELECT codfas, nomfas FROM fase"; 
         $modelo = new conexion();
-        $conexion = $modelo->get_conexion();
+        $conexion = $modelo->get_Conexion();
         $result = $conexion->prepare($sql);
         $result->execute();
         $res = $result->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
+    
     public function save()
-    {
-        $modelo = new Conexion();
-        $conexion = $modelo->get_conexion();
-
-        // Generar un código único para `codact`
-        do {
-            $codact = str_pad(rand(0, 99999), 5, '0', STR_PAD_LEFT);
-            $sqlCheck = "SELECT COUNT(*) FROM actividad WHERE codact = :codact";
-            $resultCheck = $conexion->prepare($sqlCheck);
-            $resultCheck->bindParam(":codact", $codact);
-            $resultCheck->execute();
-            $exists = $resultCheck->fetchColumn();
-        } while ($exists > 0);
-        try {
-            // Insertar el registro
-            $sql = "INSERT INTO actividad (nomact, desact, codfas, iniact, finact) VALUES (:nomact, :desact, :codfas, :iniact, :finact)";
-            $result = $conexion->prepare($sql);
-            $nomact = $this->getNomact();
-            $result->bindParam(":nomact", $nomact);
-            $desact = $this->getDesact();
-            $result->bindParam(":desact", $desact);
-            $codfas = $this->getCodfas();
-            $result->bindParam(":codfas", $codfas);
-            $iniact = $this->getIniact();
-            $result->bindParam(":iniact", $iniact);
-            $finact = $this->getFinact();
-            $result->bindParam(":finact", $finact);
-
-            if ($result->execute()) {
-                echo "<script>alert('Actividad creada exitosamente.');</script>";
-            }
-        } catch (PDOException $e) {
-            echo "<script>alert('Error al guardar la Actividad: " . addslashes($e->getMessage()) . "');</script>";
-        }
-    }
-
-    public function edit()
-    {
-        $modelo = new Conexion();
-        $conexion = $modelo->get_conexion();
-        $sql = "UPDATE actividad SET nomact=:nomact, desact=:desact, codfas=:codfas, iniact=:iniact, finact=:finact WHERE codact=:codact";
+{
+    $modelo = new conexion();
+    $conexion = $modelo->get_Conexion();
+    try {
+        $sql = "INSERT INTO actividad (nomact, desact, codfas, iniact, finact, archivo) 
+                VALUES (:nomact, :desact, :codfas, :iniact, :finact, :archivo)";
         $result = $conexion->prepare($sql);
-        $codact = $this->getCodact();
-        $result->bindParam(":codact", $codact);
-        $nomact = $this->getNomact();
-        $result->bindParam(":nomact", $nomact);
-        $desact = $this->getDesact();
-        $result->bindParam(":desact", $desact);
-        $codfas = $this->getCodfas();
-        $result->bindParam(":codfas", $codfas);
-        $iniact = $this->getIniact();
-        $result->bindParam(":iniact", $iniact);
-        $finact = $this->getFinact();
-        $result->bindParam(":finact", $finact);
-
-        try {
-            if ($result->execute()) {
-                echo "<script>alert('Actividad actualizada exitosamente.');</script>";
-            }
-        } catch (PDOException $e) {
-            echo "<script>alert('Error al actualizar la Actividad: " . addslashes($e->getMessage()) . "');</script>";
+        $result->bindParam(":archivo", $this->archivo);
+        $result->bindParam(":nomact", $this->nomact);
+        $result->bindParam(":desact", $this->desact);
+        $result->bindParam(":codfas", $this->codfas);
+        $result->bindParam(":iniact", $this->iniact);
+        $result->bindParam(":finact", $this->finact);
+        
+        if ($result->execute()) {
+            echo "<script>alert('Actividad creada exitosamente.');</script>";
         }
+    } catch (PDOException $e) {
+        echo "<script>alert(Error al guardar la actividad);</script>";
     }
+}
 
+public function edit()
+{
+    $modelo = new conexion();
+    $conexion = $modelo->get_Conexion();
+    try {
+        $sql = "UPDATE actividad SET nomact=:nomact, desact=:desact, codfas=:codfas, iniact=:iniact, finact=:finact, archivo=:archivo WHERE codact=:codact";
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":archivo", $this->archivo);
+        $result->bindParam(":codact", $this->codact);
+        $result->bindParam(":nomact", $this->nomact);
+        $result->bindParam(":desact", $this->desact);
+        $result->bindParam(":codfas", $this->codfas);
+        $result->bindParam(":iniact", $this->iniact);
+        $result->bindParam(":finact", $this->finact);
+        
+        if ($result->execute()) {
+            echo "<script>alert('Actividad actualizada exitosamente.');</script>";
+        }
+    } catch (PDOException $e) {
+        echo "<script>alert(Error al actualizar la actividad);</script>";
+    }
+}
     public function del()
     {
         $sql = "DELETE FROM actividad WHERE codact= :codact";
-        $modelo = new Conexion();
-        $conexion = $modelo->get_conexion();
+        $modelo = new conexion();
+        $conexion = $modelo->get_Conexion();
 
         $result = $conexion->prepare($sql);
         $codact = $this->getCodact();
