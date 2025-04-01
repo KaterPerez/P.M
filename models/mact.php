@@ -1,62 +1,63 @@
-<?php class Mfas
+<?php class Mact
 {
     //atributos
+    private $codact;
+    private $nomact;
+    private $desact;
     private $codfas;
-    private $nomfas;
-    private $codpro;
-    private $inifas;
-    private $finfas;
-    private $idgru;
+    private $iniact;
+    private $finact;
+
 
     //metodos get
+    public function getCodact()
+    {
+        return $this->codact;
+    }
+    public function getNomact()
+    {
+        return $this->nomact;
+    }
+    public function getDesact()
+    {
+        return $this->desact;
+    }
     public function getCodfas()
     {
         return $this->codfas;
     }
-    public function getNomfas()
+    public function getIniact()
     {
-        return $this->nomfas;
+        return $this->iniact;
     }
-    public function getCodpro()
+    public function getFinact()
     {
-        return $this->codpro;
-    }
-    public function getInifas()
-    {
-        return $this->inifas;
-    }
-    public function getFinfas()
-    {
-        return $this->finfas;
-    }
-    public function getidgru()
-    {
-        return $this->idgru;
+        return $this->finact;
     }
     //metodos SET
+    public function setCodact($codact)
+    {
+        $this->codact = $codact;
+    }
+    public function setNomact($nomact)
+    {
+        $this->nomact = $nomact;
+    }
+    public function setDesact($desact)
+    {
+        $this->desact = $desact;
+    }
     public function setCodfas($codfas)
     {
         $this->codfas = $codfas;
     }
-    public function setNomfas($nomfas)
+    public function setIniact($iniact)
     {
-        $this->nomfas = $nomfas;
+        $this->iniact = $iniact;
     }
-    public function setCodpro($codpro)
+    public function setFinact($finact)
     {
-        $this->codpro = $codpro;
-    }
-    public function setInifas($inifas)
-    {
-        $this->inifas = $inifas;
-    }
-    public function setFinfas($finfas)
-    {
-        $this->finfas = $finfas;
-    }
-    public function setidgru($idgru)
-    {
-        $this->idgru = $idgru;
+        $this->finact = $finact;
     }
 
     //metodos publicos
@@ -64,11 +65,7 @@
     {
         $res = NULL;
         // Modificación de la consulta para incluir el nombre del grupo vinculado al proyecto
-        $sql = "SELECT f.codfas, f.nomfas, f.codpro, f.inifas, f.finfas, g.nomgru, p.nompro 
-                FROM fase AS f
-                INNER JOIN proyecto AS p ON f.codpro = p.codpro
-                INNER JOIN grupo AS g ON p.idgru = g.idgru";  // Relación entre proyecto y grupo
-
+        $sql = "SELECT a.codact, a.nomact, a.desact, a.codfas, a.iniact, a.finact, f.codfas, f.nomfas FROM actividad AS a INNER JOIN fase AS f ON a.codfas = f.codfas";  // Relación entre proyecto y grupo
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -79,12 +76,12 @@
     public function getOne()
     {
         $res = NULL;
-        $sql = "SELECT f.codfas, f.nomfas, f.codpro, f.inifas, f.finfas, g.idgru, g.nomgru ,p.codpro, p.nompro FROM fase AS f INNER JOIN grupo AS g INNER JOIN proyecto AS p ON f.codpro=p.codpro WHERE f.codfas=:codfas";
+        $sql = "SELECT a.codact, a.nomact, a.desact, a.codfas, a.iniact, a.finact, f.codfas, f.nomfas FROM actividad AS a INNER JOIN fase AS f ON a.codfas = f.codfas WHERE a.codact=:codact";
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
-        $codfas = $this->getCodfas();
-        $result->bindParam(":codfas", $codfas);
+        $codact = $this->getCodact();
+        $result->bindParam(":codact", $codact);
         $result->execute();
         $res = $result->fetchall(PDO::FETCH_ASSOC);
         return $res;
@@ -92,7 +89,7 @@
 
     public function getCpro()
     {
-        $sql = "SELECT codpro, nompro FROM proyecto";
+        $sql = "SELECT codfas, nomfas FROM fase";
         $modelo = new conexion();
         $conexion = $modelo->get_conexion();
         $result = $conexion->prepare($sql);
@@ -100,54 +97,40 @@
         $res = $result->fetchAll(PDO::FETCH_ASSOC);
         return $res;
     }
-    public function validateCodpro($codpro)
-    {
-        $modelo = new Conexion();
-        $conexion = $modelo->get_conexion();
-        $sql = "SELECT COUNT(*) FROM proyecto WHERE codpro = :codpro";
-        $result = $conexion->prepare($sql);
-        $result->bindParam(":codpro", $codpro);
-        $result->execute();
-        return $result->fetchColumn() > 0; // Retorna true si existe
-    }
     public function save()
     {
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
 
-        // Verificar que `codpro` exista en la tabla `proyecto`
-        if (!$this->validateCodpro($this->getCodpro())) {
-            echo "<script>alert('Error: El código de proyecto no existe.');</script>";
-            return;
-        }
-
-        // Generar un código único para `codfas`
+        // Generar un código único para `codact`
         do {
-            $codfas = str_pad(rand(0, 99999), 5, '0', STR_PAD_LEFT);
-            $sqlCheck = "SELECT COUNT(*) FROM fase WHERE codfas = :codfas";
+            $codact = str_pad(rand(0, 99999), 5, '0', STR_PAD_LEFT);
+            $sqlCheck = "SELECT COUNT(*) FROM actividad WHERE codact = :codact";
             $resultCheck = $conexion->prepare($sqlCheck);
-            $resultCheck->bindParam(":codfas", $codfas);
+            $resultCheck->bindParam(":codact", $codact);
             $resultCheck->execute();
             $exists = $resultCheck->fetchColumn();
         } while ($exists > 0);
         try {
             // Insertar el registro
-            $sql = "INSERT INTO fase (nomfas, codpro, inifas, finfas) VALUES (:nomfas, :codpro, :inifas, :finfas)";
+            $sql = "INSERT INTO actividad (nomact, desact, codfas, iniact, finact) VALUES (:nomact, :desact, :codfas, :iniact, :finact)";
             $result = $conexion->prepare($sql);
-            $nomfas = $this->getNomfas();
-            $result->bindParam(":nomfas", $nomfas);
-            $codpro = $this->getCodpro();
-            $result->bindParam(":codpro", $codpro);
-            $inifas = $this->getInifas();
-            $result->bindParam(":inifas", $inifas);
-            $finfas = $this->getFinfas();
-            $result->bindParam(":finfas", $finfas);
+            $nomact = $this->getNomact();
+            $result->bindParam(":nomact", $nomact);
+            $desact = $this->getDesact();
+            $result->bindParam(":desact", $desact);
+            $codfas = $this->getCodfas();
+            $result->bindParam(":codfas", $codfas);
+            $iniact = $this->getIniact();
+            $result->bindParam(":iniact", $iniact);
+            $finact = $this->getFinact();
+            $result->bindParam(":finact", $finact);
 
             if ($result->execute()) {
-                echo "<script>alert('Fase creada exitosamente.');</script>";
+                echo "<script>alert('Actividad creada exitosamente.');</script>";
             }
         } catch (PDOException $e) {
-            echo "<script>alert('Error al guardar la fase: " . addslashes($e->getMessage()) . "');</script>";
+            echo "<script>alert('Error al guardar la Actividad: " . addslashes($e->getMessage()) . "');</script>";
         }
     }
 
@@ -155,44 +138,46 @@
     {
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "UPDATE fase SET nomfas=:nomfas, codpro=:codpro, inifas=:inifas, finfas=:finfas WHERE codfas=:codfas";
+        $sql = "UPDATE actividad SET nomact=:nomact, desact=:desact, codfas=:codfas, iniact=:iniact, finact=:finact WHERE codact=:codact";
         $result = $conexion->prepare($sql);
+        $codact = $this->getCodact();
+        $result->bindParam(":codact", $codact);
+        $nomact = $this->getNomact();
+        $result->bindParam(":nomact", $nomact);
+        $desact = $this->getDesact();
+        $result->bindParam(":desact", $desact);
         $codfas = $this->getCodfas();
         $result->bindParam(":codfas", $codfas);
-        $nomfas = $this->getNomfas();
-        $result->bindParam(":nomfas", $nomfas);
-        $codpro = $this->getCodpro();
-        $result->bindParam(":codpro", $codpro);
-        $inifas = $this->getInifas();
-        $result->bindParam(":inifas", $inifas);
-        $finfas = $this->getFinfas();
-        $result->bindParam(":finfas", $finfas);
+        $iniact = $this->getIniact();
+        $result->bindParam(":iniact", $iniact);
+        $finact = $this->getFinact();
+        $result->bindParam(":finact", $finact);
 
         try {
             if ($result->execute()) {
-                echo "<script>alert('Fase actualizada exitosamente.');</script>";
+                echo "<script>alert('Actividad actualizada exitosamente.');</script>";
             }
         } catch (PDOException $e) {
-            echo "<script>alert('Error al actualizar la fase: " . addslashes($e->getMessage()) . "');</script>";
+            echo "<script>alert('Error al actualizar la Actividad: " . addslashes($e->getMessage()) . "');</script>";
         }
     }
 
     public function del()
     {
-        $sql = "DELETE FROM fase WHERE codfas= :codfas";
+        $sql = "DELETE FROM actividad WHERE codact= :codact";
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
-       
+
         $result = $conexion->prepare($sql);
-        $codfas = $this->getCodfas();
-        $result->bindParam(":codfas", $codfas);
+        $codact = $this->getCodact();
+        $result->bindParam(":codact", $codact);
 
         try {
             if ($result->execute()) {
-                echo "<script>alert('Fase eliminada exitosamente.');</script>";
+                echo "<script>alert('Actividad eliminada exitosamente.');</script>";
             }
         } catch (PDOException $e) {
-            echo "<script>alert('Error al eliminar la fase: " . addslashes($e->getMessage()) . "');</script>";
+            echo "<script>alert('Error al eliminar la Actividad: " . addslashes($e->getMessage()) . "');</script>";
         }
     }
 }
