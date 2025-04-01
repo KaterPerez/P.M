@@ -4,7 +4,7 @@ include("../models/conexion.php");
 $conexion_obj = new conexion();
 $conexion = $conexion_obj->get_Conexion();
 
-require_once("../PHPExcel/Classes/PHPExcel.php");
+require_once("../PHPExcel/PHPExcel/Classes/PHPExcel.php");
 
 // Verificar que se haya subido el archivo sin errores
 if (isset($_FILES["archivo"]) && $_FILES["archivo"]["error"] == 0) {
