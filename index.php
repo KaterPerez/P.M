@@ -32,9 +32,7 @@
   
     <section>
         <?php 
-            if($pg==300){
-                include("views/vini.php");
-            }else if($pg==205){
+            if($pg==205){
                 include("views/vrcon.php");
             }else if($pg==1896){
                 include("views/vlic.php");
