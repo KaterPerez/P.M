@@ -1275,12 +1275,13 @@ CREATE TABLE fase(
 );
 INSERT INTO `fase` (`codfas`, `nomfas`, `codpro`, `inifas`, `finfas`) VALUES
 (6, 'assdasdas', 4, '2025-03-29', '2025-03-29');
-CREATE TABLE actividad(
+CREATE TABLE actividad (
   codact INT(10) PRIMARY KEY AUTO_INCREMENT,
   nomact VARCHAR(255),
+  archivo VARCHAR(255),
   desact TEXT,
   codfas INT(10),
   iniact DATE,
   finact DATE,
   FOREIGN KEY (codfas) REFERENCES fase(codfas) 
-); 
+);
