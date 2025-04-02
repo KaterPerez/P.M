@@ -82,8 +82,9 @@
                 <th class="text-center">Tema del proyecto</th>
                 <th class="text-center">Fecha de inicio</th>
                 <th class="text-center">Fecha de finalización</th>
-                <th class="text-center">Fases</th>
+                <th class="text-center">Descargar</th>
                 <th class="text-center"></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -96,11 +97,18 @@
                         <td class="text-center"><?= $dt["tempro"]; ?></td>
                         <td class="text-center"><?= $dt["inipro"]; ?></td>
                         <td class="text-center"><?= $dt["finpro"]; ?></td>
-                        <td class="text-center">                            <!-- Botón para abrir el modal -->
+                        <td class="text-center">
                             <button class="btn btn-dark">
-								<a href="home.php?pg=3001" style="text-decoration: none; color: white;">
-									<i class="fa-solid fa-bars-progress"></i> Crear fase
-								</a>
+                                <a href="controllers/descargar.php?codpro=<?= $dt['codpro'] ?>" style="text-decoration: none; color: white;">
+                                    <i class="fa-solid fa-file-zipper"></i> Descargar Proyecto
+                                </a>
+                            </button>
+                        </td>
+                        <td class="text-center">                           
+                            <button class="btn btn-dark">
+				<a href="home.php?pg=3001" style="text-decoration: none; color: white;">
+					<i class="fa-solid fa-bars-progress"></i> Crear fase
+				</a>
                             </button>
                         </td>
                         <td class="text-center">
