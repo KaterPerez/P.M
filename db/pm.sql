@@ -1113,19 +1113,12 @@ CREATE TABLE pagxper(
   FOREIGN KEY (codper) REFERENCES perfil(codper)
 );
 INSERT INTO `pagxper` (`codpag`, `codper`) VALUES
-(1011, 1),
-(1012, 1),
-(1013, 1),
-(1011, 3),
-(1012, 3),
-(1013, 3),
 (3145, 1),
 (3145, 2),
 (3145, 3),
 (3145, 4),
 (4002, 1),
 (1001, 1),
-(3002, 1),
 (3002, 4),
 (3002, 3),
 (4004, 1),
@@ -1133,6 +1126,9 @@ INSERT INTO `pagxper` (`codpag`, `codper`) VALUES
 (1002, 2),
 (1001, 2),
 (1001, 3),
+(1011, 3),
+(1012, 3),
+(1013, 3),
 (1003, 2),
 (1003, 1),
 (4001, 1),
@@ -1146,6 +1142,10 @@ INSERT INTO `pagxper` (`codpag`, `codper`) VALUES
 (2001, 1),
 (2002, 1),
 (3001, 1);
+(3002, 1),
+(1011, 1),
+(1012, 1),
+(1013, 1),
 CREATE TABLE valor(
   codval INT(10) PRIMARY KEY AUTO_INCREMENT,
   coddom INT(10),
