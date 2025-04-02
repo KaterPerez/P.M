@@ -44,7 +44,7 @@
             <label for="archivo">Archivo</label>
             <input type="file" class="form-control" name="archivo" id="archivo" <?= !$datOne ? '' : ''; ?>>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-4 my-3">
             <input type="hidden" name="ope" value="save">
             <input type="hidden" name="codact" value="<?= $datOne ? $datOne[0]['codact'] : ''; ?>">
             <input type="submit" class="btn btn-dark" value="Enviar">
