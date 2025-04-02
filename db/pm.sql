@@ -1076,6 +1076,9 @@ INSERT INTO `pagina` (`codpag`, `nompag`, `rutpag`,`mospag`, `icopag`) VALUES
 (1001, 'Lista', 'views/vlis.php', '1', 'fa-solid fa-user-graduate'),
 (1002, 'Cursos', 'views/vcrecur.php', '1','fa-solid fa-grip'),
 (1003, 'Registro', 'views/vest.php', '1', 'fa-solid fa-users'),
+(1011, 'Proyecto', 'views/vproyecto.php', '1', 'fa-regular fa-folder-open'),
+(1012, 'Fase', 'views/vfase.php', '1', 'fa-solid fa-gears'),
+(1013, 'Actividad', 'views/vactividad.php', '1', 'fa-solid fa-gears'),
 (2001, 'Grupos', 'views/vgrue.php', '1', 'fa-solid fa-users-gear'),
 (2002, 'Proyecto', 'views/vcrgrupo.php','1', 'fa-regular fa-folder-open'),
 (3001, 'Fases', 'views/vfas.php','1', 'fa-solid fa-gears'),
@@ -1110,6 +1113,12 @@ CREATE TABLE pagxper(
   FOREIGN KEY (codper) REFERENCES perfil(codper)
 );
 INSERT INTO `pagxper` (`codpag`, `codper`) VALUES
+(1011, 1),
+(1012, 1),
+(1013, 1),
+(1011, 3),
+(1012, 3),
+(1013, 3),
 (3145, 1),
 (3145, 2),
 (3145, 3),
