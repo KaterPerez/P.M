@@ -82,7 +82,7 @@
                 <th class="text-center">Tema del proyecto</th>
                 <th class="text-center">Fecha de inicio</th>
                 <th class="text-center">Fecha de finalización</th>
-                <th class="text-center"></th>
+                <th class="text-center">Fases</th>
                 <th class="text-center"></th>
             </tr>
         </thead>
