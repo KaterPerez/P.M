@@ -1,10 +1,9 @@
 <div class="container">
     <div class="text">
-        <h1 class="text-center">Una mejor manera de <br>
-            llevar tus proyectos</h1>
-        <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt vero fugiat <br>
-            maiores officia ab. Unde cumque nostrum esse laboriosam quasi dicta aperiam nisi. <br> 
-            Unde vero quo enim tempore quam corrupti?</p>
+        <h1 class="text-center">Organiza, colabora y lleva tus <br> proyectos al siguiente nivel.</h1>
+        <p class="text-center">Project Manager es una plataforma todo en uno para la gestión eficiente de proyectos y colaboración en equipo.<br>
+            Permite organizar fases, cumplir tareas, asignar responsabilidades<br> 
+            y hacer seguimiento al progreso en tiempo real.</p>
     </div>
 </div>
 <div class="container">
