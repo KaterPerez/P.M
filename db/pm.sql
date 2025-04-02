@@ -1145,7 +1145,7 @@ INSERT INTO `pagxper` (`codpag`, `codper`) VALUES
 (3002, 1),
 (1011, 1),
 (1012, 1),
-(1013, 1)
+(1013, 1);
 CREATE TABLE valor(
   codval INT(10) PRIMARY KEY AUTO_INCREMENT,
   coddom INT(10),
