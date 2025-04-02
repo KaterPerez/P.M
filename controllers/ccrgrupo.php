@@ -35,6 +35,33 @@ if($ope=="edi" && $codpro){
 }else{
     $datOne=NULL;
 }
+if (isset($_GET['download']) && isset($_GET['codpro'])) {
+    $codpro = $_GET['codpro'];
+    $mcrgrupo = new Mcrgrupo();
+    $archivos = $mcrgrupo->getArchivosByProyecto($codpro);
+
+    if (!empty($archivos)) {
+        $zip = new ZipArchive();
+        $zipFileName = "proyecto_$codpro.zip";
+
+        if ($zip->open($zipFileName, ZipArchive::CREATE) === TRUE) {
+            foreach ($archivos as $archivo) {
+                if (file_exists("uploads/" . $archivo['archivo'])) {
+                    $zip->addFile("uploads/" . $archivo['archivo'], $archivo['archivo']);
+                }
+            }
+            $zip->close();
+
+            header('Content-Type: application/zip');
+            header('Content-Disposition: attachment; filename="' . $zipFileName . '"');
+            header('Content-Length: ' . filesize($zipFileName));
+
+            readfile($zipFileName);
+            unlink($zipFileName);
+            exit;
+        }
+    }
+}
 
 $cdgru = $mcrgrupo->getCgru();
 $datAll = $mcrgrupo->getAll(); // Recupera todos los datos necesarios
