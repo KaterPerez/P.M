@@ -191,5 +191,19 @@
             echo "<script>alert('Error al eliminar el proyecto. Antes de eliminar proyectos verifique que ninguna fase se encuentre vinculado al el.');</script>";
         }
     }
+    public function getArchivosByProyecto($codpro) {
+        $sql = "SELECT a.archivo 
+                FROM actividad AS a
+                INNER JOIN fase AS f ON a.codfas = f.codfas
+                INNER JOIN proyecto AS p ON f.codpro = p.codpro
+                WHERE p.codpro = :codpro";
+    
+        $modelo = new Conexion();
+        $conexion = $modelo->get_conexion();
+        $result = $conexion->prepare($sql);
+        $result->bindParam(":codpro", $codpro);
+        $result->execute();
+        return $result->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
