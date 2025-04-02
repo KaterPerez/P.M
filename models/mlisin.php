@@ -169,7 +169,7 @@
     {
         $modelo = new Conexion();
         $conexion = $modelo->get_conexion();
-        $sql = "UPDATE ie SET SELECT nomie=:nomie, tipie=:tipie, dirie=:dirie, nuicie=:nuicie, corie=:corie, codubi=:cosubi, telie=:telie, actie=:actie WHERE codie=:codie";
+        $sql = "UPDATE ie SET nomie=:nomie, tipie=:tipie, dirie=:dirie, nuicie=:nuicie, corie=:corie, codubi=:cosubi, telie=:telie, actie=:actie WHERE codie=:codie";
         $result = $conexion->prepare($sql);
         $codie = $this->getCodie();
         $result->bindParam(":codie", $codie);
